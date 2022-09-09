@@ -1,0 +1,4 @@
+per compilare: gcc parse_tree.c special_split.c ft_tree.c ft_tree2.c -o prova
+
+bisogna mettere i comandi in pipe con un particolare nodo -> -3
+capire se ci sono piu errori nella pipe quale risultato si ottiene
