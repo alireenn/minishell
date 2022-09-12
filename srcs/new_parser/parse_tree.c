@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:50:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/09 17:31:04 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/11 15:43:44 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ t_tree	get_next_tree(char *input, int *ind, int *cmd)
 t_tree	make_tree(char *input, int *cmd)
 {
 	int		i;
-	int		j;
 	t_tree	ret;
 	t_tree	sx;
 
@@ -102,7 +101,6 @@ char	*parse_tree(char *input)
 {
 	int		i;
 	int		j;
-	int		cmd;
 	char	*ret;
 
 	i = 0;
@@ -163,38 +161,16 @@ int	check_parse(char *parsed)
 	while (parsed[i] != '\0')
 	{
 		if (parsed[i] == '>' && parsed[i + 1] == '(')
-			{
-				printf("minishell: parse error near `)'\n");
-				return (0);
-			}
-			else if (parsed[i] == '>' && parsed[i + 1] == '<')
-			{
-				printf("minishell: syntax error near unexpected token `<'\n");
-				return (0);
-			}
+		{
+			printf("minishell: parse error near `)'\n");
+			return (0);
+		}
+		else if (parsed[i] == '>' && parsed[i + 1] == '<')
+		{
+			printf("minishell: syntax error near unexpected token `<'\n");
+			return (0);
+		}
 		i++;
 	}
 	return (1);	
-}
-
-int main(int argc, char **argv)
-{
-	char 		*parsed;
-	t_tree		ret;
-	// t_command	**cmds;
-	char		**splitted;
-	int			cmd;
-
-	if (argc != 2)
-		return (0);
-	parsed = parse_tree(argv[1]);
-	printf("parsed = %s\n", parsed);
-	if (!check_parse(parsed))
-		return (1);
-	cmd = 0;
-	ret = make_tree(parsed, &cmd);
-	print_tree(&ret);
-	splitted = split_parser(argv[1], cmd);
-	// cmds = alloc_cmds(cmd);
-	free(parsed);
 }

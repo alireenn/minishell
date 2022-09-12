@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/09 17:12:40 by gcucino          ###   ########.fr       */
+/*   Created: 2022/09/11 16:20:10 by gcucino           #+#    #+#             */
+/*   Updated: 2022/09/11 18:10:02 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
+#include "../../incl/new_parser.h"
 
-t_command	**alloc_cmds(int cmd)
+void	get_redirs(char **s, t_command **cmds, int cmd)
 {
-	t_command	**cmds;
-	int			j;
+	int	i;
+	int	j;
 
-	cmds = malloc (sizeof(t_command *) * cmd);
-	j = 0;
-	while (j < cmd)
+	i = 0;
+	while (i < cmd)
 	{
-		cmds[j] = malloc(sizeof(t_command));
-		j++;
+		j = 0;
+		while (j < strlen(s[i]))
+		{
+			j++;
+		}
+		i++;
 	}
-	return (cmds);
 }

@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:53:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/09 17:30:13 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/11 16:27:03 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int			get_tree_depth(t_tree a);
 
 t_command	**alloc_cmds(int cmd);
 int			search_closing(char *input, int c);
-char 		**split_parser(char *input, int cmd);
+char		**split_parser(char *input, int cmd);
+int			check_parse(char *parsed);
+void		get_redirs(char **splitted, t_command **cmds, int cmd);
 
 #endif
