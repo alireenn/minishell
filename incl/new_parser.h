@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:53:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/11 16:27:03 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/12 15:41:44 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+# include <libft.h>
 
 typedef struct s_command {
 	char	*com;
@@ -35,6 +36,7 @@ typedef t_node_tree*	t_tree;
 
 int			special_issep(char c, char *str);
 char		*parse_tree(char *input);
+char		**special_split(char *str, char *charset, int *c);
 
 t_tree		make_tree(char *input, int *cmd);
 t_tree		null_tree(void);

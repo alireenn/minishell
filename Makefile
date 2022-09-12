@@ -1,10 +1,10 @@
 NAME			= minishell
 
 # libraries
-# LIB_DIR			= ./lib
+LIB_DIR			= ./lib
 
-# LIBFT_DIR		= $(LIB_DIR)/libft
-# LIBFT_A			= $(LIBFT_DIR)/libft.a
+LIBFT_DIR		= $(LIB_DIR)/libft
+LIBFT_A			= $(LIBFT_DIR)/libft.a
 
 # PRINTFFD_DIR	= $(LIB_DIR)/printf_fd
 # PRINTFFD_A		= $(PRINTFFD_DIR)/printf_fd.a
@@ -24,9 +24,10 @@ NEW_PARSER_FILES=				\
 
 NEW_PARSER		= $(addprefix new_parser/, $(NEW_PARSER_FILES))
 
-COMMANDS_FILES=				\
+COMMANDS_FILES=					\
 		commands.c				\
 		execute.c				\
+		redirections.c 			\
 
 COMMANDS		= $(addprefix commands/, $(COMMANDS_FILES))
 
@@ -59,7 +60,7 @@ SRCS			=								\
 OBJS_DIR		= ./objs
 OBJS			= $(patsubst $(SRCS_DIR)%,$(OBJS_DIR)%,$(SRCS:.c=.o))
 
-INCLUDES		= -I $(HEAD_DIR)
+INCLUDES		= -I $(LIBFT_DIR) -I $(HEAD_DIR)
 
 CC				= gcc
 
@@ -77,12 +78,12 @@ RESET 			= \033[00m
 # Rules
 all:			$(NAME)
 
-$(NAME):	 $(OBJS)
-		@gcc $(FLAGS) $(OBJS) $(MAIN) -o $(NAME) $(RLFLAGS2)
+$(NAME):	 $(OBJS) $(LIB_A)
+		@gcc $(FLAGS) $(OBJS) $(MAIN) $(LIB_A) -o $(NAME) $(RLFLAGS2)
 		@echo "$(GREEN_B)$(NAME) successfully compiled $(RESET)"
 
-sanitize:	 $(OBJS)
-		@gcc -g -fsanitize=address $(FLAGS) $(OBJS) $(MAIN) -o $(NAME)
+sanitize:	 $(OBJS) $(LIB_A)
+		@gcc -g -fsanitize=address $(FLAGS) $(OBJS) $(MAIN) $(LIB_A) -o $(NAME)
 		@echo "$(GREEN)$(NAME) successfully compiled $(RESET)"
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
