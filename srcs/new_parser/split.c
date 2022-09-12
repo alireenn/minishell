@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 17:15:28 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/12 14:32:22 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/12 16:32:56 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	putstr_parser(char *input, int len, int offset, char *matrix)
 		matrix[i] = input[i + offset];
 		i++;
 	}
-	while (input[i + offset] == ' ' || input[i + offset] == '&' || input[i + offset] == '|')
+	while (input[i + offset] == ' '
+		|| input[i + offset] == '&' || input[i + offset] == '|')
 		i++;
 	return (i);
 }
