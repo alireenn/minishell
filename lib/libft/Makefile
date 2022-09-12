@@ -13,6 +13,12 @@ OBJS = $(SRC:.c=.o)
 
 BONUS_OBJS = $(BONUS_SRC:.c=.o)
 
+# Colors
+GREEN 			= \033[00;32m
+GREEN_B 		= \033[01;32m
+YELLOW 			= \033[00;33m
+RESET  			= \033[00m
+
 $(NAME):
 		gcc -Wall -Werror -Wextra -c $(SRC)
 		ar rc $(NAME) $(OBJS)
@@ -29,6 +35,7 @@ clean:
 
 fclean: clean
 		rm -f $(NAME)
+		@echo "$(GREEN)Successfully forced cleaned - $(NAME)$(RESET)"
 	
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 16:20:10 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/12 16:46:57 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/12 17:38:50 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ void	get_redirs(char **s, t_command **cmds, int cmd)
 	int		i;
 	int		j;
 	int		a;
-	// char	**save;
+	char	**save;
 
 	i = 0;
 	a = 0;
 	while (i < cmd) //cmd e'il numero di comandi che nellésempio di prima era 3
 	{
-		if (s[i][j] == '>' && s[i][j + 1] != '\0' && s[i][j + 1] == '>')
+		if (s[i][j] == '>' && s[i][j + 1] != '\0' && s[i][j + 1] != '>')
 		{
-			// save = ft_split(s[i], ">", &a);
-			// printf("%s\n", save[1]);
+			save = ft_split(s[i], ">", &a);
+			printf("\n%s\n", save[1]);
 			// get_red_input(save[1], cmds, );
 
 		}

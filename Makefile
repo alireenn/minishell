@@ -9,7 +9,7 @@ LIBFT_A			= $(LIBFT_DIR)/libft.a
 # PRINTFFD_DIR	= $(LIB_DIR)/printf_fd
 # PRINTFFD_A		= $(PRINTFFD_DIR)/printf_fd.a
 
-# LIB_A	= $(LIBFT_A) $(PRINTFFD_A)
+LIB_A	= $(LIBFT_A) #$(PRINTFFD_A)
 
 HEAD_DIR		= ./incl
 
@@ -78,7 +78,7 @@ RESET 			= \033[00m
 # Rules
 all:			$(NAME)
 
-$(NAME):	 $(OBJS) $(LIB_A)
+$(NAME):	libraries $(LIB_A) $(OBJS)
 		@gcc $(FLAGS) $(OBJS) $(MAIN) $(LIB_A) -o $(NAME) $(RLFLAGS2)
 		@echo "$(GREEN_B)$(NAME) successfully compiled $(RESET)"
 
@@ -94,8 +94,8 @@ $(OBJS): 			| $(OBJS_DIR)
 $(OBJS_DIR):
 		@mkdir $(OBJS_DIR)
 
-# libraries:			
-# 		@printf "Making libft..." && make -C $(LIBFT_DIR) && echo "$(YELLOW)libft successfully compiled $(RESET)"
+libraries:			
+		@printf "Making libft..." && make -C $(LIBFT_DIR) && echo "$(YELLOW)libft successfully compiled $(RESET)"
 # 		@printf "Making printf_fd..." && make -C $(PRINTFFD_DIR) && echo "$(YELLOW)printf_fd successfully compiled $(RESET)"
 
 clean:				
@@ -103,6 +103,7 @@ clean:
 		@echo "$(GREEN)Successfully cleaned objects - $(NAME)$(RESET)"
 
 fclean: 			clean
+		make fclean -C $(LIBFT_DIR)
 		@rm -f $(OBJS)
 		@rm -f $(NAME)
 		@rm -rf $(OBJS_DIR)
