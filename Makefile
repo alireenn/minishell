@@ -43,19 +43,16 @@ COMMANDS		= $(addprefix commands/, $(COMMANDS_FILES))
 
 # SIGNAL			= $(addprefix signal/, $(SIGNAL_FILES))
 
-# UTILS_FILES		=				\
-# 		ft_free_mini.c			\
-# 		debugging_functions.c	\
-# 		utils.c					\
-# 		utils2.c				\
-# 		list_utils.c			\
+UTILS_FILES		=				\
+		strings.c			\
 
-# UTILS			= $(addprefix utils/, $(UTILS_FILES))
+UTILS			= $(addprefix utils/, $(UTILS_FILES))
 
 SRCS_DIR		= ./srcs
 SRCS			=								\
 		$(addprefix $(SRCS_DIR)/,$(NEW_PARSER))	\
 		$(addprefix $(SRCS_DIR)/,$(COMMANDS))	\
+		$(addprefix $(SRCS_DIR)/,$(UTILS))	\
 
 OBJS_DIR		= ./objs
 OBJS			= $(patsubst $(SRCS_DIR)%,$(OBJS_DIR)%,$(SRCS:.c=.o))

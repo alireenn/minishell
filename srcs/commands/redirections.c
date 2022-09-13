@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 16:20:10 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/12 17:38:50 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:43:31 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,54 @@
 
 // 1 -> '>'
 
-// void	get_red_input(char *s, t_command *cmds, int j, int flag)
-// {
-	
-// }
+char	*get_file_io(char **s, int r, int j, int *type)
+{
+	int		i;
+	int		k;
+	char	*file;
+
+	i = 0;
+	k = 0;
+	(*type) = (s[r][j] == '>') + 2 * (s[r][j] == '<')
+		+ 2 * (s[r][j + 1] == '<') + 2 * (s[r][j + 1] == '>');
+	if (s[r][j] == s[r][i + j + 1])
+		i++;
+	i++;
+	while (s[r][i + j] == ' ')
+		i++;
+	while (!special_issep(s[r][i + k + j], " <>") && s[r][i + k + j] != '\0')
+		k++;
+	if (k == 0)
+		return (NULL);
+	file = ft_strdup_from_to(s[r], j + i, j + i + k);
+	replace(&s[r], j, j + i + k, "");
+	return (file);
+}
 
 void	get_redirs(char **s, t_command **cmds, int cmd)
 {
 	int		i;
 	int		j;
-	int		a;
-	char	**save;
+	char	*file;
+	int		type;
 
 	i = 0;
-	a = 0;
-	while (i < cmd) //cmd e'il numero di comandi che nellésempio di prima era 3
-	{
-		if (s[i][j] == '>' && s[i][j + 1] != '\0' && s[i][j + 1] != '>')
-		{
-			save = ft_split(s[i], ">", &a);
-			printf("\n%s\n", save[1]);
-			// get_red_input(save[1], cmds, );
-
-		}
-		j = 0;
-		cmds++;
-		// j = 0;
-		// while (j < (int)strlen(s[i]))
-		// {
-		// 	if (s[i][j] == '>' && s[i][j + 1] != '\0' && s[i][j + 1] != '>')
-		// 	{
-		// 		get_red_input(s[i], cmds[i], j, 1);
-		// 	}
-		// 	else if ()
-		// 	j++;
-		// }
-		i++;
-	}
 	while (i < cmd)
 	{
-		printf("%s\n", s[i]);
+		j = 0;
+		while (j < (int)ft_strlen(s[i]))
+		{
+			if (special_issep(s[i][j], "><"))
+			{
+				type = 0;
+				file = get_file_io(s, i, j, &type);
+				if (file == NULL)
+					printf("error");
+				get_red_io(cmds[i], type);
+			}
+			j++;
+		}
+		cmds++;
 		i++;
 	}
 }
