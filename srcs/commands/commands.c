@@ -12,6 +12,34 @@
 
 #include "../../incl/new_parser.h"
 
+void	init_secret_env(t_mini *mini)
+{
+	t_env	*it;
+	t_env	*min;
+	t_env	*tmp;
+	int		i;
+	int		cmp;
+
+	tmp = copy_env(mini, &i);
+	while (i--)
+	{
+		it = tmp;
+		min = tmp;
+		while (it != NULL)
+		{
+			cmp = ft_strncmp(it->name_var, min->name_var,
+					ft_strlen(min->name_var));
+			if (cmp < 0 || (cmp == 0 && ft_strlen(it->name_var)
+					< ft_strlen(min->name_var)))
+				min = it;
+			it = it->next;
+		}
+		add_elem(&mini->secret, min->name_var, min->arg_var);
+		delete_elem(&tmp, min);
+	}
+	free(tmp);
+}
+
 void	init_env(t_mini *mini, char **env)
 {
 	int		i;
