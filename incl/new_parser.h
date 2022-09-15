@@ -74,6 +74,7 @@ char		**split_parser(char *input, int cmd);
 */
 //		COMMANDS.C
 t_command	**alloc_cmds(int cmd);
+void		init_env(t_mini *mini, char **env);
 //		REDIRECTION.C
 void		get_redirs(char **s, t_command **cmds, int cmd);
 void		replace(char **tbr, int from, int to, char *rep);
