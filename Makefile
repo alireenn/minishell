@@ -44,7 +44,10 @@ COMMANDS		= $(addprefix commands/, $(COMMANDS_FILES))
 # SIGNAL			= $(addprefix signal/, $(SIGNAL_FILES))
 
 UTILS_FILES		=				\
-		strings.c			\
+		strings.c				\
+		list.c					\
+		utils.c					\
+		init.c					\
 
 UTILS			= $(addprefix utils/, $(UTILS_FILES))
 

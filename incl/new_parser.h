@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:53:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/15 16:18:11 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/15 18:32:21 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@
 # include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <limits.h>
 # include "libft.h"
+
+typedef struct s_env {
+	char			*name_var;
+	char			*arg_var;
+	struct s_env	*next;
+}	t_env;
 
 typedef struct s_command {
 	char	*com;
@@ -35,6 +42,20 @@ typedef struct s_node_tree {
 }	t_node_tree;
 
 typedef t_node_tree*	t_tree;
+
+typedef struct s_mini {
+	t_env		*env;
+	t_env		*secret;
+	t_tree		tree;
+	t_command	**commands;
+	int			cmd;
+	int			exit;
+	char		*pwd;
+	int			last;
+	int			res;
+	int			save_out;
+	int			save_in;
+}	t_mini;
 
 /*
 ** 			NEW_PARSER 
@@ -74,14 +95,22 @@ char		**split_parser(char *input, int cmd);
 */
 //		COMMANDS.C
 t_command	**alloc_cmds(int cmd);
-void		init_env(t_mini *mini, char **env);
-void		init_secret_env(t_mini *mini);
 //		REDIRECTION.C
 void		get_redirs(char **s, t_command **cmds, int cmd);
 void		replace(char **tbr, int from, int to, char *rep);
 char		*ft_strdup_from_to(char *input, int start, int end);
 void		emily(int n);
-
-t_env		*copy_env(t_mini *mini, int *n)
-
+// init.c
+void		init_env(t_mini *mini, char **env);
+void		init_secret_env(t_mini *mini);
+t_mini		*init_mini(char **envp);
+// utils.c
+void		split_at(char *input, t_env *env, char c);
+t_env		*copy_env(t_mini *mini, int *n);
+//list.c
+t_env		*create_elem(char *elem_name, char *elem_arg);
+void		add_elem(t_env **list, char *elem_name, char *elem_arg);
+void		add_elem_ord(t_env **list, char *elem_name, char *elem_arg);
+void		delete_elem(t_env **list, t_env *elem);
+void		change_var(t_env *env, char *name, char *arg);
 #endif

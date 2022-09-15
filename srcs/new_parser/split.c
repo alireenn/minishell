@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 17:15:28 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/12 16:32:56 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:29:59 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ char	**split_parser(char *input, int cmd)
 		len = strlen_parser(input + offset);
 		matrix[row] = (char *) malloc (sizeof(char) * (len + 1));
 		offset += putstr_parser(input, len, offset, matrix[row]);
-		// printf("%s\n", matrix[row]);
 		row++;
 	}
 	return (matrix);
