@@ -12,6 +12,26 @@
 
 #include "../../incl/new_parser.h"
 
+void	init_env(t_mini *mini, char **env)
+{
+	int		i;
+	t_env	*new;
+	t_env	*tmp;
+
+	tmp = malloc(sizeof(t_env));
+	split_at(env[0], tmp, '=');
+	mini->env = tmp;
+	i = 1;
+	while (env[i])
+	{
+		new = malloc(sizeof(t_env));
+		split_at(env[i], new, '=');
+		tmp->next = new;
+		tmp = new;
+		i++;
+	}
+}
+
 t_command	**alloc_cmds(int cmd)
 {
 	t_command	**cmds;
