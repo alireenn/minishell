@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:53:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/13 18:28:01 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/15 16:18:11 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "libft.h"
 
 typedef struct s_command {
@@ -33,7 +35,6 @@ typedef struct s_node_tree {
 }	t_node_tree;
 
 typedef t_node_tree*	t_tree;
-
 
 /*
 ** 			NEW_PARSER 

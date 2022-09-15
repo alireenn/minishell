@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 16:20:10 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/15 14:47:26 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/15 16:31:05 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,12 @@ int	get_red_io(t_command *cmd, char *filename, int type)
 	{
 		if (access(filename, F_OK) != 0)
 		{
-			// printf_fd(2,"minishell: %s: No such file or directory\n", filename);
+			printf("minishell: %s: No such file or directory\n", filename);
 			// mini->last = 1;
 			cmd->res = 0;
 			return (-1);
 		}
+		return (open(filename, O_RDONLY | O_CREAT, mode));
 	}
 	else if (type == 3)
 		return (open(filename, O_WRONLY | O_CREAT | O_APPEND, mode));
@@ -112,9 +113,9 @@ void	get_redirs(char **s, t_command **cmds, int cmd)
 					printf("error");
 				cmds[i]->fd_red[type % 2] = get_red_io(cmds[i], file, type);
 			}
-			j++;
+			else
+				j++;
 		}
-		cmds++;
 		i++;
 	}
 }
