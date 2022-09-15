@@ -82,4 +82,6 @@ void		replace(char **tbr, int from, int to, char *rep);
 char		*ft_strdup_from_to(char *input, int start, int end);
 void		emily(int n);
 
+t_env		*copy_env(t_mini *mini, int *n)
+
 #endif
