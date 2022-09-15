@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/12 14:45:37 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:28:39 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	main(int argc, char **argv)
 	print_tree(&ret);
 	splitted = split_parser(argv[1], cmd);
 	cmds = alloc_cmds(cmd);
-	int i;
-	i = 0;
+	// expand()
+	get_redirs(splitted, cmds, cmd);
+	int i = 0;
 	while (i < cmd)
 	{
 		printf("%s\n", splitted[i]);
 		i++;
 	}
-	get_redirs(splitted, cmds, cmd);
 	free(parsed);
 }
