@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:53:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/15 18:32:21 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/17 16:09:35 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ char		**split_parser(char *input, int cmd);
 */
 //		COMMANDS.C
 t_command	**alloc_cmds(int cmd);
+void		expand(char **s, t_mini *mini);
+void		get_cmds(t_command **cmds, int cmd, char **input);
 //		REDIRECTION.C
 void		get_redirs(char **s, t_command **cmds, int cmd);
 void		replace(char **tbr, int from, int to, char *rep);
@@ -107,6 +109,7 @@ t_mini		*init_mini(char **envp);
 // utils.c
 void		split_at(char *input, t_env *env, char c);
 t_env		*copy_env(t_mini *mini, int *n);
+t_env		*ft_search_var(t_env *env, char *name);
 //list.c
 t_env		*create_elem(char *elem_name, char *elem_arg);
 void		add_elem(t_env **list, char *elem_name, char *elem_arg);

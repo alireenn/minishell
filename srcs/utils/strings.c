@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:34:35 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/17 13:05:35 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/17 16:08:46 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	replace(char **tbr, int from, int to, char *rep)
 	free(input);
 	input = ft_strjoin(before, rep);
 	ret = ft_strjoin(input, after);
+	// printf("%s\n", ret);
 	free(input);
 	free(before);
 	free(after);

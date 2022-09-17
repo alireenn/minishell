@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:25:42 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/15 18:25:43 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/17 14:32:29 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,19 @@ t_env	*copy_env(t_mini *mini, int *n)
 	}
 	(*n) = i;
 	return (ret);
+}
+
+t_env	*ft_search_var(t_env *env, char *name)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp != NULL)
+	{
+		if (ft_strlen(name) == ft_strlen(tmp->name_var)
+			&& ft_strncmp(tmp->name_var, name, ft_strlen(name)) == 0)
+			break ;
+		tmp = tmp->next;
+	}
+	return (tmp);
 }
