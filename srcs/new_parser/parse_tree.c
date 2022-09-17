@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:50:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/11 15:43:44 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/17 13:05:58 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ t_tree	get_next_tree(char *input, int *ind, int *cmd)
 	if (input[i] == '(')
 	{
 		j = search_closing(input, i);
-		// ret = make_tree(ft_strdup_from_to(input, i + 1, j - 2), cmd);
 		*ind = j;
 	}
 	ret = nodoalb_alloc(*cmd);
@@ -77,13 +76,14 @@ t_tree	make_tree(char *input, int *cmd)
 	t_tree	sx;
 
 	i = 0;
-	//printf("len: %d\n", strlen(input));
 	ret = get_next_tree(input, &i, cmd);
 	while (input[i] != '\0')
 	{
 		sx = ret;
 		while (input[i] == '>' || input[i] == '<')
 			i++;
+		if (input[i] == '\0')
+			return (ret);
 		if (input[i] == '&')
 			ret = nodoalb_alloc(-1);
 		if (input[i] == '|')
@@ -172,5 +172,5 @@ int	check_parse(char *parsed)
 		}
 		i++;
 	}
-	return (1);	
+	return (1);
 }

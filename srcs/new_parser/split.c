@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 17:15:28 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/15 18:29:59 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/17 12:27:47 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	putstr_parser(char *input, int len, int offset, char *matrix)
 		matrix[i] = input[i + offset];
 		i++;
 	}
+	matrix[i] = '\0';
 	while (input[i + offset] == ' '
 		|| input[i + offset] == '&' || input[i + offset] == '|')
 		i++;
