@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 16:20:10 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/17 13:04:39 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/17 17:28:37 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*get_file_io(char **s, int r, int j, int *type)
 	if (k == 0)
 		return (NULL);
 	file = ft_strdup_from_to(s[r], j + i, j + i + k - 1);
-	// printf("file: |%s|\n", file);
 	replace(&s[r], j, j + i + k, "\0");
 	return (file);
 }

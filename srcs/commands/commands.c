@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/17 16:12:09 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/17 17:38:10 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,38 @@ void	get_cmds(t_command **cmds, int cmd, char **input)
 {
 	int	i;
 	int	j;
+	int	k;
+	int	z;
 
 	i = 0;
 	while (i < cmd)
 	{
 		j = 0;
+		z = 0;
 		if (input[i][j] == '(')
-		{
-			// cmds[i]->com = ft_strdup(input[i]);
 			j = (int)ft_strlen(input[i]);
-		}
-		while (j < (int)ft_strlen(input[i]) && input[i][j] != ' ')
+		while (j < (int)ft_strlen(input[i]) && input[i][j + z] == ' ')
+			z++;
+		while (j < (int)ft_strlen(input[i]) && input[i][j + z] != ' ')
 			j++;
-		cmds[i]->com = ft_strdup_from_to(input[i], 0, j - 1);
+		k = 0;
+		while (input[i][j - 1 - k + z] == ' ' && j - 1 - k > 0)
+			k++;
+		cmds[i]->com = ft_strdup_from_to(input[i], z, j - 1 - k + z);
 		printf("cmd = |%s|\n", cmds[i]->com);
+		j += z;
+		while (input[i][j] != '\0' && input[i][j] == ' ')
+			j++;
+		if (j != (int)ft_strlen(input[i]))
+		{
+			k = (int)ft_strlen(input[i]);
+			while (input[i][k - 1] == ' ')
+				k--;
+			cmds[i]->arg = ft_strdup_from_to(input[i], j, k - 1);
+		}
+		else
+			cmds[i]->arg = NULL;
+		printf("arg = |%s|\n", cmds[i]->arg);
 		i++;
 	}
 }
