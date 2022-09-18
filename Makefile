@@ -64,8 +64,8 @@ INCLUDES		= -I $(LIBFT_DIR) -I $(HEAD_DIR)
 
 CC				= gcc
 
-FLAGS			= -Wall -Werror -Wextra $(INCLUDES)
-
+FLAGS			= $(INCLUDES)
+# -Wall -Werror -Wextra
 RLFLAGS			= -lreadline -lcurses -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
 
 RLFLAGS2		= -lreadline -lcurses -L $(HOME)/.brew/opt/readline/lib -I $(HOME)/.brew/opt/readline/include

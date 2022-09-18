@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:53:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/17 16:09:35 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/18 15:50:38 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ char		**split_parser(char *input, int cmd);
 t_command	**alloc_cmds(int cmd);
 void		expand(char **s, t_mini *mini);
 void		get_cmds(t_command **cmds, int cmd, char **input);
+void		print_cmds(t_command **cmds, int cmd);
 //		REDIRECTION.C
 void		get_redirs(char **s, t_command **cmds, int cmd);
 void		replace(char **tbr, int from, int to, char *rep);

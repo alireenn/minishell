@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/17 17:38:10 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/18 16:35:47 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,42 +78,64 @@ void	expand(char **s, t_mini *mini)
 	}
 }
 
+
+void	print_cmds(t_command **cmds, int cmd)
+{
+	int	i;
+
+	i = 0;
+	while (i < cmd)
+	{
+		if (cmds[i]->com != NULL)
+			printf("comando: $%s$\n", cmds[i]->com);
+		if (cmds[i]->arg != NULL)
+			printf("argomento: $%s$\n", cmds[i]->arg);
+		i++;
+	}
+}
+
+char	*get_strip_str(char *input, int from, int to)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (input[from + i] == ' ')
+		i++;
+	j = 0;
+	while (input[to - 1 - j] == ' ')
+		j++;
+	return (ft_strdup_from_to(input, from + i, to - j - 1));
+}
+
 void	get_cmds(t_command **cmds, int cmd, char **input)
 {
 	int	i;
 	int	j;
-	int	k;
-	int	z;
 
 	i = 0;
 	while (i < cmd)
 	{
 		j = 0;
-		z = 0;
+		while (input[i][j] == ' ' && j < (int)ft_strlen(input[i]))
+			j++;
 		if (input[i][j] == '(')
-			j = (int)ft_strlen(input[i]);
-		while (j < (int)ft_strlen(input[i]) && input[i][j + z] == ' ')
-			z++;
-		while (j < (int)ft_strlen(input[i]) && input[i][j + z] != ' ')
-			j++;
-		k = 0;
-		while (input[i][j - 1 - k + z] == ' ' && j - 1 - k > 0)
-			k++;
-		cmds[i]->com = ft_strdup_from_to(input[i], z, j - 1 - k + z);
-		printf("cmd = |%s|\n", cmds[i]->com);
-		j += z;
-		while (input[i][j] != '\0' && input[i][j] == ' ')
-			j++;
-		if (j != (int)ft_strlen(input[i]))
 		{
-			k = (int)ft_strlen(input[i]);
-			while (input[i][k - 1] == ' ')
-				k--;
-			cmds[i]->arg = ft_strdup_from_to(input[i], j, k - 1);
+			cmds[i]->com = get_strip_str(input[i], 0, (int)ft_strlen(input[i]));
+			cmds[i]->arg = NULL;
 		}
 		else
-			cmds[i]->arg = NULL;
-		printf("arg = |%s|\n", cmds[i]->arg);
+		{
+			while (input[i][j] != ' ' && j < (int)ft_strlen(input[i]))
+				j++;
+			cmds[i]->com = get_strip_str(input[i], 0, j);
+			while (input[i][j] == ' ')
+				j++;
+			if (j == (int)ft_strlen(input[i]))
+				cmds[i]->arg = NULL;
+			else
+				cmds[i]->arg = get_strip_str(input[i], j, (int)ft_strlen(input[i]));
+		}
 		i++;
 	}
 }

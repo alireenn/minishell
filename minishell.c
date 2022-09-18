@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/17 16:10:03 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/18 16:22:54 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,9 @@ void	process_input(t_mini *mini, char *input)
 	splitted = split_parser(input, mini->cmd);
 	mini->commands = alloc_cmds(mini->cmd);
 	get_redirs(splitted, mini->commands, mini->cmd);
-	// int	i = 0;
-	// while (i < mini->cmd)
-	// {
-	// 	printf("%s\n", splitted[i]);
-	// 	i++; 
-	// }
 	expand(splitted, mini);
 	get_cmds(mini->commands, mini->cmd, splitted);
-	// i = 0;
-	// while (i < mini->cmd)
-	// {
-	// 	printf("splitted after = %s\n", splitted[i]);
-	// 	i++; 
-	// }
+	print_cmds(mini->commands, mini->cmd);
 	/* mini->res = execute(mini->tree, mini->commands, mini);
 	mini->cmd = 0;
 	free_cmds(mini->commands, mini->cmd);
