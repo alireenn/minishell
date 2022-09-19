@@ -67,7 +67,7 @@ INCLUDES		= -I $(LIBFT_DIR) -I $(PRINTFFD_DIR) -I $(HEAD_DIR)
 
 CC				= gcc
 
-FLAGS			= $(INCLUDES)
+FLAGS			= -Wall -Werror -Wextra $(INCLUDES)
 # -Wall -Werror -Wextra
 RLFLAGS			= -lreadline -lcurses -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
 
@@ -108,6 +108,7 @@ clean:
 
 fclean: 			clean
 		make fclean -C $(LIBFT_DIR)
+		make fclean -C $(PRINTFFD_DIR)
 		@rm -f $(OBJS)
 		@rm -f $(NAME)
 		@rm -rf $(OBJS_DIR)

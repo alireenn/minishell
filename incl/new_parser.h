@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/19 18:34:01 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/19 18:44:20 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
-# include "libft.h"
-# include "ft_printf.h"
+# include "../lib/libft/libft.h"
+# include "../lib/printf_fd/ft_printf.h"
 
 typedef struct s_env {
 	char			*name_var;

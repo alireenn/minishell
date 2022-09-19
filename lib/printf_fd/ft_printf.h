@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:50:04 by gcucino           #+#    #+#             */
-/*   Updated: 2022/07/14 18:39:58 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/19 18:43:09 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-int				ft_printf(int fd, const char *format, ...);
+int				printf_fd(int fd, const char *str, ...);
 int				ft_get_arg(int fd, va_list *args, char *str, int *i);
 
 //MANDATORY
