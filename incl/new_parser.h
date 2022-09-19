@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:53:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/13 18:28:01 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/14 15:51:14 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,14 @@ char		**split_parser(char *input, int cmd);
 //		COMMANDS.C
 t_command	**alloc_cmds(int cmd);
 //		REDIRECTION.C
+char		*get_file_io(char **s, int r, int j, int *type);
 void		get_redirs(char **s, t_command **cmds, int cmd);
-void		replace(char **tbr, int from, int to, char *rep);
-char		*ft_strdup_from_to(char *input, int start, int end);
+/*
+**		UTILS
+*/
+//	STRINGS.C
 void		emily(int n);
+void		replace(char **tbr, int from, int to, char *rep);
+
 
 #endif
