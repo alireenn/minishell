@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/19 15:21:10 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/19 17:05:20 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,35 +78,6 @@ void	expand(char **s, t_mini *mini)
 	}
 }
 
-void	print_cmds(t_command **cmds, int cmd)
-{
-	int	i;
-
-	i = 0;
-	while (i < cmd)
-	{
-		if (cmds[i]->com != NULL)
-			printf("comando: $%s$\n", cmds[i]->com);
-		if (cmds[i]->arg != NULL)
-			printf("argomento: $%s$\n", cmds[i]->arg);
-		i++;
-	}
-}
-
-char	*get_strip_str(char *input, int from, int to)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (input[from + i] == ' ')
-		i++;
-	j = 0;
-	while (input[to - 1 - j] == ' ')
-		j++;
-	return (ft_strdup_from_to(input, from + i, to - j - 1));
-}
-
 void	get_cmds(t_command **cmds, int cmd, char **input)
 {
 	int	i;
@@ -137,21 +108,4 @@ void	get_cmds(t_command **cmds, int cmd, char **input)
 		}
 		i++;
 	}
-}
-
-void	free_cmds(t_command	**cmds, int cmd)
-{
-	int	i;
-
-	i = 0;
-	while (i < cmd)
-	{
-		if (cmds[i]->com != NULL)
-			free(cmds[i]->com);
-		if (cmds[i]->arg != NULL)
-			free(cmds[i]->arg);
-		free(cmds[i]);
-		i++;
-	}
-	free(cmds);
 }

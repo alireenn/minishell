@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/19 16:32:30 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:16:47 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
@@ -58,6 +59,44 @@ typedef struct s_mini {
 }	t_mini;
 
 /*
+**		BUILDIN
+*/
+//		cd.c
+void		ft_cd(t_mini *mini, char *arg, t_command *com);
+//		env.c
+char		**trasformation(t_env *env);
+void		init_env(t_mini *mini, char **env);
+void		ft_env(t_env *env, t_command *cmd);
+void		ft_print_export(t_env *env, t_command *cmd);
+void		ft_export(t_mini *mini, char *str, t_command *cmd);
+//		env2.c
+int			search(t_env *env, char *name);
+void		ft_unset(t_mini *mini, char *name, t_command *cmd);
+//		some_buildin.c
+int			check_par(char *str);
+void		ft_pwd(t_command *cmd);
+int			check_flag_echo(t_command *cmd);
+void		ft_echo(char *str, t_command *com);
+void		ft_exit(t_mini *mini, t_command *com);
+/*
+** 			COMMANDS
+*/
+//		commands.c
+t_command	**alloc_cmds(int cmd);
+void		expand(char **s, t_mini *mini);
+void		free_cmds(t_command	**cmds, int cmd);
+void		get_cmds(t_command **cmds, int cmd, char **input);
+//		execute.c
+int			is_valid_path(char *filename);
+char		**get_argv(char *com, char *arg);
+void		make_cmd(t_command *cmd, t_mini *mini);
+char		*get_filename(t_mini *mini, char *filename);
+void		other_command(t_command *cmd, t_mini *mini);
+int			execute(t_tree a, t_command **cmds, t_mini *mini);
+//		redirection.c
+char		*get_file_io(char **s, int r, int j, int *type);
+void		get_redirs(char **s, t_command **cmds, int cmd);
+/*
 ** 			NEW_PARSER 
 */
 //		ft_tree.c
@@ -91,22 +130,6 @@ int			strlen_parser(char *input);
 char		**split_parser(char *input, int cmd);
 int			putstr_parser(char *input, int len, int offset, char *matrix);
 /*
-** 			COMMANDS
-*/
-//		commands.c
-t_command	**alloc_cmds(int cmd);
-void		expand(char **s, t_mini *mini);
-void		free_cmds(t_command	**cmds, int cmd);
-void		print_cmds(t_command **cmds, int cmd);
-void		get_cmds(t_command **cmds, int cmd, char **input);
-//		redirection.c
-char		*get_file_io(char **s, int r, int j, int *type);
-void		get_redirs(char **s, t_command **cmds, int cmd);
-//		execute.c
-void		make_cmd(t_command *cmd, t_mini *mini);
-void		other_command(t_command *cmd, t_mini *mini);
-int			execute(t_tree a, t_command **cmds, t_mini *mini);
-/*
 **		UTILS
 */
 //	STRINGS.C
@@ -131,25 +154,8 @@ t_env		*create_elem(char *elem_name, char *elem_arg);
 void		change_var(t_env *env, char *name, char *arg);
 void		add_elem(t_env **list, char *elem_name, char *elem_arg);
 void		add_elem_ord(t_env **list, char *elem_name, char *elem_arg);
-/*
-**		BUILDIN
-*/
-//		cd.c
-void		ft_cd(t_mini *mini, char *arg, t_command *com);
-//		env.c
-char		**trasformation(t_env *env);
-void		init_env(t_mini *mini, char **env);
-void		ft_env(t_env *env, t_command *cmd);
-void		ft_print_export(t_env *env, t_command *cmd);
-void		ft_export(t_mini *mini, char *str, t_command *cmd);
-//		env2.c
-void		ft_unset(t_mini *mini, char *name, t_command *cmd);
-//		some_buildin.c
-int			check_par(char *str);
-void		ft_pwd(t_command *cmd);
-int			check_flag_echo(t_command *cmd);
-void		ft_echo(char *str, t_command *com);
-void		ft_exit(t_mini *mini, t_command *com);
-
+//		free.c
+//		debug.c
+void		print_cmds(t_command **cmds, int cmd);
 #endif
 

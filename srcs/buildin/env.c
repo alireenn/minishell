@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:24:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/19 16:17:46 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:12:05 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/new_parser.h"
+
+char	**trasformation(t_env *env)
+{
+	int		i;
+	char	**m;
+	int		size;
+	t_env	*tmp;
+
+	tmp = env;
+	i = 0;
+	size = 0;
+	while (tmp != NULL)
+	{
+		tmp = tmp->next;
+		size++;
+	}
+	m = (char **)malloc (sizeof(char *) * (size + 1));
+	tmp = env;
+	while (tmp != NULL)
+	{
+		m[i] = ft_join_char(tmp->name_var, tmp->arg_var, '=');
+		i++;
+		tmp = tmp->next;
+	}
+	m[i] = NULL;
+	return (m);
+}
 
 void	init_env(t_mini *mini, char **env)
 {
@@ -79,33 +106,6 @@ void	ft_export(t_mini *mini, char *str, t_command *cmd)
 	else
 		ft_print_export(mini->secret, cmd);
 	cmd->res = 1;
-}
-
-char	**trasformation(t_env *env)
-{
-	int		i;
-	char	**m;
-	int		size;
-	t_env	*tmp;
-
-	tmp = env;
-	i = 0;
-	size = 0;
-	while (tmp != NULL)
-	{
-		tmp = tmp->next;
-		size++;
-	}
-	m = (char **)malloc (sizeof(char *) * (size + 1));
-	tmp = env;
-	while (tmp != NULL)
-	{
-		m[i] = ft_join_char(tmp->name_var, tmp->arg_var, '=');
-		i++;
-		tmp = tmp->next;
-	}
-	m[i] = NULL;
-	return (m);
 }
 
 void	ft_print_export(t_env *env, t_command *cmd)

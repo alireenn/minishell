@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:34:35 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/19 16:22:56 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:05:04 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ void	replace(char **tbr, int from, int to, char *rep)
 	*tbr = ret;
 }
 
-void	emily(int n)
-{
-	printf("emily %d\n", n);
-}
-
 int	equal_strings(char *com, char *exec)
 {
 	int	len_com;
@@ -66,4 +61,18 @@ char	*ft_join_char(char *s1, char *s2, char c)
 	ret = ft_strjoin(tmp, s2);
 	free(tmp);
 	return (ret);
+}
+
+char	*get_strip_str(char *input, int from, int to)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (input[from + i] == ' ')
+		i++;
+	j = 0;
+	while (input[to - 1 - j] == ' ')
+		j++;
+	return (ft_strdup_from_to(input, from + i, to - j - 1));
 }

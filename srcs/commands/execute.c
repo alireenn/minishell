@@ -3,14 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/19 16:30:18 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:15:54 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "new_parser.h"
+
+int	is_valid_path(char *filename)
+{
+	DIR	*dir;
+
+	if (access(filename, F_OK) == 0)
+	{
+		if (access(filename, X_OK) != 0)
+		{
+			printf_fd(2, "minishell: %s: Permission denied\n", filename);
+			exit(126);
+		}
+		else
+		{
+			dir = opendir(filename);
+			if (dir != NULL)
+			{
+				printf_fd(2, "minishell: %s: is a directory\n", filename);
+				closedir(dir);
+				exit(126);
+			}
+		}
+		return (1);
+	}
+	return (0);
+}
+
+char	*get_filename(t_mini *mini, char *filename)
+{
+	char	*ret;
+	char	**path;
+	int		i;
+
+	ret = NULL;
+	if (is_valid_path(filename) == 1)
+		return (ft_strdup(filename));
+	if (strchr(filename, '/') != NULL)
+	{
+		printf_fd(2, "minishell: %s: No such file or directory\n", filename);
+		exit(1);
+	}
+	path = get_path(mini);
+	i = 0;
+	while (path != NULL && path[i] != NULL)
+	{
+		ret = ft_join_char(path[i], filename, '/');
+		if (access(ret, F_OK) == 0)
+		{
+			if (access(ret, X_OK) != 0)
+			{
+				printf_fd(2, "minishell: %s: Permission denied\n", filename);
+				exit(126);
+			}
+			return (ret);
+		}
+		free(ret);
+		i++;
+	}
+	return (NULL);
+}
+
+char	**get_argv(char *com, char *arg)
+{
+	char	*tmp;
+	char	**argv;
+	int		i;
+
+	i = 0;
+	tmp = ft_join_char(com, arg, ' ');
+	argv = ft_split(tmp, " ", &i);
+	free(tmp);
+	return (argv);
+}
 
 void	other_command(t_command *cmd, t_mini *mini)
 {
