@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/18 16:35:47 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/19 15:21:10 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	expand(char **s, t_mini *mini)
 		i++;
 	}
 }
-
 
 void	print_cmds(t_command **cmds, int cmd)
 {
