@@ -5,14 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/11 16:20:10 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/19 15:33:59 by anovelli         ###   ########.fr       */
+/*   Created: 2022/09/19 15:36:17 by anovelli          #+#    #+#             */
+/*   Updated: 2022/09/19 15:36:23 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/new_parser.h"
 
 // 1 -> '>'
+
+int	here_doc(char *end)
+{
+	pid_t	reader;
+	int		fd[2];
+	char	*tmp;
+
+	if (pipe(fd) == -1)
+		return (-1);
+	reader = fork();
+	if (reader == 0)
+	{
+		close(fd[0]);
+		tmp = readline("> ");
+		while (ft_strlen(tmp) != ft_strlen(end) || ft_strncmp(tmp, end, ft_strlen(end)) != 0)
+		{
+			write(fd[1], tmp, ft_strlen(tmp));
+			write(fd[1], "\n", 1);
+			free(tmp);
+			tmp = readline("> ");
+		}
+		exit(0);
+	}
+	else
+	{
+		close(fd[1]);
+		wait(NULL);
+		return (fd[0]);
+	}
+}
 
 char	*get_file_io(char **s, int r, int j, int *type)
 {
@@ -33,9 +63,33 @@ char	*get_file_io(char **s, int r, int j, int *type)
 		k++;
 	if (k == 0)
 		return (NULL);
-	file = ft_strdup_from_to(s[r], j + i, j + i + k);
-	replace(&s[r], j, j + i + k, "");
+	file = ft_strdup_from_to(s[r], j + i, j + i + k - 1);
+	replace(&s[r], j, j + i + k, "\0");
 	return (file);
+}
+
+int	get_red_io(t_command *cmd, char *filename, int type)
+{
+	mode_t	mode;
+
+	mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+	if (type == 1)
+		return (open(filename, O_WRONLY | O_CREAT | O_TRUNC, mode));
+	else if (type == 2)
+	{
+		if (access(filename, F_OK) != 0)
+		{
+			printf("minishell: %s: No such file or directory\n", filename);
+			// mini->last = 1;
+			cmd->res = 0;
+			return (-1);
+		}
+		return (open(filename, O_RDONLY | O_CREAT, mode));
+	}
+	else if (type == 3)
+		return (open(filename, O_WRONLY | O_CREAT | O_APPEND, mode));
+	else
+		return (here_doc(filename));
 }
 
 void	get_redirs(char **s, t_command **cmds, int cmd)
@@ -57,11 +111,11 @@ void	get_redirs(char **s, t_command **cmds, int cmd)
 				file = get_file_io(s, i, j, &type);
 				if (file == NULL)
 					printf("error");
-				get_red_io(cmds[i], type);
+				cmds[i]->fd_red[type % 2] = get_red_io(cmds[i], file, type);
 			}
-			j++;
+			else
+				j++;
 		}
-		cmds++;
 		i++;
 	}
 }
