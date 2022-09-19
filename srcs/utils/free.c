@@ -6,11 +6,11 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:00:20 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/19 17:03:28 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/19 18:10:22 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
+#include  "../../incl/new_parser.h"
 
 void	free_execve(char *filename, char **argv, char **envp)
 {

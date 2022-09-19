@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/19 17:16:47 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/19 18:34:01 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/history.h>
 # include <limits.h>
 # include "libft.h"
+# include "ft_printf.h"
 
 typedef struct s_env {
 	char			*name_var;
@@ -84,9 +85,9 @@ void		ft_exit(t_mini *mini, t_command *com);
 //		commands.c
 t_command	**alloc_cmds(int cmd);
 void		expand(char **s, t_mini *mini);
-void		free_cmds(t_command	**cmds, int cmd);
 void		get_cmds(t_command **cmds, int cmd, char **input);
 //		execute.c
+char		**get_path(t_mini *mini);
 int			is_valid_path(char *filename);
 char		**get_argv(char *com, char *arg);
 void		make_cmd(t_command *cmd, t_mini *mini);
@@ -132,12 +133,11 @@ int			putstr_parser(char *input, int len, int offset, char *matrix);
 /*
 **		UTILS
 */
-//	STRINGS.C
-void		emily(int n);
+//		strings.c
 int			equal_strings(char *com, char *exec);
 char		*ft_join_char(char *s1, char *s2, char c);
+char		*get_strip_str(char *input, int from, int to);
 void		replace(char **tbr, int from, int to, char *rep);
-
 // 		init.c
 t_mini		*init_mini(char **envp);
 void		init_secret_env(t_mini *mini);
@@ -155,7 +155,10 @@ void		change_var(t_env *env, char *name, char *arg);
 void		add_elem(t_env **list, char *elem_name, char *elem_arg);
 void		add_elem_ord(t_env **list, char *elem_name, char *elem_arg);
 //		free.c
+void		free_cmds(t_command	**cmds, int cmd);
+void		free_execve(char *filename, char **argv, char **envp);
 //		debug.c
+void		emily(int n);
 void		print_cmds(t_command **cmds, int cmd);
 #endif
 

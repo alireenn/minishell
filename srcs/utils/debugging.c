@@ -6,11 +6,11 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:02:22 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/19 17:05:10 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/19 18:29:43 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
+#include "../../incl/new_parser.h"
 
 void	print_cmds(t_command **cmds, int cmd)
 {

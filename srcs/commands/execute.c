@@ -6,11 +6,31 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/19 17:15:54 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/19 18:29:47 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
+#include "../../incl/new_parser.h"
+
+char	**get_path(t_mini *mini)
+{
+	t_env	*path;
+	int		i;
+
+	i = 0;
+	path = mini->env;
+	while (path != NULL)
+	{
+		if (ft_strlen(path->name_var) == 4
+			&& ft_strncmp(path->name_var, "PATH",
+				ft_strlen(path->name_var)) == 0)
+			break ;
+		path = path->next;
+	}
+	if (path != NULL)
+		return (ft_split(path->arg_var, ":", &i));
+	return (NULL);
+}
 
 int	is_valid_path(char *filename)
 {
@@ -123,7 +143,6 @@ void	other_command(t_command *cmd, t_mini *mini)
 
 void	make_cmd(t_command *cmd, t_mini *mini)
 {
-	expand(cmd, mini);
 	if (cmd->red[0] != 0 || cmd->red[1] != 0)
 	{
 		if (cmd->fd_red[0] < 0)

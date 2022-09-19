@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:24:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/19 17:12:05 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/19 18:16:12 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,6 @@ char	**trasformation(t_env *env)
 	}
 	m[i] = NULL;
 	return (m);
-}
-
-void	init_env(t_mini *mini, char **env)
-{
-	int		i;
-	t_env	*new;
-	t_env	*tmp;
-
-	tmp = malloc(sizeof(t_env));
-	split_at(env[0], tmp, '=');
-	mini->env = tmp;
-	i = 1;
-	while (env[i])
-	{
-		new = malloc(sizeof(t_env));
-		split_at(env[i], new, '=');
-		tmp->next = new;
-		tmp = new;
-		i++;
-	}
 }
 
 void	ft_env(t_env *env, t_command *cmd)

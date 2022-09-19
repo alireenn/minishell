@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/19 17:05:20 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/19 18:27:21 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	get_cmds(t_command **cmds, int cmd, char **input)
 		j = 0;
 		while (input[i][j] == ' ' && j < (int)ft_strlen(input[i]))
 			j++;
+		printf("%d, $%s$\n", j, &(input[i])[j]);
 		if (input[i][j] == '(')
 		{
 			cmds[i]->com = get_strip_str(input[i], 0, (int)ft_strlen(input[i]));
@@ -98,9 +99,12 @@ void	get_cmds(t_command **cmds, int cmd, char **input)
 		{
 			while (input[i][j] != ' ' && j < (int)ft_strlen(input[i]))
 				j++;
+			printf("%d, $%s$\n", j, &(input[i])[j]);
 			cmds[i]->com = get_strip_str(input[i], 0, j);
+			printf("comando: $%s$\n", cmds[i]->com);
 			while (input[i][j] == ' ')
 				j++;
+			printf("%d, $%s$\n", j, &(input[i])[j]);
 			if (j == (int)ft_strlen(input[i]))
 				cmds[i]->arg = NULL;
 			else

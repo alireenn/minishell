@@ -48,6 +48,8 @@ UTILS_FILES		=				\
 		list.c					\
 		utils.c					\
 		init.c					\
+		free.c					\
+		debugging.c				\
 
 UTILS			= $(addprefix utils/, $(UTILS_FILES))
 
@@ -55,13 +57,13 @@ SRCS_DIR		= ./srcs
 SRCS			=								\
 		$(addprefix $(SRCS_DIR)/,$(NEW_PARSER))	\
 		$(addprefix $(SRCS_DIR)/,$(COMMANDS))	\
-		$(addprefix $(SRCS_DIR)/,$(UTILS))	\
+		$(addprefix $(SRCS_DIR)/,$(UTILS))		\
 		$(addprefix $(SRCS_DIR)/,$(BUILDIN))	\
 
 OBJS_DIR		= ./objs
 OBJS			= $(patsubst $(SRCS_DIR)%,$(OBJS_DIR)%,$(SRCS:.c=.o))
 
-INCLUDES		= -I $(LIBFT_DIR) -I $(HEAD_DIR)
+INCLUDES		= -I $(LIBFT_DIR) -I $(PRINTFFD_DIR) -I $(HEAD_DIR)
 
 CC				= gcc
 
@@ -83,7 +85,7 @@ $(NAME):	libraries $(LIB_A) $(OBJS)
 		@gcc $(FLAGS) $(OBJS) $(MAIN) $(LIB_A) -o $(NAME) $(RLFLAGS2)
 		@echo "$(GREEN_B)$(NAME) successfully compiled $(RESET)"
 
-sanitize:	 $(OBJS) $(LIB_A)
+sanitize:	 libraries $(OBJS) $(LIB_A)
 		@gcc -g -fsanitize=address $(FLAGS) $(OBJS) $(MAIN) $(LIB_A) -o $(NAME)
 		@echo "$(GREEN)$(NAME) successfully compiled $(RESET)"
 
@@ -97,7 +99,8 @@ $(OBJS_DIR):
 
 libraries:			
 		@printf "Making libft..." && make -C $(LIBFT_DIR) && echo "$(YELLOW)libft successfully compiled $(RESET)"
-# 		@printf "Making printf_fd..." && make -C $(PRINTFFD_DIR) && echo "$(YELLOW)printf_fd successfully compiled $(RESET)"
+		@printf "Making printf_fd..." && make -C $(PRINTFFD_DIR) && echo "$(YELLOW)printf_fd successfully compiled $(RESET)"
+
 
 clean:				
 		@rm -f $(OBJS)
