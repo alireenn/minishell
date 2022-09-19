@@ -6,10 +6,10 @@ LIB_DIR			= ./lib
 LIBFT_DIR		= $(LIB_DIR)/libft
 LIBFT_A			= $(LIBFT_DIR)/libft.a
 
-# PRINTFFD_DIR	= $(LIB_DIR)/printf_fd
-# PRINTFFD_A		= $(PRINTFFD_DIR)/printf_fd.a
+PRINTFFD_DIR	= $(LIB_DIR)/printf_fd
+PRINTFFD_A		= $(PRINTFFD_DIR)/printf_fd.a
 
-LIB_A	= $(LIBFT_A) #$(PRINTFFD_A)
+LIB_A	= $(LIBFT_A) $(PRINTFFD_A)
 
 HEAD_DIR		= ./incl
 
@@ -31,13 +31,13 @@ COMMANDS_FILES=					\
 
 COMMANDS		= $(addprefix commands/, $(COMMANDS_FILES))
 
-# BUILDIN_FILES	=				\
-# 		cd.c					\
-# 		env.c					\
-# 		env2.c					\
-# 		some_buildin.c			\
+BUILDIN_FILES	=				\
+		cd.c					\
+		env.c					\
+		env2.c					\
+		some_buildin.c			\
 
-# BUILDIN			= $(addprefix buildin/, $(BUILDIN_FILES))
+BUILDIN			= $(addprefix buildin/, $(BUILDIN_FILES))
 
 # SIGNAL_FILES	= signal.c		\
 
@@ -56,6 +56,7 @@ SRCS			=								\
 		$(addprefix $(SRCS_DIR)/,$(NEW_PARSER))	\
 		$(addprefix $(SRCS_DIR)/,$(COMMANDS))	\
 		$(addprefix $(SRCS_DIR)/,$(UTILS))	\
+		$(addprefix $(SRCS_DIR)/,$(BUILDIN))	\
 
 OBJS_DIR		= ./objs
 OBJS			= $(patsubst $(SRCS_DIR)%,$(OBJS_DIR)%,$(SRCS:.c=.o))

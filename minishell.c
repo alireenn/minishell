@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/18 16:22:54 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/19 16:02:13 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,6 @@ void	process_input(t_mini *mini, char *input)
 	free_cmds(mini->commands, mini->cmd);
 	free_tree(&(mini->tree));*/
 }
-
-void	ft_env(t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp != NULL)
-	{
-		if (tmp->arg_var != NULL)
-			printf("%s=%s\n", tmp->name_var, tmp->arg_var);
-		else
-			printf("%s\n", tmp->name_var);
-		tmp = tmp->next;
-	}
-	// cmd->res = 1;
-}
-
 
 int	main(int argc, char **argv, char **envp)
 {

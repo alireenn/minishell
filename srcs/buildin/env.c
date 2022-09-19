@@ -6,34 +6,11 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:24:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/19 15:47:33 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:17:46 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
-
-void	split_at(char *input, t_env *env, char c)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (input[i] != '\0' && input[i] != c)
-		i++;
-	j = 0;
-	env->name_var = malloc(sizeof(char) * (i + 1));
-	while (j < i)
-	{
-		env->name_var[j] = input[j];
-		j++;
-	}
-	env->name_var[j] = '\0';
-	if (input[i] == '\0')
-		env->arg_var = NULL;
-	else
-		env->arg_var = ft_strdup(&input[i + 1]);
-	env->next = NULL;
-}
+#include "../../incl/new_parser.h"
 
 void	init_env(t_mini *mini, char **env)
 {
@@ -129,4 +106,20 @@ char	**trasformation(t_env *env)
 	}
 	m[i] = NULL;
 	return (m);
+}
+
+void	ft_print_export(t_env *env, t_command *cmd)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp != NULL)
+	{
+		if (tmp->arg_var != NULL)
+			printf("declare -x %s=\"%s\"\n", tmp->name_var, tmp->arg_var);
+		else
+			printf("declare -x %s\n", tmp->name_var);
+		tmp = tmp->next;
+	}
+	cmd->res = 1;
 }

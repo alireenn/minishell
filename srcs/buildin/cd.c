@@ -6,11 +6,11 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 14:35:13 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/19 15:47:24 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:17:43 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
+#include "../../incl/new_parser.h"
 
 void	ft_cd(t_mini *mini, char *arg, t_command *com)
 {

@@ -6,11 +6,47 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/19 15:46:20 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:30:18 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "new_parser.h"
+
+void	other_command(t_command *cmd, t_mini *mini)
+{
+	pid_t	pid;
+	int		ret;
+	int		status;
+	char	**envp;
+	char	**argv;
+	char	*filename;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		envp = trasformation(mini->env);
+		argv = get_argv(cmd->com, cmd->arg);
+		filename = get_filename(mini, cmd->com);
+		if (execve(filename, argv, envp) == -1)
+		{
+			free_execve(filename, argv, envp);
+			printf_fd(2, "minishell: %s: command not found\n", cmd->com);
+			exit(127);
+		}
+		free_execve(filename, argv, envp);
+		exit(0);
+	}
+	ret = wait(&status);
+	if (ret == -1)
+		exit(-1);
+	if (WEXITSTATUS(status) == 0)
+		cmd->res = 1;
+	else
+	{
+		mini->last = WEXITSTATUS(status);
+		cmd->res = 0;
+	}
+}
 
 void	make_cmd(t_command *cmd, t_mini *mini)
 {

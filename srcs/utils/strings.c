@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:34:35 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/19 15:44:53 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:22:56 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,18 @@ int	equal_strings(char *com, char *exec)
 		return (0);
 	else
 		return (1);
+}
+
+char	*ft_join_char(char *s1, char *s2, char c)
+{
+	char	*tmp;
+	char	*ret;
+	char	ch[2];
+
+	ch[0] = c;
+	ch[1] = '\0';
+	tmp = ft_strjoin(s1, ch);
+	ret = ft_strjoin(tmp, s2);
+	free(tmp);
+	return (ret);
 }

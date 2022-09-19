@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:25:42 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/18 15:50:19 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/19 16:11:11 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,26 @@ t_env	*ft_search_var(t_env *env, char *name)
 		tmp = tmp->next;
 	}
 	return (tmp);
+}
+
+void	back_to_standard(t_command *cmd, t_mini *mini)
+{
+	if (cmd->red[1] != 0)
+	{
+		close(cmd->fd_red[1]);
+		dup2(mini->save_out, STDOUT_FILENO);
+	}
+	if (cmd->red[0] != 0)
+	{
+		close(cmd->fd_red[0]);
+		dup2(mini->save_in, STDIN_FILENO);
+	}
+}
+
+void	change_fd(t_command *cmd)
+{
+	if (cmd->red[1] != 0)
+		dup2(cmd->fd_red[1], STDOUT_FILENO);
+	if (cmd->red[0] != 0)
+		dup2(cmd->fd_red[0], STDIN_FILENO);
 }
