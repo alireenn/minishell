@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/19 18:29:47 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/20 15:59:56 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,17 @@ char	**get_argv(char *com, char *arg)
 	int		i;
 
 	i = 0;
-	tmp = ft_join_char(com, arg, ' ');
-	argv = ft_split(tmp, " ", &i);
-	free(tmp);
+	if (arg == NULL)
+	{
+		argv = malloc(sizeof(char *));
+		argv[0] = ft_strdup(com);
+	}
+	else
+	{
+		tmp = ft_join_char(com, arg, ' ');
+		argv = ft_split(tmp, " ", &i);
+		free(tmp);
+	}
 	return (argv);
 }
 
@@ -117,9 +125,13 @@ void	other_command(t_command *cmd, t_mini *mini)
 	pid = fork();
 	if (pid == 0)
 	{
+		emily(2);
 		envp = trasformation(mini->env);
+		emily(3);
 		argv = get_argv(cmd->com, cmd->arg);
+		emily(4);
 		filename = get_filename(mini, cmd->com);
+		emily(5);
 		if (execve(filename, argv, envp) == -1)
 		{
 			free_execve(filename, argv, envp);
@@ -143,28 +155,46 @@ void	other_command(t_command *cmd, t_mini *mini)
 
 void	make_cmd(t_command *cmd, t_mini *mini)
 {
+	char	*new_cmd;
+	t_mini	*mini2;
+	char	**envp2;
+	
 	if (cmd->red[0] != 0 || cmd->red[1] != 0)
 	{
 		if (cmd->fd_red[0] < 0)
 			return ;
 		change_fd(cmd);
 	}
-	if (equal_strings(cmd->com, "echo") == 0)
-		ft_echo(cmd->arg, cmd);
-	else if (equal_strings(cmd->com, "pwd") == 0)
-		ft_pwd(cmd);
-	else if (equal_strings(cmd->com, "env") == 0)
-		ft_env(mini->env, cmd);
-	else if (equal_strings(cmd->com, "export") == 0)
-		ft_export(mini, cmd->arg, cmd);
-	else if (equal_strings(cmd->com, "unset") == 0)
-		ft_unset(mini, cmd->arg, cmd);
-	else if (equal_strings(cmd->com, "exit") == 0)
-		ft_exit(mini, cmd);
-	else if (equal_strings(cmd->com, "cd") == 0)
-		ft_cd(mini, cmd->arg, cmd);
+	if (cmd->com[0] == '(')
+	{
+		new_cmd = ft_strdup_from_to(cmd->com, 1, ft_strlen(cmd->com) - 2);
+		envp2 = trasformation(mini->env);
+		mini2 = init_mini(envp2);
+		process_input(mini2, new_cmd);
+		cmd->res = mini2->res;
+	}
 	else
-		other_command(cmd, mini);
+	{
+		if (equal_strings(cmd->com, "echo") == 0)
+			ft_echo(cmd->arg, cmd);
+		else if (equal_strings(cmd->com, "pwd") == 0)
+			ft_pwd(cmd);
+		else if (equal_strings(cmd->com, "env") == 0)
+			ft_env(mini->env, cmd);
+		else if (equal_strings(cmd->com, "export") == 0)
+			ft_export(mini, cmd->arg, cmd);
+		else if (equal_strings(cmd->com, "unset") == 0)
+			ft_unset(mini, cmd->arg, cmd);
+		else if (equal_strings(cmd->com, "exit") == 0)
+			ft_exit(mini, cmd);
+		else if (equal_strings(cmd->com, "cd") == 0)
+			ft_cd(mini, cmd->arg, cmd);
+		else
+		{
+			emily(1);
+			other_command(cmd, mini);
+		}
+	}
 	if (cmd->red[0] != 0 || cmd->red[1] != 0)
 		back_to_standard(cmd, mini);
 }

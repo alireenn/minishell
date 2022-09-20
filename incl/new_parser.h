@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/19 18:44:20 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/20 15:47:34 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_mini {
 	int			save_in;
 }	t_mini;
 
+void	process_input(t_mini *mini, char *input);
 /*
 **		BUILDIN
 */
@@ -155,6 +156,8 @@ void		change_var(t_env *env, char *name, char *arg);
 void		add_elem(t_env **list, char *elem_name, char *elem_arg);
 void		add_elem_ord(t_env **list, char *elem_name, char *elem_arg);
 //		free.c
+void		free_env(t_env *env);
+void		free_mini(t_mini *mini);
 void		free_cmds(t_command	**cmds, int cmd);
 void		free_execve(char *filename, char **argv, char **envp);
 //		debug.c
