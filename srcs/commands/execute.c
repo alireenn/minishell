@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/20 15:59:56 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/20 17:21:32 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,9 @@ char	**get_argv(char *com, char *arg)
 	i = 0;
 	if (arg == NULL)
 	{
-		argv = malloc(sizeof(char *));
+		argv = malloc(sizeof(char *) * 2);
 		argv[0] = ft_strdup(com);
+		argv[1] = NULL;
 	}
 	else
 	{
@@ -125,13 +126,10 @@ void	other_command(t_command *cmd, t_mini *mini)
 	pid = fork();
 	if (pid == 0)
 	{
-		emily(2);
 		envp = trasformation(mini->env);
-		emily(3);
 		argv = get_argv(cmd->com, cmd->arg);
-		emily(4);
 		filename = get_filename(mini, cmd->com);
-		emily(5);
+		printf("%s\n", filename);
 		if (execve(filename, argv, envp) == -1)
 		{
 			free_execve(filename, argv, envp);

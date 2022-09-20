@@ -20,6 +20,7 @@ NEW_PARSER_FILES=				\
 		ft_tree2.c				\
 		parse_tree.c			\
 		special_split.c			\
+		parse_tree_supp.c 		\
 		split.c 				\
 
 NEW_PARSER		= $(addprefix new_parser/, $(NEW_PARSER_FILES))

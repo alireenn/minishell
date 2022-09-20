@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/20 15:47:34 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/20 17:01:19 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,14 @@ typedef struct s_mini {
 	int			save_in;
 }	t_mini;
 
-void	process_input(t_mini *mini, char *input);
+void		process_input(t_mini *mini, char *input);
 /*
 **		BUILDIN
 */
 //		cd.c
+void		ft_cd_supp2(t_mini *mini, t_command *com);
 void		ft_cd(t_mini *mini, char *arg, t_command *com);
+void		ft_cd_supp(char *tmp, t_mini *mini, t_command *com, char *arg);
 //		env.c
 char		**trasformation(t_env *env);
 void		init_env(t_mini *mini, char **env);
@@ -73,6 +75,7 @@ void		ft_print_export(t_env *env, t_command *cmd);
 void		ft_export(t_mini *mini, char *str, t_command *cmd);
 //		env2.c
 int			search(t_env *env, char *name);
+void		ft_export_supp(t_mini *mini, t_env *tmp);
 void		ft_unset(t_mini *mini, char *name, t_command *cmd);
 //		some_buildin.c
 int			check_par(char *str);
@@ -115,11 +118,12 @@ int			get_tree_depth(t_tree a);
 void		print_tree_rec(t_tree a);
 //		parse_tree.c
 char		*parse_tree(char *input);
-int			check_parse(char *parsed);
 t_tree		make_tree(char *input, int *cmd);
 int			search_closing(char *input, int c);
 t_tree		get_next_tree(char *input, int *ind, int *cmd);
 char		*ft_strdup_from_to(char *input, int start, int end);
+//		parse_tree_supp.c
+int			check_parse(char *parsed);
 // 		special_split.c
 int			special_issep(char c, char *str);
 int			special_strlen(char *str, char *charset);
@@ -164,4 +168,3 @@ void		free_execve(char *filename, char **argv, char **envp);
 void		emily(int n);
 void		print_cmds(t_command **cmds, int cmd);
 #endif
-

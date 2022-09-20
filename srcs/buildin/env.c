@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:24:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/19 18:16:12 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/20 17:01:04 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,7 @@ void	ft_export(t_mini *mini, char *str, t_command *cmd)
 			change_var(mini->env, tmp->name_var, tmp->arg_var);
 			change_var(mini->secret, tmp->name_var, tmp->arg_var);
 		}
-		else if (search(mini->secret, tmp->name_var) == 0)
-		{
-			add_elem(&mini->env, tmp->name_var, tmp->arg_var);
-			change_var(mini->secret, tmp->name_var, tmp->arg_var);
-		}
-		else
-		{
-			if (tmp->arg_var != NULL)
-				add_elem(&mini->env, tmp->name_var, tmp->arg_var);
-			add_elem_ord(&mini->secret, tmp->name_var, tmp->arg_var);
-		}
+		ft_export_supp(mini, tmp);
 		free(tmp->name_var);
 		free(tmp->arg_var);
 		free(tmp);
