@@ -83,7 +83,7 @@ RESET 			= \033[00m
 all:			$(NAME)
 
 $(NAME):	libraries $(LIB_A) $(OBJS)
-		@gcc $(FLAGS) $(OBJS) $(MAIN) $(LIB_A) -o $(NAME) $(RLFLAGS2)
+		@gcc -g $(FLAGS) $(OBJS) $(MAIN) $(LIB_A) -o $(NAME) $(RLFLAGS2)
 		@echo "$(GREEN_B)$(NAME) successfully compiled $(RESET)"
 
 sanitize:	 libraries $(OBJS) $(LIB_A)

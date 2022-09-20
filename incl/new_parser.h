@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/20 17:01:19 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:33:51 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ void		add_elem_ord(t_env **list, char *elem_name, char *elem_arg);
 //		free.c
 void		free_env(t_env *env);
 void		free_mini(t_mini *mini);
+void		free_matrix(char **matrix, int rows);
 void		free_cmds(t_command	**cmds, int cmd);
 void		free_execve(char *filename, char **argv, char **envp);
 //		debug.c

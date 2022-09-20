@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/20 15:47:17 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/20 19:11:19 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ void	process_input(t_mini *mini, char *input)
 	expand(splitted, mini);
 	get_cmds(mini->commands, mini->cmd, splitted);
 	mini->res = execute(mini->tree, mini->commands, mini);
-	// free_cmds(mini->commands, mini->cmd);
-	// free_tree(&(mini->tree));
+	free_cmds(mini->commands, mini->cmd);
+	free_tree(&(mini->tree));
+	free(parsed);
+	free_matrix(splitted, mini->cmd);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -76,9 +78,6 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc > 1)
 		return (printf("Minishell: %s: No such file or directory\n", argv[1]));
-	mini = malloc(sizeof(t_mini));
-	if (!mini)
-		return (0);
 	(void)argc;
 	(void)argv;
 	// signal(SIGINT, received);

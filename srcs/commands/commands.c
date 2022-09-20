@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/20 17:31:19 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:27:28 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@ t_command	**alloc_cmds(int cmd)
 		j++;
 	}
 	return (cmds);
+}
+
+int	get_len_var(char **s, int i, int j)
+{
+	int	len;
+
+	len = 0;
+	while (s[i][j + 1 + len] != '\0' && (s[i][j + 1 + len] != ' '
+		&& s[i][j + 1 + len] != '$'))
+		len++;
+	return (len);
 }
 
 void	expand(char **s, t_mini *mini)
@@ -46,10 +57,7 @@ void	expand(char **s, t_mini *mini)
 			if (s[i][j] == '$'
 			&& s[i][j + 1] != '\0' && s[i][j + 1] != ' ')
 			{
-				len = 0;
-				while (s[i][j + 1 + len] != '\0' && (s[i][j + 1 + len] != ' '
-					&& s[i][j + 1 + len] != '$'))
-					len++;
+				len = get_len_var(s, i, j);
 				if (len == 0 && s[i][j + 1] == '$')
 				{
 					replace(&s[i], j, j + 2, "pid");
@@ -84,7 +92,7 @@ void	get_cmds(t_command **cmds, int cmd, char **input)
 	int	j;
 
 	i = -1;
-	while (i++ < cmd)
+	while (++i < cmd)
 	{
 		j = 0;
 		while (input[i][j] == ' ' && j < (int)ft_strlen(input[i]))

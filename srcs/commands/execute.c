@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/20 17:21:32 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:23:43 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ void	other_command(t_command *cmd, t_mini *mini)
 		envp = trasformation(mini->env);
 		argv = get_argv(cmd->com, cmd->arg);
 		filename = get_filename(mini, cmd->com);
-		printf("%s\n", filename);
 		if (execve(filename, argv, envp) == -1)
 		{
 			free_execve(filename, argv, envp);
@@ -156,7 +155,7 @@ void	make_cmd(t_command *cmd, t_mini *mini)
 	char	*new_cmd;
 	t_mini	*mini2;
 	char	**envp2;
-	
+
 	if (cmd->red[0] != 0 || cmd->red[1] != 0)
 	{
 		if (cmd->fd_red[0] < 0)
@@ -188,10 +187,7 @@ void	make_cmd(t_command *cmd, t_mini *mini)
 		else if (equal_strings(cmd->com, "cd") == 0)
 			ft_cd(mini, cmd->arg, cmd);
 		else
-		{
-			emily(1);
 			other_command(cmd, mini);
-		}
 	}
 	if (cmd->red[0] != 0 || cmd->red[1] != 0)
 		back_to_standard(cmd, mini);
