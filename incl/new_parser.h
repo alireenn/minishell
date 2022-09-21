@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/21 14:42:45 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:50:26 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ t_tree		get_next_tree(char *input, int *ind, int *cmd);
 char		*ft_strdup_from_to(char *input, int start, int end);
 //		parse_tree_supp.c
 int			check_parse(char *parsed);
+char		*parse_tree_helper(char *input, char *ret);
 // 		special_split.c
 int			special_issep(char c, char *str);
 int			special_strlen(char *str, char *charset);
