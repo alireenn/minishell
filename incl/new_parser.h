@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/20 18:33:51 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/21 14:42:45 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,18 @@ t_command	**alloc_cmds(int cmd);
 void		expand(char **s, t_mini *mini);
 void		get_cmds(t_command **cmds, int cmd, char **input);
 //		execute.c
-char		**get_path(t_mini *mini);
-int			is_valid_path(char *filename);
 char		**get_argv(char *com, char *arg);
 void		make_cmd(t_command *cmd, t_mini *mini);
 char		*get_filename(t_mini *mini, char *filename);
 void		other_command(t_command *cmd, t_mini *mini);
+void		make_cmd_helper(t_command *cmd, t_mini *mini);
 int			execute(t_tree a, t_command **cmds, t_mini *mini);
+// 		path_utils.c
+char		**get_path(t_mini *mini);
+int			is_valid_path(char *filename);
 //		redirection.c
+int			here_doc(char *end);
+void		here_doc_helper(int *fd, char *tmp);
 char		*get_file_io(char **s, int r, int j, int *type);
 void		get_redirs(char **s, t_command **cmds, int cmd);
 /*

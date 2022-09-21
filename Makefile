@@ -28,6 +28,7 @@ NEW_PARSER		= $(addprefix new_parser/, $(NEW_PARSER_FILES))
 COMMANDS_FILES=					\
 		commands.c				\
 		execute.c				\
+		commands_utils.c 			\
 		redirections.c 			\
 
 COMMANDS		= $(addprefix commands/, $(COMMANDS_FILES))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:00:20 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/20 19:02:41 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/21 14:44:44 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	free_mini(t_mini *mini)
 	close(mini->save_in);
 	close(mini->save_out);
 	free(mini);
-	printf("culo\n");
 }
 
 void	free_matrix(char **matrix, int rows)

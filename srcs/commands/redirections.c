@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/20 15:16:29 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/21 14:37:32 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/new_parser.h"
 
-// 1 -> '>'
+void	here_doc_helper(int *fd, char *tmp)
+{
+	write(fd[1], tmp, ft_strlen(tmp));
+	write(fd[1], "\n", 1);
+	free(tmp);
+	tmp = readline("> ");
+}
 
 int	here_doc(char *end)
 {
@@ -27,13 +33,9 @@ int	here_doc(char *end)
 	{
 		close(fd[0]);
 		tmp = readline("> ");
-		while (ft_strlen(tmp) != ft_strlen(end) || ft_strncmp(tmp, end, ft_strlen(end)) != 0)
-		{
-			write(fd[1], tmp, ft_strlen(tmp));
-			write(fd[1], "\n", 1);
-			free(tmp);
-			tmp = readline("> ");
-		}
+		while (ft_strlen(tmp) != ft_strlen(end)
+			|| ft_strncmp(tmp, end, ft_strlen(end)) != 0)
+			here_doc_helper(fd, tmp);
 		exit(0);
 	}
 	else
