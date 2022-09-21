@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:50:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/20 16:45:30 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:44:42 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,39 @@ t_tree	make_tree(char *input, int *cmd)
 	return (ret);
 }
 
+char	*parse_tree_helper(char *input, char *ret)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (input[i] != '\0')
+	{
+		if (special_issep(input[i], "()<>"))
+		{
+			ret[j] = input[i];
+			j++;
+		}
+		if (special_issep(input[i], "&|")
+			&& input[i + 1] != '\0' && input[i + 1] == input[i])
+		{
+			ret[j] = input[i];
+			i++;
+			j++;
+		}
+		else if (input[i] == '|' && input[i + 1] != '\0' && input[i + 1] != '&')
+		{
+			ret[j] = 'p';
+			i++;
+			j++;
+		}
+		i++;
+	}
+	ret[j] = '\0';
+	return (ret);
+}
+
 char	*parse_tree(char *input)
 {
 	int		i;
@@ -125,30 +158,30 @@ char	*parse_tree(char *input)
 		i++;
 	}
 	ret = (char *) malloc (sizeof(char) * (j + 1));
-	i = 0;
-	j = 0;
-	while (input[i] != '\0')
-	{
-		if (special_issep(input[i], "()<>"))
-		{
-			ret[j] = input[i];
-			j++;
-		}
-		if (special_issep(input[i], "&|")
-			&& input[i + 1] != '\0' && input[i + 1] == input[i])
-		{
-			ret[j] = input[i];
-			i++;
-			j++;
-		}
-		else if (input[i] == '|' && input[i + 1] != '\0' && input[i + 1] != '&')
-		{
-			ret[j] = 'p';
-			i++;
-			j++;
-		}
-		i++;
-	}
-	ret[j] = '\0';
+	// i = 0;
+	// j = 0;
+	// while (input[i] != '\0')
+	// {
+	// 	if (special_issep(input[i], "()<>"))
+	// 	{
+	// 		ret[j] = input[i];
+	// 		j++;
+	// 	}
+	// 	if (special_issep(input[i], "&|")
+	// 		&& input[i + 1] != '\0' && input[i + 1] == input[i])
+	// 	{
+	// 		ret[j] = input[i];
+	// 		i++;
+	// 		j++;
+	// 	}
+	// 	else if (input[i] == '|' && input[i + 1] != '\0' && input[i + 1] != '&')
+	// 	{
+	// 		ret[j] = 'p';
+	// 		i++;
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
+	// ret[j] = '\0';
 	return (ret);
 }
