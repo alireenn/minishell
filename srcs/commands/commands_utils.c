@@ -6,11 +6,30 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:33:27 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/21 14:43:54 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/21 16:58:53 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/new_parser.h"
+
+void	other_command_helper(t_mini *mini, t_command *cmd)
+{
+	char	**envp;
+	char	**argv;
+	char	*filename;
+
+	envp = trasformation(mini->env);
+	argv = get_argv(cmd->com, cmd->arg);
+	filename = get_filename(mini, cmd->com);
+	if (execve(filename, argv, envp) == -1)
+	{
+		free_execve(filename, argv, envp);
+		printf_fd(2, "minishell: %s: command not found\n", cmd->com);
+		exit(127);
+	}
+	free_execve(filename, argv, envp);
+	exit (0);
+}
 
 char	**get_path(t_mini *mini)
 {

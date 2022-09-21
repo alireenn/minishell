@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/21 15:50:26 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/21 17:54:26 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,15 @@ char		*get_filename(t_mini *mini, char *filename);
 void		other_command(t_command *cmd, t_mini *mini);
 void		make_cmd_helper(t_command *cmd, t_mini *mini);
 int			execute(t_tree a, t_command **cmds, t_mini *mini);
-// 		path_utils.c
+// 		commands_utils.c
 char		**get_path(t_mini *mini);
 int			is_valid_path(char *filename);
+void		other_command_helper(t_mini *mini, t_command *cmd);
 //		redirection.c
 int			here_doc(char *end);
 void		here_doc_helper(int *fd, char *tmp);
 char		*get_file_io(char **s, int r, int j, int *type);
-void		get_redirs(char **s, t_command **cmds, int cmd);
+void		get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini);
 /*
 ** 			NEW_PARSER 
 */

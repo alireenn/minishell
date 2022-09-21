@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/21 14:43:47 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/21 16:56:37 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,25 +73,10 @@ void	other_command(t_command *cmd, t_mini *mini)
 	pid_t	pid;
 	int		ret;
 	int		status;
-	char	**envp;
-	char	**argv;
-	char	*filename;
 
 	pid = fork();
 	if (pid == 0)
-	{
-		envp = trasformation(mini->env);
-		argv = get_argv(cmd->com, cmd->arg);
-		filename = get_filename(mini, cmd->com);
-		if (execve(filename, argv, envp) == -1)
-		{
-			free_execve(filename, argv, envp);
-			printf_fd(2, "minishell: %s: command not found\n", cmd->com);
-			exit(127);
-		}
-		free_execve(filename, argv, envp);
-		exit(0);
-	}
+		other_command_helper(mini, cmd);
 	ret = wait(&status);
 	if (ret == -1)
 		exit(-1);

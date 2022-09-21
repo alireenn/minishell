@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/21 14:37:32 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/21 17:24:13 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*get_file_io(char **s, int r, int j, int *type)
 	return (file);
 }
 
-int	get_red_io(t_command *cmd, char *filename, int type)
+int	get_red_io(t_command *cmd, char *filename, int type, t_mini *mini)
 {
 	mode_t	mode;
 
@@ -82,7 +82,7 @@ int	get_red_io(t_command *cmd, char *filename, int type)
 		if (access(filename, F_OK) != 0)
 		{
 			printf("minishell: %s: No such file or directory\n", filename);
-			// mini->last = 1;
+			mini->last = 1;
 			cmd->res = 0;
 			return (-1);
 		}
@@ -94,7 +94,7 @@ int	get_red_io(t_command *cmd, char *filename, int type)
 		return (here_doc(filename));
 }
 
-void	get_redirs(char **s, t_command **cmds, int cmd)
+void	get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini)
 {
 	int		i;
 	int		j;
@@ -114,7 +114,8 @@ void	get_redirs(char **s, t_command **cmds, int cmd)
 				if (file == NULL)
 					printf("error");
 				cmds[i]->red[type % 2] = 1;
-				cmds[i]->fd_red[type % 2] = get_red_io(cmds[i], file, type);
+				cmds[i]->fd_red[type % 2] = get_red_io(cmds[i],
+						file, type, mini);
 			}
 			else
 				j++;
