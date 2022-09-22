@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/21 16:56:37 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:50:02 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_filename(t_mini *mini, char *filename)
 	ret = NULL;
 	if (is_valid_path(filename) == 1)
 		return (ft_strdup(filename));
-	if (strchr(filename, '/') != NULL)
+	if (ft_strchr(filename, '/') != NULL)
 	{
 		printf_fd(2, "minishell: %s: No such file or directory\n", filename);
 		exit(1);
@@ -30,19 +30,12 @@ char	*get_filename(t_mini *mini, char *filename)
 	i = 0;
 	while (path != NULL && path[i] != NULL)
 	{
-		ret = ft_join_char(path[i], filename, '/');
-		if (access(ret, F_OK) == 0)
-		{
-			if (access(ret, X_OK) != 0)
-			{
-				printf_fd(2, "minishell: %s: Permission denied\n", filename);
-				exit(126);
-			}
+		ret = check_path(filename, path, i);
+		if (ret != NULL)
 			return (ret);
-		}
-		free(ret);
 		i++;
 	}
+	free(path);
 	return (NULL);
 }
 

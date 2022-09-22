@@ -1,4 +1,2 @@
-parsed = &
-( -1 ( 0 () () ) ( 1 () () ) )
 culo
-emily
+pipe non ancora implementate

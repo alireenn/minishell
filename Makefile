@@ -28,8 +28,9 @@ NEW_PARSER		= $(addprefix new_parser/, $(NEW_PARSER_FILES))
 COMMANDS_FILES=					\
 		commands.c				\
 		execute.c				\
-		commands_utils.c 			\
+		commands_utils.c 		\
 		redirections.c 			\
+		expand.c				\
 
 COMMANDS		= $(addprefix commands/, $(COMMANDS_FILES))
 
@@ -70,10 +71,11 @@ INCLUDES		= -I $(LIBFT_DIR) -I $(PRINTFFD_DIR) -I $(HEAD_DIR)
 CC				= gcc
 
 FLAGS			= -Wall -Werror -Wextra $(INCLUDES)
-# -Wall -Werror -Wextra
+
 RLFLAGS			= -lreadline -lcurses -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
 
 RLFLAGS2		= -lreadline -lcurses -L $(HOME)/.brew/opt/readline/lib -I $(HOME)/.brew/opt/readline/include
+
 # Colors
 GREEN 			= \033[00;32m
 GREEN_B 		= \033[01;32m

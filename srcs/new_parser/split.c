@@ -6,25 +6,11 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 17:15:28 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/18 16:14:21 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/22 18:24:57 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "new_parser.h"
-
-int	is_sep(char c, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 int	strlen_parser(char *input)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tree_supp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:43:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/21 15:50:16 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/22 18:48:42 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,38 @@ int	check_parse(char *parsed)
 	return (1);
 }
 
-char	*parse_tree_helper(char *input, char *ret)
+void	put_symbols(char *in, char *ret, int *i, int *j)
+{
+	if (is_sep(in[(*i)], "()<>"))
+	{
+		ret[(*j)] = in[(*i)];
+		(*j)++;
+	}
+	if (is_sep(in[(*i)], "&|") && in[(*i) + 1] != '\0'
+		&& in[(*i) + 1] == in[(*i)])
+	{
+		ret[(*j)] = in[(*i)];
+		(*i)++;
+		(*j)++;
+	}
+	else if (in[(*i)] == '|' && in[(*i) + 1] != '\0' && in[(*i) + 1] != '&')
+	{
+		ret[(*j)] = 'p';
+		(*i)++;
+		(*j)++;
+	}
+}
+
+char	*parse_tree_helper(char *in, char *ret)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (input[i] != '\0')
+	while (in[i] != '\0')
 	{
-		if (special_issep(input[i], "()<>"))
-		{
-			ret[j] = input[i];
-			j++;
-		}
-		if (special_issep(input[i], "&|")
-			&& input[i + 1] != '\0' && input[i + 1] == input[i])
-		{
-			ret[j] = input[i];
-			i++;
-			j++;
-		}
-		else if (input[i] == '|' && input[i + 1] != '\0' && input[i + 1] != '&')
-		{
-			ret[j] = 'p';
-			i++;
-			j++;
-		}
+		put_symbols(in, ret, &i, &j);
 		i++;
 	}
 	ret[j] = '\0';

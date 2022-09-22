@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:25:42 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/21 16:05:48 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:00:25 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,12 @@ t_env	*copy_env(t_mini *mini, int *n)
 
 	it = mini->env;
 	i = 1;
-	tmp = malloc(sizeof(t_env));
-	tmp->name_var = ft_strdup(it->name_var);
-	tmp->arg_var = ft_strdup(it->arg_var);
-	tmp->next = NULL;
+	tmp = create_elem(it->name_var, it->arg_var);
 	ret = tmp;
 	it = it->next;
 	while (it != NULL)
 	{
-		new = malloc(sizeof(t_env));
-		new->name_var = ft_strdup(it->name_var);
-		new->arg_var = ft_strdup(it->arg_var);
-		new->next = NULL;
+		new = create_elem(it->name_var, it->arg_var);
 		tmp->next = new;
 		tmp = new;
 		it = it->next;

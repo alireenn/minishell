@@ -3,29 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/21 17:05:25 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:01:14 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "incl/new_parser.h"
 
-// void	process_input(t_mini *mini, char *input)
-// {
-// 	if (input[0] == '\0')
-// 		return ;
-// 	add_history(input);
-// 	mini->tree = make_tree(input, &mini->cmd);
-// 	mini->commands = get_cmds(input, mini);
-// 	print_tree(&(mini->tree));
-// 	print_cmds(mini->commands, mini->cmd);
-// 	mini->res = execute(mini->tree, mini->commands, mini);
-// 	mini->cmd = 0;
-// 	free_cmds(mini->commands, mini->cmd);
-// 	free_tree(&(mini->tree));
-// }
+void	free_mini(t_mini *mini)
+{
+	if (mini->env != NULL)
+		free_env(mini->env);
+	if (mini->secret != NULL)
+		free_env(mini->secret);
+	if (mini->pwd != NULL)
+		free(mini->pwd);
+	close(mini->save_in);
+	close(mini->save_out);
+	free(mini);
+}
 
 char	*our_prompt(int res)
 {
@@ -48,6 +46,14 @@ void	process_input_aux(t_mini *mini, char *input)
 	add_history(input);
 	process_input(mini, input);
 }
+	// int i = 0;
+	// while (i < mini->cmd)
+	// {
+	// 	printf("%s\n", splitted[i]);
+	// 	i++;
+	// }
+
+	// printf("parsed = %s, %d\n", parsed, mini->cmd);
 
 void	process_input(t_mini *mini, char *input)
 {
@@ -71,6 +77,8 @@ void	process_input(t_mini *mini, char *input)
 	free_matrix(splitted, mini->cmd);
 }
 
+	// signal(SIGINT, received);
+	// signal(SIGQUIT, quit);
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	*mini;
@@ -80,8 +88,6 @@ int	main(int argc, char **argv, char **envp)
 		return (printf("Minishell: %s: No such file or directory\n", argv[1]));
 	(void)argc;
 	(void)argv;
-	// signal(SIGINT, received);
-	// signal(SIGQUIT, quit);
 	mini = init_mini(envp);
 	prompt = our_prompt(mini->res);
 	while (prompt != NULL)

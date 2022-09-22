@@ -6,13 +6,13 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:01:06 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/09 17:22:11 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/22 18:55:28 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "new_parser.h"
 
-int	special_issep(char c, char *str)
+int	is_sep(char c, char *str)
 {
 	int	i;
 
@@ -26,26 +26,24 @@ int	special_issep(char c, char *str)
 	return (0);
 }
 
-int	special_strcount(char *str, char *charset)
+int	special_strcount(char *s, char *cs)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (str[i] != '\0')
+	while (s[i] != '\0')
 	{
-		if (special_issep(str[i], charset) == 0)
+		if (is_sep(s[i], cs) == 0)
 		{
 			count++;
-			while (str[i] != '\0')
+			while (s[i] != '\0')
 			{
-				if (special_issep(str[i], charset) == 1
-					&& str[i + 1] != '\0' && str[i + 1] == str[i])
+				if (is_sep(s[i], cs) && s[i + 1] != '\0' && s[i + 1] == s[i])
 				{
 					i++;
-					if (str[i + 1] != '\0'
-						&& special_issep(str[i + 1], charset) == 0)
+					if (s[i + 1] != '\0' && is_sep(s[i + 1], cs) == 0)
 						break ;
 				}
 				i++;
@@ -57,30 +55,25 @@ int	special_strcount(char *str, char *charset)
 	return (count);
 }
 
-int	special_strlen(char *str, char *charset)
+int	special_strlen(char *s, char *cs)
 {
 	int	i;
 	int	len;
 
 	i = 0;
 	len = 0;
-	while (str[i] != '\0')
+	while (s[i] != '\0')
 	{
-		if (special_issep(str[i], charset) == 0)
+		if (is_sep(s[i], cs) == 0)
 		{
-			while (str[i] != '\0')
+			while (s[i] != '\0')
 			{
-				if (special_issep(str[i], charset) == 1
-					&& str[i + 1] != '\0' && str[i + 1] == str[i])
+				if (is_sep(s[i], cs) && s[i + 1] != '\0' && s[i + 1] == s[i])
 				{
 					i++;
-					len++;
-					if (str[i + 1] != '\0'
-						&& special_issep(str[i + 1], charset) == 0)
-					{
-						len--;
+					if (s[i + 1] != '\0' && is_sep(s[i + 1], cs) == 0)
 						break ;
-					}
+					len++;
 				}
 				i++;
 				len++;
@@ -102,18 +95,18 @@ int	special_putstr(char *str, char *charset, char *matrix)
 	j = 0;
 	while (str[i] != '\0')
 	{
-		if (special_issep(str[i], charset) == 0)
+		if (is_sep(str[i], charset) == 0)
 		{
 			while (str[i] != '\0')
 			{
-				if (special_issep(str[i], charset) == 1
+				if (is_sep(str[i], charset) == 1
 					&& str[i + 1] != '\0' && str[i + 1] == str[i])
 				{
 					i++;
 					matrix[j] = str[i];
 					j++;
 					if (str[i + 1] != '\0'
-						&& special_issep(str[i + 1], charset) == 0)
+						&& is_sep(str[i + 1], charset) == 0)
 					{
 						i--;
 						j--;

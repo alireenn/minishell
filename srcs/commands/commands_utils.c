@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   commands_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:33:27 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/21 16:58:53 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:49:17 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/new_parser.h"
+
+char	*check_path(char *filename, char **path, int i)
+{
+	char	*ret;
+
+	ret = ft_join_char(path[i], filename, '/');
+	if (access(ret, F_OK) == 0)
+	{
+		if (access(ret, X_OK) != 0)
+		{
+			printf_fd(2, "minishell: %s: Permission denied\n", filename);
+			exit(126);
+		}
+		free(path);
+		return (ret);
+	}
+	free(ret);
+	return (NULL);
+}
 
 void	other_command_helper(t_mini *mini, t_command *cmd)
 {

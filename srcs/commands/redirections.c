@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/21 17:24:13 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/22 18:23:19 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/new_parser.h"
 
-void	here_doc_helper(int *fd, char *tmp)
+char	*here_doc_helper(int *fd, char *tmp)
 {
 	write(fd[1], tmp, ft_strlen(tmp));
 	write(fd[1], "\n", 1);
 	free(tmp);
 	tmp = readline("> ");
+	return (tmp);
 }
 
 int	here_doc(char *end)
@@ -35,7 +36,7 @@ int	here_doc(char *end)
 		tmp = readline("> ");
 		while (ft_strlen(tmp) != ft_strlen(end)
 			|| ft_strncmp(tmp, end, ft_strlen(end)) != 0)
-			here_doc_helper(fd, tmp);
+			tmp = here_doc_helper(fd, tmp);
 		exit(0);
 	}
 	else
@@ -61,7 +62,7 @@ char	*get_file_io(char **s, int r, int j, int *type)
 	i++;
 	while (s[r][i + j] == ' ')
 		i++;
-	while (!special_issep(s[r][i + k + j], " <>") && s[r][i + k + j] != '\0')
+	while (!is_sep(s[r][i + k + j], " <>") && s[r][i + k + j] != '\0')
 		k++;
 	if (k == 0)
 		return (NULL);
@@ -107,9 +108,8 @@ void	get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini)
 		j = 0;
 		while (j < (int)ft_strlen(s[i]))
 		{
-			if (special_issep(s[i][j], "><"))
+			if (is_sep(s[i][j], "><"))
 			{
-				type = 0;
 				file = get_file_io(s, i, j, &type);
 				if (file == NULL)
 					printf("error");

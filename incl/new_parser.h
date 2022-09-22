@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/21 17:54:26 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/22 18:22:53 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,24 +86,30 @@ void		ft_exit(t_mini *mini, t_command *com);
 /*
 ** 			COMMANDS
 */
+//		expand.c
+void		expand(char **s, t_mini *mini);
+int			get_len_var(char **s, int i, int j);
+int			expand_helper(char **s, int i, int j, t_mini *mini);
+int			expand_helper2(char **s, t_mini *mini, int j, int len);
 //		commands.c
 t_command	**alloc_cmds(int cmd);
-void		expand(char **s, t_mini *mini);
 void		get_cmds(t_command **cmds, int cmd, char **input);
+void		get_cmd_simple(t_command **cmds, char **input, int i, int j);
 //		execute.c
 char		**get_argv(char *com, char *arg);
 void		make_cmd(t_command *cmd, t_mini *mini);
 char		*get_filename(t_mini *mini, char *filename);
 void		other_command(t_command *cmd, t_mini *mini);
-void		make_cmd_helper(t_command *cmd, t_mini *mini);
 int			execute(t_tree a, t_command **cmds, t_mini *mini);
 // 		commands_utils.c
 char		**get_path(t_mini *mini);
 int			is_valid_path(char *filename);
+void		make_cmd_helper(t_command *cmd, t_mini *mini);
+char		*check_path(char *filename, char **path, int i);
 void		other_command_helper(t_mini *mini, t_command *cmd);
 //		redirection.c
 int			here_doc(char *end);
-void		here_doc_helper(int *fd, char *tmp);
+char		*here_doc_helper(int *fd, char *tmp);
 char		*get_file_io(char **s, int r, int j, int *type);
 void		get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini);
 /*
@@ -131,7 +137,7 @@ char		*ft_strdup_from_to(char *input, int start, int end);
 int			check_parse(char *parsed);
 char		*parse_tree_helper(char *input, char *ret);
 // 		special_split.c
-int			special_issep(char c, char *str);
+int			is_sep(char c, char *str);
 int			special_strlen(char *str, char *charset);
 int			special_strcount(char *str, char *charset);
 char		**special_split(char *str, char *charset, int *c);
@@ -168,6 +174,7 @@ void		add_elem_ord(t_env **list, char *elem_name, char *elem_arg);
 //		free.c
 void		free_env(t_env *env);
 void		free_mini(t_mini *mini);
+void		free_matrix_no_rows(char **matrix);
 void		free_matrix(char **matrix, int rows);
 void		free_cmds(t_command	**cmds, int cmd);
 void		free_execve(char *filename, char **argv, char **envp);

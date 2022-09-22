@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:50:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/21 15:50:09 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/22 18:26:58 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_tree	make_tree(char *input, int *cmd)
 	return (ret);
 }
 
-char	*parse_tree(char *input)
+char	*parse_tree(char *in)
 {
 	int		i;
 	int		j;
@@ -105,26 +105,19 @@ char	*parse_tree(char *input)
 
 	i = 0;
 	j = 0;
-	while (input[i] != '\0')
+	while (in[i] != '\0')
 	{
-		if (special_issep(input[i], "()<>"))
-			j++;
-		if (special_issep(input[i], "&|")
-			&& input[i + 1] != '\0' && input[i + 1] == input[i])
+		if (is_sep(in[i], "&|") && in[i + 1] != '\0' && in[i + 1] == in[i])
 		{
 			i++;
 			j++;
 		}
-		else if (input[i] == '|' && input[i + 1] != '\0' && input[i + 1] != '&')
+		else if ((in[i] == '|' && in[i + 1] != '\0' && in[i + 1] != '&')
+			|| (is_sep(in[i], "()<>")))
 			j++;
-		else if (special_issep(input[i], "&|") && input[i + 1] != '\0')
-		{
-			printf("Parse Error\n");
-			exit(1);
-		}
 		i++;
 	}
 	ret = (char *) malloc (sizeof(char) * (j + 1));
-	parse_tree_helper(input, ret);
+	parse_tree_helper(in, ret);
 	return (ret);
 }

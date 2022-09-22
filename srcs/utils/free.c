@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:00:20 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/21 14:44:44 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:00:50 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,6 @@ void	free_env(t_env *env)
 	}
 }
 
-void	free_mini(t_mini *mini)
-{
-	if (mini->env != NULL)
-		free_env(mini->env);
-	if (mini->secret != NULL)
-		free_env(mini->secret);
-	if (mini->pwd != NULL)
-		free(mini->pwd);
-	close(mini->save_in);
-	close(mini->save_out);
-	free(mini);
-}
-
 void	free_matrix(char **matrix, int rows)
 {
 	int	i;
@@ -99,4 +86,18 @@ void	free_matrix(char **matrix, int rows)
 		i++;
 	}
 	free(matrix);
+}
+
+void	free_matrix_no_rows(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix && matrix[i] != NULL)
+	{
+		free(matrix[i]);
+		i++;
+	}
+	if (matrix != NULL)
+		free(matrix);
 }
