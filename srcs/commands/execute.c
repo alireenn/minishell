@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/22 17:50:02 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/23 19:32:00 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,25 @@ void	make_cmd(t_command *cmd, t_mini *mini)
 		back_to_standard(cmd, mini);
 }
 
+int	execute_pipe(t_tree a, t_command **cmds, t_mini *mini)
+{
+	int		fd[2];
+	int		ret;
+
+	if (pipe(fd) == -1)
+		return (-1);
+	dup2(fd[1], STDOUT_FILENO);
+	ret = execute(a->left, cmds, mini);
+	close(fd[1]);
+	dup2(mini->save_out, STDOUT_FILENO);
+	dup2(fd[0], STDIN_FILENO);
+	ret = execute(a->right, cmds, mini);
+	// emily(43);
+	close(fd[0]);
+	dup2(mini->save_in, STDIN_FILENO);
+	return (ret);
+}
+
 int	execute(t_tree a, t_command **cmds, t_mini *mini)
 {
 	if (mini->exit == 1)
@@ -117,13 +136,11 @@ int	execute(t_tree a, t_command **cmds, t_mini *mini)
 	if (a->info == -2)
 		return (execute(a->left, cmds, mini) || execute(a->right, cmds, mini));
 	if (a->info == -3)
-	{
-		printf("pipe non ancora implementate\n");
-		exit(1);
-	}
+		return (execute_pipe(a, cmds, mini));
 	else
 	{
 		make_cmd(cmds[a->info], mini);
+		// emily(42);
 		return (cmds[a->info]->res);
 	}
 }
