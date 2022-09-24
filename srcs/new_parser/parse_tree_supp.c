@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:43:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/22 18:48:42 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/24 17:48:23 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	check_parse(char *parsed)
 
 void	put_symbols(char *in, char *ret, int *i, int *j)
 {
+	if (is_sep(in[(*i)], "\"\'"))
+		*(i) = search_closing(in, (*i), in[(*i)], in[(*i)]);
 	if (is_sep(in[(*i)], "()<>"))
 	{
 		ret[(*j)] = in[(*i)];

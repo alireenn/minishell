@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:50:04 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/20 15:11:00 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:03:17 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ unsigned int	ft_atou(const char *str);
 int				ft_printchar(int fd, int c);
 char			ft_convert_ex(int n, int nc);
 int				ft_printstr(int fd, char *str);
-char			*ft_strjoin(char const *s1, char *s2);
+// char			*ft_strjoin(char const *s1, char *s2);
 void			*ft_memset(void *b, int c, size_t len);
 int				ft_char_in_set(char c, const char *set);
 char			*ft_strjoin_width(char *s2, int width, int minus, int zero);

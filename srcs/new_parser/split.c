@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 17:15:28 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/22 18:24:57 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/24 17:55:32 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	strlen_parser(char *input)
 		if (input[i] == '|')
 			return (i);
 		if (input[i] == '(')
-			i = search_closing(input, i) - 1;
+			i = search_closing(input, i, '(', ')') - 1;
+		if (input[i] == '\"' || input[i] == '\'')
+			i = search_closing(input, i, input[i], input[i]) - 1;
 		i++;
 	}
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 17:08:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/02/05 14:30:08 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/24 16:08:50 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ft_strjoin_width_sign(char *s, int width, int minus, int zero)
 	return (ret);
 }
 
-char	*ft_strjoin(char const *s1, char *s2)
+char	*_ft_strjoin(char const *s1, char *s2)
 {
 	char	*ret;
 	int		i;

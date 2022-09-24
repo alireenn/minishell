@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:50:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/22 18:26:58 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/24 17:47:20 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strdup_from_to(char *input, int start, int end)
 	return (ret);
 }
 
-int	search_closing(char *input, int c)
+int	search_closing(char *input, int c, char c1, char c2)
 {
 	int	i;
 	int	open;
@@ -41,9 +41,9 @@ int	search_closing(char *input, int c)
 		return (-1);
 	while (open > 0 && input[i] != 0)
 	{
-		if (input[i] == '(')
+		if (input[i] == c1)
 			open++;
-		if (input[i] == ')')
+		if (input[i] == c2)
 			open--;
 		i++;
 	}
@@ -61,7 +61,7 @@ t_tree	get_next_tree(char *input, int *ind, int *cmd)
 	i = *ind;
 	if (input[i] == '(')
 	{
-		j = search_closing(input, i);
+		j = search_closing(input, i, '(', ')');
 		*ind = j;
 	}
 	ret = nodoalb_alloc(*cmd);
@@ -107,6 +107,8 @@ char	*parse_tree(char *in)
 	j = 0;
 	while (in[i] != '\0')
 	{
+		if (is_sep(in[i], "\"\'"))
+			i = search_closing(in, i, in[i], in[i]);
 		if (is_sep(in[i], "&|") && in[i + 1] != '\0' && in[i + 1] == in[i])
 		{
 			i++;

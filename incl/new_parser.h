@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/22 18:22:53 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/24 17:45:04 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void		print_tree_rec(t_tree a);
 //		parse_tree.c
 char		*parse_tree(char *input);
 t_tree		make_tree(char *input, int *cmd);
-int			search_closing(char *input, int c);
+int			search_closing(char *input, int c, char c1, char c2);
 t_tree		get_next_tree(char *input, int *ind, int *cmd);
 char		*ft_strdup_from_to(char *input, int start, int end);
 //		parse_tree_supp.c

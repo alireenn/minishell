@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/22 18:23:19 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/24 18:00:35 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void	get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini)
 		j = 0;
 		while (j < (int)ft_strlen(s[i]))
 		{
+			if (is_sep(s[i][j], "\'\""))
+				j = search_closing(s[i], j, s[i][j], s[i][j]) - 1;
 			if (is_sep(s[i][j], "><"))
 			{
 				file = get_file_io(s, i, j, &type);

@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/23 19:33:20 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/24 18:18:27 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,31 @@ void	process_input_aux(t_mini *mini, char *input)
 
 	// printf("parsed = %s, %d\n", parsed, mini->cmd);
 
+int	incomplete_cmd(char *input)
+{
+	int	i;
+
+	i = (int)ft_strlen(input) - 1;
+	while (input[i] == ' ')
+		i--;
+	if (input[i] == '|' || input[i] == '&')
+		return (0);
+	else
+		return (1);
+}
+
+char	*get_other_input(char *input)
+{
+	char	*tmp;
+	char	*ret;
+
+	tmp = readline("> ");
+	ret = ft_strjoin(input, tmp);
+	free(tmp);
+	free(input);
+	return (ret);
+}
+
 void	process_input(t_mini *mini, char *input)
 {
 	char	*parsed;
@@ -73,8 +98,8 @@ void	process_input(t_mini *mini, char *input)
 	mini->res = execute(mini->tree, mini->commands, mini);
 	free_cmds(mini->commands, mini->cmd);
 	free_tree(&(mini->tree));
-	free(parsed);
 	free_matrix(splitted, mini->cmd);
+	free(parsed);
 }
 
 	// signal(SIGINT, received);
@@ -92,6 +117,8 @@ int	main(int argc, char **argv, char **envp)
 	prompt = our_prompt(mini->res);
 	while (prompt != NULL)
 	{
+		while (incomplete_cmd(prompt) == 0)
+			prompt = get_other_input(prompt);
 		process_input_aux(mini, prompt);
 		free(prompt);
 		if (mini->exit == 1)

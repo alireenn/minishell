@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/22 16:26:13 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/24 18:04:19 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	get_len_var(char **s, int i, int j)
 	len = 0;
 	while (s[i][j + 1 + len] != '\0' && (s[i][j + 1 + len] != ' '
 		&& s[i][j + 1 + len] != '$' && s[i][j + 1 + len] != '('
-		&& s[i][j + 1 + len] != ')'))
+		&& s[i][j + 1 + len] != ')' && s[i][j + 1 + len] != '\"'))
 		len++;
 	return (len);
 }
@@ -81,6 +81,8 @@ void	expand(char **s, t_mini *mini)
 		j = 0;
 		while (j < (int)ft_strlen(s[i]))
 		{
+			if (s[i][j] == '\'')
+				j = search_closing(s[i], j, s[i][j], s[i][j]) - 1;
 			if (s[i][j] == '$'
 			&& s[i][j + 1] != '\0' && s[i][j + 1] != ' ')
 				j += expand_helper(s, i, j, mini) - 1;
