@@ -62,6 +62,7 @@ SRCS			=								\
 		$(addprefix $(SRCS_DIR)/,$(COMMANDS))	\
 		$(addprefix $(SRCS_DIR)/,$(UTILS))		\
 		$(addprefix $(SRCS_DIR)/,$(BUILDIN))	\
+		$(addprefix $(SRCS_DIR)/,$(SIGNAL))	\
 
 OBJS_DIR		= ./objs
 OBJS			= $(patsubst $(SRCS_DIR)%,$(OBJS_DIR)%,$(SRCS:.c=.o))

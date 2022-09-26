@@ -10,31 +10,11 @@ capire se ci sono piu errori nella pipe quale risultato si ottiene
 --- gestione quotes ---
 quando ci sono " o ' bisogna skippare qualsiasi cosa ci sia all'interno; se ci sono le " allora bisogna fare expand, altrimenti no.
 
-
-
-
-
-
-
-
-
-
 -> non eliminare il file prova.c che è importante!!!!!
 
 ------ bug e mini bug ------
-Con exit e una cosa a caso deve stampare un messaggio di errore dopo exit
-❌ Minishell ➡exit cogfo
-exit
-➜  minishell git:(main) ✗ bash
-bash-3.2$ exit vcjvaio
-exit
-bash: exit: vcjvaio: numeric argument required
 
-va in segfault con spazi
-
-/bin/cosa a caso --> a noi da come exit status 1 quando ci dovrebbe dare 127
-
-cat --> con ctrl-C esce da mini, dovremmo farlo solo uscire da cat?
+cat --> con ctrl-C esce da mini, dovremmo farlo solo uscire da cat? ---> readline buggato
 
  -> l'exit status ogni tanto non cambia, qua dovrebbe essere 0  
 ✅ Minishell ➡ echo $? + $?

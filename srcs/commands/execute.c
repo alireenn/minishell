@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/26 10:13:39 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/26 16:31:42 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_filename(t_mini *mini, char *filename)
 	if (ft_strchr(filename, '/') != NULL)
 	{
 		printf_fd(2, "minishell: %s: No such file or directory\n", filename);
-		exit(1);
+		exit(127);
 	}
 	path = get_path(mini);
 	i = 0;
@@ -123,7 +123,6 @@ int	execute_pipe(t_tree a, t_command **cmds, t_mini *mini)
 	dup2(mini->save_out, STDOUT_FILENO);
 	dup2(fd[0], STDIN_FILENO);
 	ret = execute(a->right, cmds, mini);
-	// emily(43);
 	close(fd[0]);
 	dup2(mini->save_in, STDIN_FILENO);
 	return (ret);
@@ -142,7 +141,6 @@ int	execute(t_tree a, t_command **cmds, t_mini *mini)
 	else
 	{
 		make_cmd(cmds[a->info], mini);
-		// emily(42);
 		return (cmds[a->info]->res);
 	}
 }

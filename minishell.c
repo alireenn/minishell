@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/26 14:55:44 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/26 16:06:54 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ void	free_mini(t_mini *mini)
 	free(mini);
 }
 
-char	*our_prompt(int res)
+char	*our_prompt(int res, t_mini *mini)
 {
 	char	*tmp;
 	char	*ret;
 
 	if (res == 1)
+	{
 		tmp = ft_strjoin("✅ ", "Minishell ➡ ");
+		mini->last = 0;
+	}
 	else
 		tmp = ft_strjoin("❌ ", "Minishell ➡ ");
 	ret = readline(tmp);
@@ -95,7 +98,7 @@ void	process_input(t_mini *mini, char *input)
 	get_redirs(splitted, mini->commands, mini->cmd, mini);
 	expand(splitted, mini);
 	get_cmds(mini->commands, mini->cmd, splitted);
-	// print_cmds(mini->commands, mini->cmd);
+	print_cmds(mini->commands, mini->cmd);
 	mini->res = execute(mini->tree, mini->commands, mini);
 	free_cmds(mini->commands, mini->cmd);
 	free_tree(&(mini->tree));
@@ -105,6 +108,7 @@ void	process_input(t_mini *mini, char *input)
 
 int	main(int argc, char **argv, char **envp)
 {
+	int		ret;
 	t_mini	*mini;
 	char	*prompt;
 
@@ -115,7 +119,7 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGINT, received);
 	signal(SIGQUIT, quit);
 	mini = init_mini(envp);
-	prompt = our_prompt(mini->res);
+	prompt = our_prompt(mini->res, mini);
 	while (prompt != NULL)
 	{
 		while (incomplete_cmd(prompt) == 0)
@@ -124,7 +128,9 @@ int	main(int argc, char **argv, char **envp)
 		free(prompt);
 		if (mini->exit == 1)
 			break ;
-		prompt = our_prompt(mini->res);
+		prompt = our_prompt(mini->res, mini);
 	}
+	ret = mini->last;
 	free_mini(mini);
+	return (ret);
 }

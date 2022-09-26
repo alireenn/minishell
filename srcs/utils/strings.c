@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:34:35 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/24 18:12:16 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/26 16:24:31 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ char	*get_strip_str(char *input, int from, int to)
 	int	j;
 
 	i = 0;
-	while (input[from + i] == ' ' || input[from + i] == '\''
-		|| input[from + i] == '\"')
+	while (input[from + i] == ' ' && input[from + i] != '\0')
 		i++;
+	if (from + i == (int)ft_strlen(input))
+		return (NULL);
 	j = 0;
-	while (input[to - 1 - j] == ' ' || input[to - 1 - j] == '\''
-		|| input[to - 1 - j] == '\"')
+	while (input[to - 1 - j] == ' ')
 		j++;
 	return (ft_strdup_from_to(input, from + i, to - j - 1));
 }
