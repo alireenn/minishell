@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 17:45:06 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/26 10:33:37 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/26 13:10:23 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <stdio.h>
-int culo = 0;
 
 void	print_pid(int pid)
 {
@@ -34,9 +33,11 @@ int	main(void)
 	pid_t				pd;
 	int					ret;
 	struct sigaction	act1;
+	// int					fd[2];
 
 	act1.sa_flags = SA_SIGINFO;
 	act1.sa_sigaction = &handler;
+	// ret = pipe(fd);
 	if (sigaction(SIGUSR1, &act1, NULL) == -1)
 		exit(1);
 	pd = fork();
