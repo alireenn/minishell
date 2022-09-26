@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/26 16:44:55 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/26 17:50:09 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int			is_valid_path(char *filename);
 void		make_cmd_helper(t_command *cmd, t_mini *mini);
 char		*check_path(char *filename, char **path, int i);
 void		other_command_helper(t_mini *mini, t_command *cmd);
+//		commands_utils2.c
+void		remove_quotes(t_command *cmd);
 //		redirection.c
 int			here_doc(char *end);
 char		*here_doc_helper(int *fd, char *tmp);

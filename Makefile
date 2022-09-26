@@ -29,6 +29,7 @@ COMMANDS_FILES=					\
 		commands.c				\
 		execute.c				\
 		commands_utils.c 		\
+		commands_utils2.c 		\
 		redirections.c 			\
 		expand.c				\
 

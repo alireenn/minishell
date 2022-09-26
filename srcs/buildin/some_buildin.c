@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   some_buildin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:52 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/26 17:07:45 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/26 17:53:29 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	ft_echo(char *str, t_command *com)
 {
 	int		flag;
 
+	remove_quotes(com);
 	flag = check_flag_echo(com);
 	if (str == NULL)
 		printf_fd(1, "\n");
