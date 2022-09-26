@@ -42,9 +42,9 @@ BUILDIN_FILES	=				\
 
 BUILDIN			= $(addprefix buildin/, $(BUILDIN_FILES))
 
-# SIGNAL_FILES	= signal.c		\
+SIGNAL_FILES	= signal.c		\
 
-# SIGNAL			= $(addprefix signal/, $(SIGNAL_FILES))
+SIGNAL			= $(addprefix signal/, $(SIGNAL_FILES))
 
 UTILS_FILES		=				\
 		strings.c				\

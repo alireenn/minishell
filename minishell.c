@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/26 10:14:40 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/26 14:00:43 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ void	process_input(t_mini *mini, char *input)
 	free(parsed);
 }
 
-	// signal(SIGINT, received);
-	// signal(SIGQUIT, quit);
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	*mini;
@@ -114,6 +112,8 @@ int	main(int argc, char **argv, char **envp)
 		return (printf("Minishell: %s: No such file or directory\n", argv[1]));
 	(void)argc;
 	(void)argv;
+	// signal(SIGINT, received);
+	// signal(SIGQUIT, quit);
 	mini = init_mini(envp);
 	prompt = our_prompt(mini->res);
 	while (prompt != NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/24 17:45:04 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/26 13:55:32 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,9 @@ int			here_doc(char *end);
 char		*here_doc_helper(int *fd, char *tmp);
 char		*get_file_io(char **s, int r, int j, int *type);
 void		get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini);
+//		signal.c
+void		quit(int sig);
+void		received(int sig);
 /*
 ** 			NEW_PARSER 
 */
