@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 17:45:06 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/24 19:08:23 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/26 10:33:37 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	handler(int signo, siginfo_t *info, void *context)
 
 	context = (ucontext_t *)context;
 	i = info->si_pid;
-	printf("%d, %d\n", i, signo);
-	culo = 1;
 }
 
 int	main(void)

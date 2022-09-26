@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/22 16:25:49 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/26 10:15:29 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 {
 	while (input[i][j] != ' ' && j < (int)ft_strlen(input[i]))
 		j++;
-	cmds[i]->com = get_strip_str(input[i], 0, j);
+	if (j == 0)
+		cmds[i]->com = NULL;
+	else
+		cmds[i]->com = get_strip_str(input[i], 0, j);
 	while (input[i][j] == ' ')
 		j++;
 	if (j == (int)ft_strlen(input[i]))

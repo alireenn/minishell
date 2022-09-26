@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/23 19:32:00 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/26 10:13:39 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ void	make_cmd(t_command *cmd, t_mini *mini)
 			return ;
 		change_fd(cmd);
 	}
-	if (cmd->com[0] == '(')
+	if (cmd->com == NULL)
+		cmd->res = 1;
+	else if (cmd->com[0] == '(')
 	{
 		new_cmd = ft_strdup_from_to(cmd->com, 1, ft_strlen(cmd->com) - 2);
 		envp2 = trasformation(mini->env);
