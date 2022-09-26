@@ -20,3 +20,40 @@ quando ci sono " o ' bisogna skippare qualsiasi cosa ci sia all'interno; se ci s
 
 
 -> non eliminare il file prova.c che è importante!!!!!
+
+------ bug e mini bug ------
+Con exit e una cosa a caso deve stampare un messaggio di errore dopo exit
+❌ Minishell ➡exit cogfo
+exit
+➜  minishell git:(main) ✗ bash
+bash-3.2$ exit vcjvaio
+exit
+bash: exit: vcjvaio: numeric argument required
+
+va in segfault con spazi
+
+/bin/cosa a caso --> a noi da come exit status 1 quando ci dovrebbe dare 127
+
+cat --> con ctrl-C esce da mini, dovremmo farlo solo uscire da cat?
+
+ -> l'exit status ogni tanto non cambia, qua dovrebbe essere 0  
+✅ Minishell ➡ echo $? + $?
+127 + 127
+✅ Minishell ➡ echo $?
+127
+
+ctrl-C non dovrebbe quittare, dovrebbe mostrare una nuova riga, pero ctrl-O lo fa,
+ma non dovrebbe
+
+con le virgolette scazza un po':
+❌ Minishell ➡ cat "foo | cat > cosecose.txt"
+cat: |: No such file or directory
+cat: cat: No such file or directory
+cat: >: No such file or directory
+cat: cosecose.txt: No such file or directory
+❌ Minishell ➡ 
+
+con env se ci sta qualcosa dopo dovrebbe dare messaggio di errore ma il nostro stampa lénv
+env cosaacaso -> env: cosaacaso: No such file or directory
+
+non fa fare l'unset della path
