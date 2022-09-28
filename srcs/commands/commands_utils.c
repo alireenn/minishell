@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:33:27 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/26 16:42:00 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/28 12:23:31 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,15 @@ void	make_cmd_helper(t_command *cmd, t_mini *mini)
 	else if (equal_strings(cmd->com, "pwd") == 0)
 		ft_pwd(cmd);
 	else if (equal_strings(cmd->com, "env") == 0)
-		ft_env(mini->env, cmd);
+	{
+		if (cmd->arg == NULL)
+			ft_env(mini->env, cmd);
+		else
+		{
+			printf("env: %s: No such file or directory\n", cmd->arg);
+			mini->last = 127;
+		}
+	}
 	else if (equal_strings(cmd->com, "export") == 0)
 		ft_export(mini, cmd->arg, cmd);
 	else if (equal_strings(cmd->com, "unset") == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/26 16:06:54 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/09/28 12:28:43 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	process_input(t_mini *mini, char *input)
 	get_redirs(splitted, mini->commands, mini->cmd, mini);
 	expand(splitted, mini);
 	get_cmds(mini->commands, mini->cmd, splitted);
-	print_cmds(mini->commands, mini->cmd);
+	// print_cmds(mini->commands, mini->cmd);
 	mini->res = execute(mini->tree, mini->commands, mini);
 	free_cmds(mini->commands, mini->cmd);
 	free_tree(&(mini->tree));

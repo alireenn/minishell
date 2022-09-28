@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 17:48:21 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/26 17:49:25 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:28:18 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	remove_quotes(t_command *cmd)
 	int		i;
 	int		j;
 	char	*temp;
-	
+
 	i = 0;
 	j = 0;
 	while (cmd->arg[i] == '\"')

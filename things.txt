@@ -14,16 +14,9 @@ quando ci sono " o ' bisogna skippare qualsiasi cosa ci sia all'interno; se ci s
 
 ------ bug e mini bug ------
 
-cat --> con ctrl-C esce da mini, dovremmo farlo solo uscire da cat? ---> readline buggato
+cat --> con ctrl-C stampa un prompt in piu' ---> readline buggato
 
- -> l'exit status ogni tanto non cambia, qua dovrebbe essere 0  
-✅ Minishell ➡ echo $? + $?
-127 + 127
-✅ Minishell ➡ echo $?
-127
-
-ctrl-C non dovrebbe quittare, dovrebbe mostrare una nuova riga, pero ctrl-O lo fa,
-ma non dovrebbe
+quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> questo non ho idea di come sistemarlo
 
 con le virgolette scazza un po':
 ❌ Minishell ➡ cat "foo | cat > cosecose.txt"
@@ -33,7 +26,4 @@ cat: >: No such file or directory
 cat: cosecose.txt: No such file or directory
 ❌ Minishell ➡ 
 
-con env se ci sta qualcosa dopo dovrebbe dare messaggio di errore ma il nostro stampa lénv
-env cosaacaso -> env: cosaacaso: No such file or directory
-
-non fa fare l'unset della path
+echo -n: si puo' passare -nnnn e quante n ti pare, non le deve stampare e la deve prendere come flag valida
