@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 17:48:21 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/28 15:05:36 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:00:48 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	remove_quotes_arg(t_command *cmd)
 
 	i = 0;
 	j = 0;
-	while (cmd->arg[i] == '\"')
+	while (cmd->arg[i] == '\"' || cmd->arg[i] == '\'')
 		i++;
 	temp = (char *)malloc(sizeof(char *) * (int)ft_strlen(cmd->arg) - i + 1);
 	i = 0;
 	while (cmd->arg[i])
 	{
-		if (cmd->arg[i] == '\"')
+		if (cmd->arg[i] == '\"' || cmd->arg[i] == '\'')
 			i++;
 		else
 		{
@@ -48,13 +48,13 @@ void	remove_quotes_com(t_command *cmd)
 
 	i = 0;
 	j = 0;
-	while (cmd->com[i] == '\"')
+	while (cmd->com[i] == '\"' || cmd->com[i] == '\'')
 		i++;
 	temp = (char *)malloc(sizeof(char *) * (int)ft_strlen(cmd->com) - i + 1);
 	i = 0;
 	while (cmd->com[i])
 	{
-		if (cmd->com[i] == '\"')
+		if (cmd->com[i] == '\"' || cmd->com[i] == '\'')
 			i++;
 		else
 		{
