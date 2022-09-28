@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/26 17:50:09 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:06:31 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ void		make_cmd_helper(t_command *cmd, t_mini *mini);
 char		*check_path(char *filename, char **path, int i);
 void		other_command_helper(t_mini *mini, t_command *cmd);
 //		commands_utils2.c
-void		remove_quotes(t_command *cmd);
+void		remove_quotes_arg(t_command *cmd);
+void		remove_quotes_com(t_command *cmd);
 //		redirection.c
 int			here_doc(char *end);
 char		*here_doc_helper(int *fd, char *tmp);

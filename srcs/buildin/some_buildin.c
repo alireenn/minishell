@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:52 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/28 12:47:06 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:04:52 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,26 @@ void	ft_pwd(t_command *cmd)
 int	check_flag_echo(t_command *cmd)
 {
 	int	i;
+	int	j;
 
+	j = 0;
 	i = 0;
 	if (cmd->arg == NULL)
 		return (-1);
 	while (cmd->arg[i] != '\0')
 	{
-		if (cmd->arg[i] == '-' && cmd->arg[i + 1] == 'n')
+		if (cmd->arg[i] == '-')
 		{
-			replace(&cmd->arg, i, i + 2, "");
+			j = 1;
+			while (cmd->arg[i + j] == 'n')
+				j++;
+			if (cmd->arg[i + j] == ' ')
+			{
+				replace(&cmd->arg, i, i + j + 1, "");
+				cmd->arg = get_strip_str(cmd->arg, 0, (int)ft_strlen(cmd->arg));
+			}
+			else
+				return (0);
 			return (1);
 		}
 		i++;
@@ -66,19 +77,16 @@ void	ft_echo(char *str, t_command *com)
 {
 	int		flag;
 
-	remove_quotes(com);
+	remove_quotes_arg(com);
 	flag = check_flag_echo(com);
 	if (str == NULL)
 		printf_fd(1, "\n");
 	else
 	{
 		if (flag == 0)
-		{	
-			ft_putstr_fd(com->arg, 1);
-			write(1, "\n", 1);
-		}
+			printf("%s\n", com->arg);
 		else
-			ft_putstr_fd(com->arg, 1);
+			printf("%s", com->arg);
 	}
 	com->res = 1;
 }
