@@ -26,4 +26,15 @@ cat: >: No such file or directory
 cat: cosecose.txt: No such file or directory
 ❌ Minishell ➡ 
 
-echo -n: si puo' passare -nnnn e quante n ti pare, non le deve stampare e la deve prendere come flag valida
+✅ Minishell ➡ export L="ls -la"
+comando: $export$
+argomento: $L="ls -la"$
+✅ Minishell ➡ $L
+comando: $ls -la$
+minishell: ls -la: command not found
+❌ Minishell ➡ ^c
+by gmezzini😘
+
+se facciamo l'export della stessa ocsa la mette un'altra volta
+
+

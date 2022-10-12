@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/24 18:04:19 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/12 15:36:16 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	get_len_var(char **s, int i, int j)
 	len = 0;
 	while (s[i][j + 1 + len] != '\0' && (s[i][j + 1 + len] != ' '
 		&& s[i][j + 1 + len] != '$' && s[i][j + 1 + len] != '('
-		&& s[i][j + 1 + len] != ')' && s[i][j + 1 + len] != '\"'))
+		&& s[i][j + 1 + len] != ')' && s[i][j + 1 + len] != '"'
+		&& s[i][j + 1 + len] != '\''))
 		len++;
 	return (len);
 }

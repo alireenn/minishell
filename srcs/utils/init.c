@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:19:42 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/15 18:32:48 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/12 16:08:25 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	init_env(t_mini *mini, char **env)
 		tmp = new;
 		i++;
 	}
+	tmp->next = NULL;
 }
 
 t_mini	*init_mini(char **envp)
