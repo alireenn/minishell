@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/26 16:31:42 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/13 20:04:01 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ void	other_command(t_command *cmd, t_mini *mini)
 
 void	make_cmd(t_command *cmd, t_mini *mini)
 {
-	char	*new_cmd;
 	t_mini	*mini2;
 	char	**envp2;
+	char	*new_cmd;
 
 	if (cmd->red[0] != 0 || cmd->red[1] != 0)
 	{

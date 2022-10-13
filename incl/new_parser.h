@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/12 14:57:27 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/13 17:17:14 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,6 @@ void		free_cmds(t_command	**cmds, int cmd);
 void		free_execve(char *filename, char **argv, char **envp);
 //		debug.c
 void		emily(int n);
+void		print_mat(char **mat);
 void		print_cmds(t_command **cmds, int cmd);
 #endif

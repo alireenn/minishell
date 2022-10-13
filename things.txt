@@ -33,4 +33,7 @@ argomento: $L="ls -la"$
 comando: $ls -la$
 minishell: ls -la: command not found
 ❌ Minishell ➡ ^c
-by gmezzini😘
+
+echo $: dovrebbe stampare $: ma va a capo
+
+

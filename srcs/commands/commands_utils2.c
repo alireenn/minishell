@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 17:48:21 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/28 16:00:48 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:59:52 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,29 @@ void	remove_quotes_arg(t_command *cmd)
 
 	i = 0;
 	j = 0;
-	while (cmd->arg[i] == '\"' || cmd->arg[i] == '\'')
+	while ((cmd->arg[i] == '\"' || cmd->arg[i] == '\'') && cmd->arg[i] != '\0')
 		i++;
-	temp = (char *)malloc(sizeof(char *) * (int)ft_strlen(cmd->arg) - i + 1);
-	i = 0;
-	while (cmd->arg[i])
+	if (i > 0)
 	{
-		if (cmd->arg[i] == '\"' || cmd->arg[i] == '\'')
-			i++;
-		else
+		temp = (char *)malloc(sizeof(char) * (int)ft_strlen(cmd->arg) - i + 1);
+		if (!temp)
+			return ;
+		i = 0;
+		while (cmd->arg[i])
 		{
-			temp[j] = cmd->arg[i];
-			j++;
-			i++;
+			if (cmd->arg[i] == '\"' || cmd->arg[i] == '\'')
+				i++;
+			else
+			{
+				temp[j] = cmd->arg[i];
+				j++;
+				i++;
+			}
 		}
+		temp[j] = '\0';
+		free (cmd->arg);
+		cmd->arg = temp;
 	}
-	temp[j] = '\0';
-	cmd->arg = temp;
-	// free(temp);
 }
 
 void	remove_quotes_com(t_command *cmd)
