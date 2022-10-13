@@ -122,7 +122,12 @@ fclean: 			clean
 
 re: 				fclean all
 
+rem:
+		exit
+		make re
+		./minishell
+
 norme:				
 		norminette ./include ./srcs ./lib/libft | awk '! /OK!/'
 
-PHONY: 				all clean fclean re libraries norme
+PHONY: 				all clean fclean re libraries norme rem

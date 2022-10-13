@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:29:32 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/23 12:57:13 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/13 14:51:14 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	add_elem_ord(t_env **list, char *elem_name, char *elem_arg)
 		(*list) = create_elem(elem_name, elem_arg);
 	else
 	{
+		emily(5);
 		while (it->next != NULL && i == 0)
 		{
 			if (ft_strlen(it->name_var) == ft_strlen(elem_name)
