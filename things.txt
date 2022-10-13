@@ -14,7 +14,7 @@ quando ci sono " o ' bisogna skippare qualsiasi cosa ci sia all'interno; se ci s
 
 ------ bug e mini bug ------
 
-cat --> con ctrl-C stampa un prompt in piu' ---> readline buggato
+cat --> con ctrl-C stampa un prompt in piu'
 
 quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> questo non ho idea di come sistemarlo
 
@@ -34,7 +34,3 @@ comando: $ls -la$
 minishell: ls -la: command not found
 ❌ Minishell ➡ ^c
 by gmezzini😘
-
-se facciamo l'export della stessa cosa ogni tanto la rimette, ogni tanto non lo prende proprio e altre volte va in segfault --> add_elem_ord() va in segfault
-
-

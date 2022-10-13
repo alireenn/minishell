@@ -6,12 +6,11 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 19:32:15 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/13 14:51:25 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:07:53 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
-#include <stdio.h>
 
 char	*ft_strdup(const char *s1)
 {
