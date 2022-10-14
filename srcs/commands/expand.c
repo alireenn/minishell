@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/13 17:17:50 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:59:19 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	expand_helper2(char **s, t_mini *mini, int j, int len)
 	{
 		replace(s, j, j + len + 1, var_env->arg_var);
 		ret = (int)ft_strlen(var_env->arg_var);
-		print_mat(s);
 	}	
 	else
 		replace(s, j, j + len + 1, "");

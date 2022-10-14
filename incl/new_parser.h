@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/13 17:17:14 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/14 10:29:24 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ int			putstr_parser(char *input, int len, int offset, char *matrix);
 **		UTILS
 */
 //		strings.c
+void		remove_quotes_str(char *str);
 int			equal_strings(char *com, char *exec);
 char		*ft_join_char(char *s1, char *s2, char c);
 char		*get_strip_str(char *input, int from, int to);

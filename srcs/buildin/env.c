@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:24:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/13 17:02:22 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/14 12:09:11 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,15 @@ void	ft_export(t_mini *mini, char *str, t_command *cmd)
 
 	if (str != NULL)
 	{
-		printf("\n%s\n", str);
 		tmp = malloc (sizeof(t_env));
 		split_at(str, tmp, '=');
+		remove_quotes_str(tmp->arg_var);
 		if (search(mini->env, tmp->name_var) == 0)
 		{
 			change_var(mini->env, tmp->name_var, tmp->arg_var);
 			change_var(mini->secret, tmp->name_var, tmp->arg_var);
 		}
+		print_mat(&mini->env->arg_var);
 		ft_export_supp(mini, tmp);
 		free(tmp->name_var);
 		free(tmp->arg_var);

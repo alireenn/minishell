@@ -12,13 +12,13 @@ quando ci sono " o ' bisogna skippare qualsiasi cosa ci sia all'interno; se ci s
 
 -> non eliminare il file prova.c che è importante!!!!!
 
------- bug e mini bug ------
+------ bug e mini bug ------(oddio aumentano...)
 
 cat --> con ctrl-C stampa un prompt in piu'
 
 quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> questo non ho idea di come sistemarlo
 
-con le virgolette scazza un po':
+con le virgolette scazza un po': NON BISOGNA SPLITTARE LE COSE DENTRO LE VIRGOLETTE DURANTE IL PARSING
 ❌ Minishell ➡ cat "foo | cat > cosecose.txt"
 cat: |: No such file or directory
 cat: cat: No such file or directory
@@ -26,7 +26,7 @@ cat: >: No such file or directory
 cat: cosecose.txt: No such file or directory
 ❌ Minishell ➡ 
 
-✅ Minishell ➡ export L="ls -la"
+✅ Minishell ➡ export L="ls -la"  --->> penso che il problema sia lo spazio tra ls e -la, forse da risolvere nel parser
 comando: $export$
 argomento: $L="ls -la"$
 ✅ Minishell ➡ $L
@@ -36,4 +36,17 @@ minishell: ls -la: command not found
 
 echo $: dovrebbe stampare $: ma va a capo
 
+export non mette in ordine 
 
+❌ Minishell ➡ $;
+make: *** [rem] Segmentation fault: 11
+
+✅ Minishell ➡ $$
+emily 4
+comando: $pid$
+minishell: pid: command not found
+❌ Minishell ➡ echo $?
+emily 4
+comando: $echo$
+argomento: $127$
+127

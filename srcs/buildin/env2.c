@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 16:27:05 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/13 14:55:26 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:55:28 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,19 @@ void	ft_export_supp(t_mini *mini, t_env *tmp)
 	if (search(mini->secret, tmp->name_var) == 0)
 	{
 		if (tmp->arg_var != NULL)
+		{
+			remove_quotes_str(tmp->arg_var);
 			add_elem(&mini->env, tmp->name_var, tmp->arg_var);
+		}
 		change_var(mini->secret, tmp->name_var, tmp->arg_var);
 	}
 	else
 	{
 		if (tmp->arg_var != NULL)
+		{
+			remove_quotes_str(tmp->arg_var);
 			add_elem(&mini->env, tmp->name_var, tmp->arg_var);
+		}
 		add_elem_ord(&mini->secret, tmp->name_var, tmp->arg_var);
 	}
 	return ;
