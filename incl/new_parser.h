@@ -6,9 +6,10 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/17 14:23:35 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/17 19:07:21 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef NEW_PARSER_H
 # define NEW_PARSER_H
@@ -20,6 +21,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include "../lib/libft/libft.h"
 # include "../lib/printf_fd/ft_printf.h"
 
@@ -110,7 +113,8 @@ void		make_cmd_helper(t_command *cmd, t_mini *mini);
 char		*check_path(char *filename, char **path, int i);
 void		other_command_helper(t_mini *mini, t_command *cmd);
 //		commands_utils2.c
-void		remove_quotes(t_command *cmd);
+void		remove_quotes_arg(t_command *cmd);
+void		remove_quotes_com(t_command *cmd);
 //		redirection.c
 int			here_doc(char *end);
 char		*here_doc_helper(int *fd, char *tmp);
@@ -158,6 +162,7 @@ int			putstr_parser(char *input, int len, int offset, char *matrix);
 **		UTILS
 */
 //		strings.c
+void		remove_quotes_str(char *str);
 int			equal_strings(char *com, char *exec);
 char		*ft_join_char(char *s1, char *s2, char c);
 char		*get_strip_str(char *input, int from, int to);
@@ -187,5 +192,6 @@ void		free_cmds(t_command	**cmds, int cmd);
 void		free_execve(char *filename, char **argv, char **envp);
 //		debug.c
 void		emily(int n);
+void		print_mat(char **mat);
 void		print_cmds(t_command **cmds, int cmd);
 #endif

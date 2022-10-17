@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/26 15:38:08 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/14 15:40:43 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ t_command	**alloc_cmds(int cmd)
 
 void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 {
+	if (input[i][j] == '\"' || input[i][j] == '\'')
+		j = search_closing(input[i], j, input[i][j], input[i][j]);
 	while (input[i][j] != ' ' && j < (int)ft_strlen(input[i]))
 		j++;
 	if (j == 0)
 		cmds[i]->com = NULL;
 	else
 		cmds[i]->com = get_strip_str(input[i], 0, j);
+	remove_quotes_com(cmds[i]);
 	while (input[i][j] == ' ')
 		j++;
 	if (j == (int)ft_strlen(input[i]))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:34:35 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/26 16:24:31 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/14 12:18:21 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,37 @@ char	*get_strip_str(char *input, int from, int to)
 	while (input[to - 1 - j] == ' ')
 		j++;
 	return (ft_strdup_from_to(input, from + i, to - j - 1));
+}
+
+void	remove_quotes_str(char *str)
+{
+	int		i;
+	int		j;
+	char	*temp;
+
+	i = 0;
+	j = 0;
+	while ((str[i] == '\"' || str[i] == '\'') && str[i] != '\0')
+		i++;
+	if (i > 0)
+	{
+		temp = (char *)malloc(sizeof(char) * (int)ft_strlen(str) - i + 1);
+		if (!temp)
+			return ;
+		i = 0;
+		while (str[i])
+		{
+			if (str[i] == '\"' || str[i] == '\'')
+				i++;
+			else
+			{
+				temp[j] = str[i];
+				j++;
+				i++;
+			}
+		}
+		temp[j] = '\0';
+		free (temp);
+		str = temp;
+	}
 }

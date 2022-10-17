@@ -6,9 +6,10 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:50:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/17 12:01:51 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/17 19:06:46 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../incl/new_parser.h"
 
@@ -41,10 +42,10 @@ int	search_closing(char *input, int c, char c1, char c2)
 		return (-1);
 	while (open > 0 && input[i] != 0)
 	{
-		if (input[i] == c1)
-			open++;
 		if (input[i] == c2)
 			open--;
+		else if (input[i] == c1)
+			open++;
 		i++;
 	}
 	return (i);
