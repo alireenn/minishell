@@ -18,7 +18,7 @@ cat --> con ctrl-C stampa un prompt in piu'
 
 quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> questo non ho idea di come sistemarlo
 
-con le virgolette scazza un po': NON BISOGNA SPLITTARE LE COSE DENTRO LE VIRGOLETTE DURANTE IL PARSING
+con le virgolette scazza un po'
 ❌ Minishell ➡ cat "foo | cat > cosecose.txt"
 cat: |: No such file or directory
 cat: cat: No such file or directory
