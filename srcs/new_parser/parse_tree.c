@@ -6,11 +6,11 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:50:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/24 17:47:20 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/17 12:01:51 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
+#include "../../incl/new_parser.h"
 
 char	*ft_strdup_from_to(char *input, int start, int end)
 {

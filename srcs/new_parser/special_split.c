@@ -6,11 +6,11 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:01:06 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/22 18:55:28 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/17 12:01:57 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
+#include "../../incl/new_parser.h"
 
 int	is_sep(char c, char *str)
 {

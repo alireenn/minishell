@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/26 17:50:09 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/17 14:23:35 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void		ft_exit(t_mini *mini, t_command *com);
 /*
 ** 			COMMANDS
 */
+//		mod_split
+char	**mod_split(char *str, char *charset, char *avoid);
 //		expand.c
 void		expand(char **s, t_mini *mini);
 int			get_len_var(char **s, int i, int j);

@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/09/26 16:31:42 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/17 14:25:56 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ char	**get_argv(char *com, char *arg)
 {
 	char	*tmp;
 	char	**argv;
-	int		i;
 
-	i = 0;
 	if (arg == NULL)
 	{
 		argv = malloc(sizeof(char *) * 2);
@@ -55,7 +53,7 @@ char	**get_argv(char *com, char *arg)
 	else
 	{
 		tmp = ft_join_char(com, arg, ' ');
-		argv = ft_split(tmp, " ", &i);
+		argv = mod_split(tmp, " ", "\'\"");
 		free(tmp);
 	}
 	return (argv);
