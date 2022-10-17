@@ -20,6 +20,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include "../lib/libft/libft.h"
 # include "../lib/printf_fd/ft_printf.h"
 
