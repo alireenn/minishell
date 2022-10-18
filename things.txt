@@ -18,35 +18,4 @@ cat --> con ctrl-C stampa un prompt in piu'
 
 quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> questo non ho idea di come sistemarlo
 
-con le virgolette scazza un po'
-❌ Minishell ➡ cat "foo | cat > cosecose.txt"
-cat: |: No such file or directory
-cat: cat: No such file or directory
-cat: >: No such file or directory
-cat: cosecose.txt: No such file or directory
-❌ Minishell ➡ 
-
-✅ Minishell ➡ export L="ls -la"  --->> penso che il problema sia lo spazio tra ls e -la, forse da risolvere nel parser
-comando: $export$
-argomento: $L="ls -la"$
-✅ Minishell ➡ $L
-comando: $ls -la$
-minishell: ls -la: command not found
-❌ Minishell ➡ ^c
-
 echo $: dovrebbe stampare $: ma va a capo
-
-export non mette in ordine 
-
-❌ Minishell ➡ $;
-make: *** [rem] Segmentation fault: 11
-
-✅ Minishell ➡ $$
-emily 4
-comando: $pid$
-minishell: pid: command not found
-❌ Minishell ➡ echo $?
-emily 4
-comando: $echo$
-argomento: $127$
-127

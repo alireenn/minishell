@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:54:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/12 14:57:58 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/18 15:57:26 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ void	received(int sig)
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
-	rl_redisplay();
+	// rl_redisplay();
 }

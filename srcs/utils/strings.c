@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:34:35 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/14 12:18:21 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:57:41 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*get_strip_str(char *input, int from, int to)
 	return (ft_strdup_from_to(input, from + i, to - j - 1));
 }
 
-void	remove_quotes_str(char *str)
+char	*remove_quotes_str(char *str)
 {
 	int		i;
 	int		j;
@@ -89,7 +89,7 @@ void	remove_quotes_str(char *str)
 	{
 		temp = (char *)malloc(sizeof(char) * (int)ft_strlen(str) - i + 1);
 		if (!temp)
-			return ;
+			return (str);
 		i = 0;
 		while (str[i])
 		{
@@ -103,7 +103,9 @@ void	remove_quotes_str(char *str)
 			}
 		}
 		temp[j] = '\0';
-		free (temp);
-		str = temp;
+		free(str);
+		return (temp);
 	}
+	else
+		return (str);
 }

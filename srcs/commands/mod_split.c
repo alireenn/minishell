@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:52:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/17 14:26:33 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/18 13:00:11 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,17 @@ int	mod_putstr(char *str, char *charset, char *matrix, char *avoid)
 		{
 			while (str[i] != '\0')
 			{	
+				if (is_sep(str[i], charset) == 1 && open == 0)
+					break ;
 				if (is_sep(str[i], avoid) == 1 && open == 0)
 					open++;
 				else if (is_sep(str[i], avoid) == 1)
 					open--;
-				if (is_sep(str[i], charset) == 1 && open == 0)
-					break ;
-				matrix[j] = str[i];
-				j++;
+				else
+				{
+					matrix[j] = str[i];
+					j++;
+				}
 				i++;
 			}
 			matrix[j] = '\0';
