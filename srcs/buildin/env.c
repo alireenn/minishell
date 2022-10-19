@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:24:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/18 14:58:55 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/19 10:33:33 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	ft_export(t_mini *mini, char *str, t_command *cmd)
 			change_var(mini->env, tmp->name_var, tmp->arg_var);
 			change_var(mini->secret, tmp->name_var, tmp->arg_var);
 		}
-		// print_mat(&mini->env->arg_var);
 		ft_export_supp(mini, tmp);
 		free(tmp->name_var);
 		free(tmp->arg_var);

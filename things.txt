@@ -1,4 +1,4 @@
-per compilare: gcc parse_tree.c special_split.c ft_tree.c ft_tree2.c -o prova
+
 
 bisogna mettere i comandi in pipe con un particolare nodo -> -3
 capire se ci sono piu errori nella pipe quale risultato si ottiene
@@ -12,10 +12,10 @@ quando ci sono " o ' bisogna skippare qualsiasi cosa ci sia all'interno; se ci s
 
 -> non eliminare il file prova.c che è importante!!!!!
 
------- bug e mini bug ------(oddio aumentano...)
-
-cat --> con ctrl-C stampa un prompt in piu'
+------ bug e mini bug ------
 
 quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> questo non ho idea di come sistemarlo
 
 echo $: dovrebbe stampare $: ma va a capo
+
+PIPE ---> con ctrl-d penso esegua la pipe

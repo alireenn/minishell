@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   mod_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:52:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/18 13:00:11 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/19 12:58:19 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/new_parser.h"
+
+int	mod_helper(char *str, int i, char *avoid, int open)
+{
+	if (is_sep(str[i], avoid) == 1 && open == 0)
+		open++;
+	else if (is_sep(str[i], avoid) == 1)
+		open--;
+	return (open);
+}
 
 int	mod_strcount(char *str, char *charset, char *avoid)
 {
@@ -28,10 +37,7 @@ int	mod_strcount(char *str, char *charset, char *avoid)
 			count++;
 			while (str[i] != '\0')
 			{
-				if (is_sep(str[i], avoid) == 1 && open == 0)
-					open++;
-				else if (is_sep(str[i], avoid) == 1)
-					open--;
+				open = mod_helper(str, i, avoid, open);
 				if (is_sep(str[i], charset) == 1 && open == 0)
 					break ;
 				i++;
@@ -41,6 +47,11 @@ int	mod_strcount(char *str, char *charset, char *avoid)
 			i++;
 	}
 	return (count);
+}
+
+int culo()
+{
+	
 }
 
 int	mod_putstr(char *str, char *charset, char *matrix, char *avoid)
@@ -65,10 +76,7 @@ int	mod_putstr(char *str, char *charset, char *matrix, char *avoid)
 				else if (is_sep(str[i], avoid) == 1)
 					open--;
 				else
-				{
-					matrix[j] = str[i];
-					j++;
-				}
+					matrix[j++] = str[i];
 				i++;
 			}
 			matrix[j] = '\0';
@@ -95,10 +103,7 @@ int	mod_strlen(char *str, char *charset, char *avoid)
 		{
 			while (str[i] != '\0')
 			{
-				if (is_sep(str[i], avoid) == 1 && open == 0)
-					open++;
-				else if (is_sep(str[i], avoid) == 1)
-					open--;
+				open = mod_helper(str, i, avoid, open);
 				if (is_sep(str[i], charset) == 1 && open == 0)
 					break ;
 				i++;
