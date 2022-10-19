@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:24:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/19 10:33:33 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:05:34 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,20 @@ void	ft_export(t_mini *mini, char *str, t_command *cmd)
 	{
 		tmp = malloc (sizeof(t_env));
 		split_at(str, tmp, '=');
-		if (search(mini->env, tmp->name_var) == 0)
+		if (check_env_var(tmp->name_var) == 0)
+		{
+			printf_fd(2, "minishell: export: `%s': not a valid identifier\n", tmp->name_var);
+			mini->last = 1;
+			cmd->res = 0;
+			return ;
+		}
+		else if (search(mini->env, tmp->name_var) == 0)
 		{
 			change_var(mini->env, tmp->name_var, tmp->arg_var);
 			change_var(mini->secret, tmp->name_var, tmp->arg_var);
 		}
-		ft_export_supp(mini, tmp);
+		else
+			ft_export_supp(mini, tmp);
 		free(tmp->name_var);
 		free(tmp->arg_var);
 		free(tmp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mod_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:52:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/19 12:58:19 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/19 14:48:13 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ int	mod_strcount(char *str, char *charset, char *avoid)
 			i++;
 	}
 	return (count);
-}
-
-int culo()
-{
-	
 }
 
 int	mod_putstr(char *str, char *charset, char *matrix, char *avoid)

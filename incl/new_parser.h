@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/19 10:56:27 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:02:24 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int		mod_helper(char *str, int i, char *avoid, int open);
 int		mod_strcount(char *str, char *charset, char *avoid);
 int		mod_putstr(char *str, char *charset, char *matrix, char *avoid);
 //		expand.c
+int			check_env_var(char *var);
 void		expand(char **s, t_mini *mini);
 int			get_len_var(char **s, int i, int j);
 int			expand_helper(char **s, int i, int j, t_mini *mini);

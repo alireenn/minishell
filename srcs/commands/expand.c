@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/14 11:59:19 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:21:30 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/new_parser.h"
+
+int	check_env_var(char *var)
+{
+	int	i;
+
+	i = 0;
+	if (ft_isalpha(var[i]) == 0 && var[i] != '_')
+		return (0);
+	while (var[i] != '\0')
+	{
+		if (ft_isalnum(var[i]) == 0 && var[i] != '_')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	get_len_var(char **s, int i, int j)
 {
@@ -31,16 +47,19 @@ int	expand_helper2(char **s, t_mini *mini, int j, int len)
 	char	*tmp;
 	t_env	*var_env;
 
-	ret = 0;
+	ret = 1;
 	tmp = ft_strdup_from_to(*s, j + 1, j + len);
-	var_env = ft_search_var(mini->env, tmp);
-	if (var_env != NULL)
+	if (check_env_var(tmp) != 0)
 	{
-		replace(s, j, j + len + 1, var_env->arg_var);
-		ret = (int)ft_strlen(var_env->arg_var);
-	}	
-	else
-		replace(s, j, j + len + 1, "");
+		var_env = ft_search_var(mini->env, tmp);
+		if (var_env != NULL)
+		{
+			replace(s, j, j + len + 1, var_env->arg_var);
+			ret = (int)ft_strlen(var_env->arg_var);
+		}	
+		else
+			replace(s, j, j + len + 1, "");
+	}
 	free(tmp);
 	return (ret);
 }
