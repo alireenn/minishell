@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/19 15:21:30 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:26:23 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_env_var(char *var)
 	int	i;
 
 	i = 0;
-	if (ft_isalpha(var[i]) == 0 && var[i] != '_')
+	if (ft_isalnum(var[i]) == 0 && var[i] != '_')
 		return (0);
 	while (var[i] != '\0')
 	{
@@ -33,6 +33,8 @@ int	get_len_var(char **s, int i, int j)
 	int	len;
 
 	len = 0;
+	if (ft_isdigit(s[i][j + 1 + len]))
+		return (1);
 	while (s[i][j + 1 + len] != '\0' && (s[i][j + 1 + len] != ' '
 		&& s[i][j + 1 + len] != '$' && s[i][j + 1 + len] != '('
 		&& s[i][j + 1 + len] != ')' && s[i][j + 1 + len] != '"'
@@ -82,6 +84,11 @@ int	expand_helper(char **s, int i, int j, t_mini *mini)
 		replace(&s[i], j, j + len + 1, tmp);
 		ret = (int)ft_strlen(tmp);
 		free(tmp);
+	}
+	else if (len == 1 && s[i][j + 1] == '0')
+	{
+		replace(&s[i], j, j + 2, "minishell");
+		ret = 9;
 	}
 	else
 		ret = expand_helper2(&s[i], mini, j, len);

@@ -16,10 +16,4 @@ quando ci sono " o ' bisogna skippare qualsiasi cosa ci sia all'interno; se ci s
 
 quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> questo non ho idea di come sistemarlo
 
-echo $: dovrebbe stampare $: ma va a capo
-
 PIPE ---> con ctrl-d penso esegua la pipe
-
-echo $_ -> non funziona come bash
-
-echo $<numero da 0 a 9> non lo deve stampare, per ora lo stampa
