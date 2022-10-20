@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/new_parser.h"
+#include "../../incl/minishell.h"
 
 void	ft_cd(t_mini *mini, char *arg, t_command *com)
 {

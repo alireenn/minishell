@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/new_parser.h"
+#include "../../incl/minishell.h"
 
 void	ft_pwd(t_command *cmd)
 {

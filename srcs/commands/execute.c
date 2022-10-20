@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 
-#include "../../incl/new_parser.h"
+#include "../../incl/minishell.h"
 
 char	*get_filename(t_mini *mini, char *filename)
 {

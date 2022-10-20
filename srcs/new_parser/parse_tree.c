@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 
-#include "../../incl/new_parser.h"
+#include "../../incl/minishell.h"
 
 char	*ft_strdup_from_to(char *input, int start, int end)
 {

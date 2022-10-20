@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/new_parser.h"
+#include "../../incl/minishell.h"
 
 t_command	**alloc_cmds(int cmd)
 {

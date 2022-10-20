@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 
-#ifndef NEW_PARSER_H
-# define NEW_PARSER_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>

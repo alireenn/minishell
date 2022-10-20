@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "incl/new_parser.h"
+#include "incl/minishell.h"
 
 void	free_mini(t_mini *mini)
 {

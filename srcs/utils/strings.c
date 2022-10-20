@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/new_parser.h"
+#include "../../incl/minishell.h"
 
 void	replace(char **tbr, int from, int to, char *rep)
 {

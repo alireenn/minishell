@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/new_parser.h"
+#include "../../incl/minishell.h"
 
 int	mod_helper(char *str, int i, char *avoid, int open)
 {

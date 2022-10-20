@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
+#include "../../incl/minishell.h"
 
 t_env	*create_elem(char *elem_name, char *elem_arg)
 {

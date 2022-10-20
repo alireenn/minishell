@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
+#include "../../incl/minishell.h"
 
 void	remove_quotes_arg(t_command *cmd)
 {

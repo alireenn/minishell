@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
+#include "../../incl/minishell.h"
 
 int	check_parse(char *parsed)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
+#include "../../incl/minishell.h"
 
 int	strlen_parser(char *input)
 {

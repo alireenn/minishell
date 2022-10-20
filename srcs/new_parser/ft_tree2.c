@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_parser.h"
+#include "../../incl/minishell.h"
 
 void	print_tree_rec(t_tree a)
 {
