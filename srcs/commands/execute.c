@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/18 15:52:11 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/10/26 15:31:42 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,18 +112,53 @@ void	make_cmd(t_command *cmd, t_mini *mini)
 int	execute_pipe(t_tree a, t_command **cmds, t_mini *mini)
 {
 	int		fd[2];
+	pid_t	pid1;
+	pid_t	pid2;
 	int		ret;
+	int		status1;
+	int		status2;
 
 	if (pipe(fd) == -1)
 		return (-1);
-	dup2(fd[1], STDOUT_FILENO);
-	ret = execute(a->left, cmds, mini);
-	close(fd[1]);
-	dup2(mini->save_out, STDOUT_FILENO);
-	dup2(fd[0], STDIN_FILENO);
-	ret = execute(a->right, cmds, mini);
-	close(fd[0]);
-	dup2(mini->save_in, STDIN_FILENO);
+	pid1 = fork();
+	if (pid1 == 0)
+	{
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+		ret = execute(a->left, cmds, mini);
+		close(fd[1]);
+		exit(ret);
+	}
+	else
+	{
+		pid2 = fork();
+		if (pid2 == 0)
+		{
+			dup2(fd[0], STDIN_FILENO);
+			close(fd[1]);
+			ret = execute(a->right, cmds, mini);
+			close(fd[0]);
+			exit(ret);
+		}
+		else
+		{
+			close(fd[0]);
+			close(fd[1]);
+			waitpid(pid1, &status1, 0);
+			waitpid(pid1, &status2, 0);
+			dup2(mini->save_out, STDOUT_FILENO);
+			dup2(mini->save_in, STDIN_FILENO);
+			ret = WEXITSTATUS(status1) && WEXITSTATUS(status2);
+		}
+	}
+	// dup2(fd[1], STDOUT_FILENO);
+	// ret = execute(a->left, cmds, mini);
+	// close(fd[1]);
+	// dup2(mini->save_out, STDOUT_FILENO);
+	// dup2(fd[0], STDIN_FILENO);
+	// ret = execute(a->right, cmds, mini);
+	// close(fd[0]);
+	// dup2(mini->save_in, STDIN_FILENO);
 	return (ret);
 }
 
