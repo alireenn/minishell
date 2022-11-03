@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/20 13:26:23 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/03 10:43:42 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,3 +118,48 @@ void	expand(char **s, t_mini *mini)
 		i++;
 	}
 }
+
+// void	expanded(char **s, t_mini *mini)
+// {
+// 	int		i;
+// 	int		j;
+
+// 	i = 0;
+// 	while (s[i] != NULL)
+// 	{
+// 		j = 0;
+// 		while (j < (int)ft_strlen(s[i]))
+// 		{
+// 			if (s[i][j] == '\'')
+// 				j = search_closing(s[i], j, s[i][j], s[i][j]) - 1;
+// 			if (s[i][j] == '$' && s[i][j + 1] != '\0')
+// 				j += expand_helper(s, i, j, mini) - 1;
+// 			// if (s[i][j] == '*' && s[i][j + 1] != '\0')
+				
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
+
+// void	expand(char **s, t_mini *mini)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		count;
+// 	char	**tmp;
+	
+// 	i = 0;
+// 	while (s[i] != NULL)
+// 	{
+// 		count = 0;
+// 		j = 0;
+// 		tmp = ft_split(s[i], " ", &count);
+// 		while (j < count)
+// 		{
+// 			expanded(tmp, mini);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }

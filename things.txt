@@ -1,22 +1,9 @@
-
-
-bisogna mettere i comandi in pipe con un particolare nodo -> -3
-capire se ci sono piu errori nella pipe quale risultato si ottiene
-
-- pipe ✅
-- gestione quotes
-- gestione delle parentesi -> quando il comando è una parentesi parte una sottoshell ✅
-
---- gestione quotes ---
-quando ci sono " o ' bisogna skippare qualsiasi cosa ci sia all'interno; se ci sono le " allora bisogna fare expand, altrimenti no.
-
 -> non eliminare il file prova.c che è importante!!!!!
-
+-> pulizia file
 ------ bug e mini bug ------
 
 quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> questo non ho idea di come sistemarlo
-
-PIPE ---> con ctrl-d penso esegua la pipe
+gestione segnali
 
 ----- wildcards --------
 se trovo una wildcard nel comando -> non mi interessa
