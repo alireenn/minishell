@@ -9,17 +9,68 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-int wild_cats(char *entry)
-{
-    int i;
+typedef struct wild{
+	char	*name;
+	struct wild	*next;
+}	wildcard;
 
-    i = 0
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*s11;
+	unsigned char	*s22;
+
+	s11 = (unsigned char *)s1;
+	s22 = (unsigned char *)s2;
+	i = 0;
+	if (n == 0)
+		return (0);
+	while ((s11[i] == s22[i] && s11[i] != '\0') && ((i + 1) < n))
+	{
+		i++;
+	}
+	return (s11[i] - s22[i]);
 }
 
-void    ls_fake(char *filename)
+int	ft_strlen(char *str)
 {
-    DIR *dir;
-    struct dirent *entry;
+	int i = 0;
+	while (str[i])
+		i++;
+	return(i);
+}
+
+void	wild_cats(char *entry, char *to_find)
+{
+    int 	i;
+	int		ast;
+	char	*replace;
+
+    i = 0;
+	ast = 0;
+	//caso in cui sia solo un *
+	while (to_find[i])
+	{
+		if (to_find[i] == '*')
+			ast++;
+		i++;
+	}
+	i = 0;
+	while (to_find[i] != '*')
+		i++;
+	if (ast == 1)
+	{
+		if (ft_strncmp(entry, to_find, i + 1) == 0 && ft_strncmp(entry, to_find + (i + 1), ft_strlen(to_find) == 0))
+			printf("%s\n", entry); 
+	}
+}
+
+void	ls_fake(char *filename, char *to_find)
+{
+    DIR 			*dir;
+    struct dirent	*entry;
+	int				i;
+	wildcard		*wild;
 
     dir = opendir(filename);
     if (dir == NULL)
@@ -32,14 +83,18 @@ void    ls_fake(char *filename)
 		entry = readdir(dir);
 		if (entry == NULL)
 			break;
-        if (wild_cats(entry->d_name) == 1)
-		    //printf("%s\n", entry->d_name); 
+		printf("%s\n", entry->d_name);
+		// wild->name = malloc(sizeof(char *) * ft_strlen(entry->d_name));
+		// wild->name = entry->d_name;
+		// wild = wild->next;
+    	wild_cats(entry->d_name, to_find);
+			
+		
 	}
-	//tvb <3
     closedir(dir);
 }
 
-char	*ft_pwd(void)
+char	*ft_pwd_ft(void)
 {
 	char	*ret;
 	char	pwd[PATH_MAX];
@@ -49,7 +104,9 @@ char	*ft_pwd(void)
 	return (ret);
 }
 
-int main (void)
+int main (int ac, char **av)
 {
-	ls_fake(ft_pwd());
+	(void)ac;
+	// printf("%s", av[1]);
+	ls_fake(ft_pwd_ft(), av[1]);
 }

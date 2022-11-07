@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_parser.h                                       :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/19 15:02:24 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/07 14:58:17 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,14 @@ void		ft_exit(t_mini *mini, t_command *com);
 /*
 ** 			COMMANDS
 */
+//		lsfake
+void		ls_fake(char *filename, char *to_find);
 //		mod_split
-int		mod_strlen(char *str, char *charset, char *avoid);
-char	**mod_split(char *str, char *charset, char *avoid);
-int		mod_helper(char *str, int i, char *avoid, int open);
-int		mod_strcount(char *str, char *charset, char *avoid);
-int		mod_putstr(char *str, char *charset, char *matrix, char *avoid);
+int			mod_strlen(char *str, char *charset, char *avoid);
+char		**mod_split(char *str, char *charset, char *avoid);
+int			mod_helper(char *str, int i, char *avoid, int open);
+int			mod_strcount(char *str, char *charset, char *avoid);
+int			mod_putstr(char *str, char *charset, char *matrix, char *avoid);
 //		expand.c
 int			check_env_var(char *var);
 void		expand(char **s, t_mini *mini);
