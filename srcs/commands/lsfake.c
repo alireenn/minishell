@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:57:25 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/08 16:22:56 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:31:21 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	wild_cats(char *entry, char *to_find)
 	j = 0;
 	cpy = ft_strdup(entry);
 	split = ft_split(to_find, "*", &i);
-	// if (split[j])
+	// if (to_find[0] == '*' && (ft_strncmp(split[0], entry, ft_strlen(split[0])) != 0))
+	// 	return (0);
 	while (*entry && split[j])
 	{
 		if (ft_strnstr(entry, split[j], ft_strlen(entry)) == entry)

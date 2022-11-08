@@ -9,4 +9,4 @@ gestione segnali
 ----- wildcards --------
 se trovo una wildcard nel comando -> non mi interessa
 se trovo wildcard nell' argomento -> usare opendir per lo stream directory
- *cia*cio   cia*cio   non inizia per cia? allora pisci subito
+ *cia*cio   cia*cio  non inizia per cia? allora pisci subito
