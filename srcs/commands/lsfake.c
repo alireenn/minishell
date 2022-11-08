@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:57:25 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/08 14:57:10 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:04:25 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,21 @@ void	wild_cats(char *entry, char *to_find)
     int 	i;
 	int		j;
 	char	**split;
+	char	*cpy;
     
 	i = 0;
 	j = 0;
+	cpy = ft_strdup(entry);
 	split = ft_split(to_find, "*", &i);
 	// if (split[j])
-	while (*entry)
+	while (*entry && split[j])
 	{
-		if (ft_strnstr(entry, split[j], ft_strlen(split[j])) == entry)
-		{
-			entry += ft_strlen(split[j]);
+		if (ft_strnstr(entry, split[j], ft_strlen(entry)) == entry)
 			j++;
-		}
-		else
-			entry++;
+		entry++;
 	}
 	if (split[j] == NULL)
-		printf("%s\n", entry);
+		printf("%s\n", cpy);
 	else
 	{
 		printf("%s\n", to_find);
