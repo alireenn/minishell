@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:57:25 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/08 16:04:25 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:22:56 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <sys/wait.h>
 # include "../../lib/libft/libft.h"
 
-void	wild_cats(char *entry, char *to_find)
+int	wild_cats(char *entry, char *to_find)
 {
     int 	i;
 	int		j;
@@ -41,12 +41,8 @@ void	wild_cats(char *entry, char *to_find)
 		entry++;
 	}
 	if (split[j] == NULL)
-		printf("%s\n", cpy);
-	else
-	{
-		printf("%s\n", to_find);
-		return ;
-	}
+		return (1);
+	return (0);
 }
 
 void	ls_fake(char *filename, char *to_find)
@@ -55,6 +51,7 @@ void	ls_fake(char *filename, char *to_find)
     struct dirent	*entry;
 	int				i;
 
+	i = 0;
     dir = opendir(filename);
     if (dir == NULL)
     {
@@ -67,8 +64,14 @@ void	ls_fake(char *filename, char *to_find)
 		if (entry == NULL)
 			break;
 		// printf("%s\n", entry->d_name);
-    	wild_cats(entry->d_name, to_find);
+    	if (wild_cats(entry->d_name, to_find) == 1)
+		{
+			printf("%s\n", entry->d_name);
+			i++;
+		}
 	}
+	if (i == 0)
+		printf("%s\n", to_find);
     closedir(dir);
 }
 
