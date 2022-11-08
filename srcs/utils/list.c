@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:29:32 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/13 17:02:26 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/08 13:06:23 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ void	add_elem(t_env **list, char *elem_name, char *elem_arg)
 	}
 }
 
+int	add_elem_ord_help(t_env *it, char *elem_name)
+{
+	if (ft_strncmp(it->name_var, elem_name,
+			ft_strlen(elem_name)) < 0
+		&& ft_strncmp(it->next->name_var, elem_name,
+			ft_strlen(elem_name)) > 0)
+		return (1);
+	return (0);
+}
+
 void	add_elem_ord(t_env **list, char *elem_name, char *elem_arg)
 {
 	t_env	*it;
@@ -62,10 +72,7 @@ void	add_elem_ord(t_env **list, char *elem_name, char *elem_arg)
 				i = 1;
 				break ;
 			}
-			else if (ft_strncmp(it->name_var, elem_name,
-					ft_strlen(elem_name)) < 0
-				&& ft_strncmp(it->next->name_var, elem_name,
-					ft_strlen(elem_name)) > 0)
+			else if (add_elem_ord_help(it, elem_name) == 1)
 				break ;
 			it = it->next;
 		}

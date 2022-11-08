@@ -1,5 +1,6 @@
 -> non eliminare il file prova.c che è importante!!!!!
 -> pulizia file
+-> gestire quotes con $
 ------ bug e mini bug ------
 
 quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> questo non ho idea di come sistemarlo
@@ -8,3 +9,4 @@ gestione segnali
 ----- wildcards --------
 se trovo una wildcard nel comando -> non mi interessa
 se trovo wildcard nell' argomento -> usare opendir per lo stream directory
+ *cia*cio   cia*cio   non inizia per cia? allora pisci subito

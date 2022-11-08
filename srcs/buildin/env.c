@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:24:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/19 15:05:34 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/08 13:00:43 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ void	ft_env(t_env *env, t_command *cmd)
 	cmd->res = 1;
 }
 
+void	free_tmp(t_env *tmp)
+{
+	free(tmp->name_var);
+	free(tmp->arg_var);
+	free(tmp);
+}
+
 void	ft_export(t_mini *mini, char *str, t_command *cmd)
 {
 	t_env	*tmp;
@@ -65,7 +72,8 @@ void	ft_export(t_mini *mini, char *str, t_command *cmd)
 		split_at(str, tmp, '=');
 		if (check_env_var(tmp->name_var) == 0)
 		{
-			printf_fd(2, "minishell: export: `%s': not a valid identifier\n", tmp->name_var);
+			printf_fd(2, "minishell: export: `%s': not a valid identifier\n",
+				tmp->name_var);
 			mini->last = 1;
 			cmd->res = 0;
 			return ;
@@ -77,9 +85,7 @@ void	ft_export(t_mini *mini, char *str, t_command *cmd)
 		}
 		else
 			ft_export_supp(mini, tmp);
-		free(tmp->name_var);
-		free(tmp->arg_var);
-		free(tmp);
+		free_tmp(tmp);
 	}
 	else
 		ft_print_export(mini->secret, cmd);

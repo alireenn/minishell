@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/07 14:58:17 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/08 13:02:17 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void		ft_cd_supp2(t_mini *mini, t_command *com);
 void		ft_cd(t_mini *mini, char *arg, t_command *com);
 void		ft_cd_supp(char *tmp, t_mini *mini, t_command *com, char *arg);
 //		env.c
+void		free_tmp(t_env *tmp);
 char		**trasformation(t_env *env);
-void		init_env(t_mini *mini, char **env);
 void		ft_env(t_env *env, t_command *cmd);
 void		ft_print_export(t_env *env, t_command *cmd);
 void		ft_export(t_mini *mini, char *str, t_command *cmd);
