@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:24:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/08 13:00:43 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/09 17:36:39 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ void	free_tmp(t_env *tmp)
 void	ft_export(t_mini *mini, char *str, t_command *cmd)
 {
 	t_env	*tmp;
-
+	int		i;
+	i = 0;
+	printf("com -> %s\n", str);
 	if (str != NULL)
 	{
 		tmp = malloc (sizeof(t_env));

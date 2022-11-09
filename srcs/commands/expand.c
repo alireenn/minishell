@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/09 14:27:19 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/09 17:42:47 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_env_var(char *var)
 		return (0);
 	while (var[i] != '\0')
 	{
-		if (ft_isalnum(var[i]) == 0 && var[i] != '_')
+		if (ft_isalnum(var[i]) == 0 && var[i] != '_' && var[i] != ' ')
 			return (0);
 		i++;
 	}
