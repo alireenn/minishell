@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:57:25 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/08 16:31:21 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/09 14:25:25 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,15 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include "../../lib/libft/libft.h"
+# include "../../incl/minishell.h"
 
-int	wild_cats(char *entry, char *to_find)
+int	wild_cats(char *entry, char *to_find, char **split)
 {
     int 	i;
 	int		j;
-	char	**split;
-	char	*cpy;
     
 	i = 0;
 	j = 0;
-	cpy = ft_strdup(entry);
-	split = ft_split(to_find, "*", &i);
-	// if (to_find[0] == '*' && (ft_strncmp(split[0], entry, ft_strlen(split[0])) != 0))
-	// 	return (0);
 	while (*entry && split[j])
 	{
 		if (ft_strnstr(entry, split[j], ft_strlen(entry)) == entry)
@@ -46,14 +41,19 @@ int	wild_cats(char *entry, char *to_find)
 	return (0);
 }
 
-void	ls_fake(char *filename, char *to_find)
+void	what_team(char *filename, char *to_find)
 {
     DIR 			*dir;
     struct dirent	*entry;
 	int				i;
+	char			*ret;
+	char			*tmp;
+	char	**split;
 
 	i = 0;
+	split = ft_split(to_find, "*", &i);
     dir = opendir(filename);
+	ret = NULL;
     if (dir == NULL)
     {
 		printf("minishell: %s: Permission denied\n", filename);
@@ -65,29 +65,45 @@ void	ls_fake(char *filename, char *to_find)
 		if (entry == NULL)
 			break;
 		// printf("%s\n", entry->d_name);
-    	if (wild_cats(entry->d_name, to_find) == 1)
+    	if (wild_cats(entry->d_name, to_find, split) == 1)
 		{
-			printf("%s\n", entry->d_name);
+			tmp = ft_strdup(ret);
+			if (tmp == NULL)
+			{
+				tmp = malloc(1);
+				tmp[0] = '\0';
+			}
+			if (ret != NULL)
+				free(ret);
+			ret = ft_strjoin(tmp, entry->d_name);
+			free(tmp);
+			// printf("%s\n", entry->d_name);
 			i++;
 		}
 	}
 	if (i == 0)
 		printf("%s\n", to_find);
+	printf("%s\n", ret);
+	free(split);
     closedir(dir);
 }
 
-char	*ft_pwd_ft(void)
-{
-	char	*ret;
-	char	pwd[PATH_MAX];
+// char	*ft_pwd_ft(void)
+// {
+// 	char	*ret;
+// 	char	pwd[PATH_MAX];
 
-	getcwd(pwd, PATH_MAX);
-	ret = strdup(pwd);
-	return (ret);
-}
+// 	getcwd(pwd, PATH_MAX);
+// 	ret = strdup(pwd);
+// 	return (ret);
+// }
 
-int main (int ac, char **av)
-{
-	(void)ac;
-	ls_fake(ft_pwd_ft(), av[1]);
-}
+// int main (int ac, char **av)
+// {
+// 	(void)ac;
+// 	char	*dir;
+
+// 	dir = ft_pwd_ft();
+// 	what_team(dir, av[1]);
+// 	free(dir);
+// }

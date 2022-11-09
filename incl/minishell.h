@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/08 13:02:17 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/09 14:24:33 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,9 @@ int			here_doc(char *end);
 char		*here_doc_helper(int *fd, char *tmp);
 char		*get_file_io(char **s, int r, int j, int *type);
 void		get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini);
+//		ls_fake
+void		what_team(char *filename, char *to_find);
+int			wild_cats(char *entry, char *to_find, char **split);
 //		signal.c
 void		quit(int sig);
 void		received(int sig);

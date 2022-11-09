@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/03 10:43:42 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/09 14:27:19 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,53 +113,56 @@ void	expand(char **s, t_mini *mini)
 			if (s[i][j] == '$'
 			&& s[i][j + 1] != '\0' && s[i][j + 1] != ' ')
 				j += expand_helper(s, i, j, mini) - 1;
+				
 			j++;
 		}
 		i++;
 	}
 }
 
-// void	expanded(char **s, t_mini *mini)
-// {
-// 	int		i;
-// 	int		j;
+/*
+void	expanded(char **s, t_mini *mini)
+{
+	int		i;
+	int		j;
 
-// 	i = 0;
-// 	while (s[i] != NULL)
-// 	{
-// 		j = 0;
-// 		while (j < (int)ft_strlen(s[i]))
-// 		{
-// 			if (s[i][j] == '\'')
-// 				j = search_closing(s[i], j, s[i][j], s[i][j]) - 1;
-// 			if (s[i][j] == '$' && s[i][j + 1] != '\0')
-// 				j += expand_helper(s, i, j, mini) - 1;
-// 			// if (s[i][j] == '*' && s[i][j + 1] != '\0')
+	i = 0;
+	while (s[i] != NULL)
+	{
+		j = 0;
+		while (j < (int)ft_strlen(s[i]))
+		{
+			if (s[i][j] == '\'')
+				j = search_closing(s[i], j, s[i][j], s[i][j]) - 1;
+			if (s[i][j] == '$' && s[i][j + 1] != '\0')
+				j += expand_helper(s, i, j, mini) - 1;
+			// if (s[i][j] == '*' && s[i][j + 1] != '\0')
 				
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
+			j++;
+		}
+		i++;
+	}
+}
 
-// void	expand(char **s, t_mini *mini)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		count;
-// 	char	**tmp;
+void	expand(char **s, t_mini *mini)
+{
+	int		i;
+	int		j;
+	int		count;
+	char	**tmp;
 	
-// 	i = 0;
-// 	while (s[i] != NULL)
-// 	{
-// 		count = 0;
-// 		j = 0;
-// 		tmp = ft_split(s[i], " ", &count);
-// 		while (j < count)
-// 		{
-// 			expanded(tmp, mini);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (s[i] != NULL)
+	{
+		count = 0;
+		j = 0;
+		tmp = ft_split(s[i], " ", &count);
+		while (j < count)
+		{
+			expanded(tmp, mini);
+			j++;
+		}
+		i++;
+	}
+}
+*/
