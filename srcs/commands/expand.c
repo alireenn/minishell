@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/09 17:42:47 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:34:06 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,40 @@ int	check_env_var(char *var)
 	int	i;
 
 	i = 0;
-	if (ft_isalnum(var[i]) == 0 && var[i] != '_')
+	if (ft_isalpha(var[i]) == 0 && var[i] != '_')
 		return (0);
 	while (var[i] != '\0')
 	{
-		if (ft_isalnum(var[i]) == 0 && var[i] != '_' && var[i] != ' ')
+		if (ft_isalnum(var[i]) == 0 && var[i] != '_')
 			return (0);
 		i++;
 	}
 	return (1);
+}
+
+void	expand(char **s, t_mini *mini)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	if (s[i] == NULL)
+		return ;
+	while (s[i] != NULL)
+	{
+		j = 0;
+		while (j < (int)ft_strlen(s[i]))
+		{
+			if (s[i][j] == '\'')
+				j = search_closing(s[i], j, s[i][j], s[i][j]) - 1;
+			if (s[i][j] == '$'
+			&& s[i][j + 1] != '\0' && s[i][j + 1] != ' ')
+				j += expand_helper(s, i, j, mini) - 1;
+				
+			j++;
+		}
+		i++;
+	}
 }
 
 int	get_len_var(char **s, int i, int j)
@@ -95,30 +120,6 @@ int	expand_helper(char **s, int i, int j, t_mini *mini)
 	return (ret);
 }
 
-void	expand(char **s, t_mini *mini)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	if (s[i] == NULL)
-		return ;
-	while (s[i] != NULL)
-	{
-		j = 0;
-		while (j < (int)ft_strlen(s[i]))
-		{
-			if (s[i][j] == '\'')
-				j = search_closing(s[i], j, s[i][j], s[i][j]) - 1;
-			if (s[i][j] == '$'
-			&& s[i][j + 1] != '\0' && s[i][j + 1] != ' ')
-				j += expand_helper(s, i, j, mini) - 1;
-				
-			j++;
-		}
-		i++;
-	}
-}
 
 /*
 void	expanded(char **s, t_mini *mini)

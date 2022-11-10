@@ -29,7 +29,7 @@ COMMANDS_FILES=					\
 		commands.c				\
 		execute.c				\
 		commands_utils.c 		\
-		commands_utils2.c 		\
+		quotes.c 				\
 		redirections.c 			\
 		expand.c				\
 		mod_split.c				\
@@ -41,6 +41,7 @@ BUILDIN_FILES	=				\
 		env.c					\
 		env2.c					\
 		some_buildin.c			\
+		echo.c 					\
 
 BUILDIN			= $(addprefix buildin/, $(BUILDIN_FILES))
 
@@ -51,6 +52,7 @@ SIGNAL			= $(addprefix signal/, $(SIGNAL_FILES))
 UTILS_FILES		=				\
 		strings.c				\
 		list.c					\
+		list_utils.c 			\
 		utils.c					\
 		init.c					\
 		free.c					\

@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/24 18:00:35 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/10 14:51:08 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-
-char	*here_doc_helper(int *fd, char *tmp)
-{
-	write(fd[1], tmp, ft_strlen(tmp));
-	write(fd[1], "\n", 1);
-	free(tmp);
-	tmp = readline("> ");
-	return (tmp);
-}
 
 int	here_doc(char *end)
 {
@@ -47,6 +38,15 @@ int	here_doc(char *end)
 	}
 }
 
+char	*here_doc_helper(int *fd, char *tmp)
+{
+	write(fd[1], tmp, ft_strlen(tmp));
+	write(fd[1], "\n", 1);
+	free(tmp);
+	tmp = readline("> ");
+	return (tmp);
+}
+
 char	*get_file_io(char **s, int r, int j, int *type)
 {
 	int		i;
@@ -69,30 +69,6 @@ char	*get_file_io(char **s, int r, int j, int *type)
 	file = ft_strdup_from_to(s[r], j + i, j + i + k - 1);
 	replace(&s[r], j, j + i + k, "\0");
 	return (file);
-}
-
-int	get_red_io(t_command *cmd, char *filename, int type, t_mini *mini)
-{
-	mode_t	mode;
-
-	mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-	if (type == 1)
-		return (open(filename, O_WRONLY | O_CREAT | O_TRUNC, mode));
-	else if (type == 2)
-	{
-		if (access(filename, F_OK) != 0)
-		{
-			printf("minishell: %s: No such file or directory\n", filename);
-			mini->last = 1;
-			cmd->res = 0;
-			return (-1);
-		}
-		return (open(filename, O_RDONLY | O_CREAT, mode));
-	}
-	else if (type == 3)
-		return (open(filename, O_WRONLY | O_CREAT | O_APPEND, mode));
-	else
-		return (here_doc(filename));
 }
 
 void	get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini)
@@ -124,4 +100,28 @@ void	get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini)
 		}
 		i++;
 	}
+}
+
+int	get_red_io(t_command *cmd, char *filename, int type, t_mini *mini)
+{
+	mode_t	mode;
+
+	mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+	if (type == 1)
+		return (open(filename, O_WRONLY | O_CREAT | O_TRUNC, mode));
+	else if (type == 2)
+	{
+		if (access(filename, F_OK) != 0)
+		{
+			printf("minishell: %s: No such file or directory\n", filename);
+			mini->last = 1;
+			cmd->res = 0;
+			return (-1);
+		}
+		return (open(filename, O_RDONLY | O_CREAT, mode));
+	}
+	else if (type == 3)
+		return (open(filename, O_WRONLY | O_CREAT | O_APPEND, mode));
+	else
+		return (here_doc(filename));
 }

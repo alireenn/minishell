@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/26 15:31:42 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/10 12:53:30 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../incl/minishell.h"
-
-char	*get_filename(t_mini *mini, char *filename)
-{
-	char	*ret;
-	char	**path;
-	int		i;
-
-	ret = NULL;
-	if (is_valid_path(filename) == 1)
-		return (ft_strdup(filename));
-	if (ft_strchr(filename, '/') != NULL)
-	{
-		printf_fd(2, "minishell: %s: No such file or directory\n", filename);
-		exit(127);
-	}
-	path = get_path(mini);
-	i = 0;
-	while (path != NULL && path[i] != NULL)
-	{
-		ret = check_path(filename, path, i);
-		if (ret != NULL)
-			return (ret);
-		i++;
-	}
-	free(path);
-	return (NULL);
-}
 
 char	**get_argv(char *com, char *arg)
 {
@@ -58,27 +30,6 @@ char	**get_argv(char *com, char *arg)
 		free(tmp);
 	}
 	return (argv);
-}
-
-void	other_command(t_command *cmd, t_mini *mini)
-{
-	pid_t	pid;
-	int		ret;
-	int		status;
-
-	pid = fork();
-	if (pid == 0)
-		other_command_helper(mini, cmd);
-	ret = wait(&status);
-	if (ret == -1)
-		exit(-1);
-	if (WEXITSTATUS(status) == 0)
-		cmd->res = 1;
-	else
-	{
-		mini->last = WEXITSTATUS(status);
-		cmd->res = 0;
-	}
 }
 
 void	make_cmd(t_command *cmd, t_mini *mini)
@@ -107,6 +58,54 @@ void	make_cmd(t_command *cmd, t_mini *mini)
 		make_cmd_helper(cmd, mini);
 	if (cmd->red[0] != 0 || cmd->red[1] != 0)
 		back_to_standard(cmd, mini);
+}
+
+char	*get_filename(t_mini *mini, char *filename)
+{
+	char	*ret;
+	char	**path;
+	int		i;
+
+	ret = NULL;
+	if (is_valid_path(filename) == 1)
+		return (ft_strdup(filename));
+	if (ft_strchr(filename, '/') != NULL)
+	{
+		printf_fd(2, "minishell: %s: No such file or directory\n", filename);
+		exit(127);
+	}
+	path = get_path(mini);
+	i = 0;
+	while (path != NULL && path[i] != NULL)
+	{
+		ret = check_path(filename, path, i);
+		if (ret != NULL)
+			return (ret);
+		i++;
+	}
+	free(path);
+	return (NULL);
+}
+
+void	other_command(t_command *cmd, t_mini *mini)
+{
+	pid_t	pid;
+	int		ret;
+	int		status;
+
+	pid = fork();
+	if (pid == 0)
+		other_command_helper(mini, cmd);
+	ret = wait(&status);
+	if (ret == -1)
+		exit(-1);
+	if (WEXITSTATUS(status) == 0)
+		cmd->res = 1;
+	else
+	{
+		mini->last = WEXITSTATUS(status);
+		cmd->res = 0;
+	}
 }
 
 int	execute_pipe(t_tree a, t_command **cmds, t_mini *mini)

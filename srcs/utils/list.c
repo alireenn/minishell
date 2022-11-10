@@ -6,11 +6,29 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:29:32 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/08 13:06:23 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:43:48 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
+
+void	delete_elem(t_env **list, t_env *elem)
+{
+	t_env	*it;
+
+	it = (*list);
+	if (*list == elem)
+		(*list) = (*list)->next;
+	else
+	{
+		while (it->next != elem)
+			it = it->next;
+		it->next = elem->next;
+	}
+	free(elem->name_var);
+	free(elem->arg_var);
+	free(elem);
+}
 
 t_env	*create_elem(char *elem_name, char *elem_arg)
 {
@@ -26,6 +44,24 @@ t_env	*create_elem(char *elem_name, char *elem_arg)
 	return (ret);
 }
 
+void	change_var(t_env *env, char *name, char *arg)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp != NULL)
+	{
+		if (ft_strlen(tmp->name_var) == ft_strlen(name)
+			&& ft_strncmp(tmp->name_var, name, ft_strlen(tmp->name_var)) == 0)
+		{
+			free(tmp->arg_var);
+			tmp->arg_var = ft_strdup(arg);
+			break ;
+		}
+		tmp = tmp->next;
+	}
+}
+
 void	add_elem(t_env **list, char *elem_name, char *elem_arg)
 {
 	t_env	*it;
@@ -39,16 +75,6 @@ void	add_elem(t_env **list, char *elem_name, char *elem_arg)
 			it = it->next;
 		it->next = create_elem(elem_name, elem_arg);
 	}
-}
-
-int	add_elem_ord_help(t_env *it, char *elem_name)
-{
-	if (ft_strncmp(it->name_var, elem_name,
-			ft_strlen(elem_name)) < 0
-		&& ft_strncmp(it->next->name_var, elem_name,
-			ft_strlen(elem_name)) > 0)
-		return (1);
-	return (0);
 }
 
 void	add_elem_ord(t_env **list, char *elem_name, char *elem_arg)
@@ -87,41 +113,5 @@ void	add_elem_ord(t_env **list, char *elem_name, char *elem_arg)
 			free(it->arg_var);
 			it->arg_var = ft_strdup(elem_arg);
 		}
-	}
-}
-
-void	delete_elem(t_env **list, t_env *elem)
-{
-	t_env	*it;
-
-	it = (*list);
-	if (*list == elem)
-		(*list) = (*list)->next;
-	else
-	{
-		while (it->next != elem)
-			it = it->next;
-		it->next = elem->next;
-	}
-	free(elem->name_var);
-	free(elem->arg_var);
-	free(elem);
-}
-
-void	change_var(t_env *env, char *name, char *arg)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp != NULL)
-	{
-		if (ft_strlen(tmp->name_var) == ft_strlen(name)
-			&& ft_strncmp(tmp->name_var, name, ft_strlen(tmp->name_var)) == 0)
-		{
-			free(tmp->arg_var);
-			tmp->arg_var = ft_strdup(arg);
-			break ;
-		}
-		tmp = tmp->next;
 	}
 }

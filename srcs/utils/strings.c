@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   strings.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:34:35 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/18 14:57:41 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/10 14:34:50 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-
-void	replace(char **tbr, int from, int to, char *rep)
-{
-	char	*before;
-	char	*after;
-	char	*input;
-	char	*ret;
-
-	input = ft_strdup(*tbr);
-	before = ft_strdup_from_to(input, 0, from - 1);
-	after = ft_strdup(&input[to]);
-	free(input);
-	input = ft_strjoin(before, rep);
-	ret = ft_strjoin(input, after);
-	free(input);
-	free(before);
-	free(after);
-	free(*tbr);
-	*tbr = ret;
-}
 
 int	equal_strings(char *com, char *exec)
 {
@@ -75,37 +55,22 @@ char	*get_strip_str(char *input, int from, int to)
 	return (ft_strdup_from_to(input, from + i, to - j - 1));
 }
 
-char	*remove_quotes_str(char *str)
+void	replace(char **tbr, int from, int to, char *rep)
 {
-	int		i;
-	int		j;
-	char	*temp;
+	char	*before;
+	char	*after;
+	char	*input;
+	char	*ret;
 
-	i = 0;
-	j = 0;
-	while ((str[i] == '\"' || str[i] == '\'') && str[i] != '\0')
-		i++;
-	if (i > 0)
-	{
-		temp = (char *)malloc(sizeof(char) * (int)ft_strlen(str) - i + 1);
-		if (!temp)
-			return (str);
-		i = 0;
-		while (str[i])
-		{
-			if (str[i] == '\"' || str[i] == '\'')
-				i++;
-			else
-			{
-				temp[j] = str[i];
-				j++;
-				i++;
-			}
-		}
-		temp[j] = '\0';
-		free(str);
-		return (temp);
-	}
-	else
-		return (str);
+	input = ft_strdup(*tbr);
+	before = ft_strdup_from_to(input, 0, from - 1);
+	after = ft_strdup(&input[to]);
+	free(input);
+	input = ft_strjoin(before, rep);
+	ret = ft_strjoin(input, after);
+	free(input);
+	free(before);
+	free(after);
+	free(*tbr);
+	*tbr = ret;
 }

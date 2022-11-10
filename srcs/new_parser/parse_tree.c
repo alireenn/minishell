@@ -6,27 +6,64 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:50:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/08 12:58:04 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:46:12 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-char	*ft_strdup_from_to(char *input, int start, int end)
+char	*parse_tree(char *in)
 {
 	int		i;
 	int		j;
 	char	*ret;
 
-	i = start;
-	ret = malloc(sizeof(char *) * (end - start + 1));
+	i = 0;
 	j = 0;
-	while (j < end - start + 1)
+	while (in[i] != '\0')
 	{
-		ret[j] = input[i + j];
-		j++;
+		if (is_sep(in[i], "\"\'"))
+			i = search_closing(in, i, in[i], in[i]);
+		if (is_sep(in[i], "&|") && in[i + 1] != '\0' && in[i + 1] == in[i])
+		{
+			i++;
+			j++;
+		}
+		else if ((in[i] == '|' && in[i + 1] != '\0' && in[i + 1] != '&')
+			|| (is_sep(in[i], "()<>")))
+			j++;
+		i++;
 	}
-	ret[j] = '\0';
+	ret = (char *) malloc (sizeof(char) * (j + 1));
+	parse_tree_helper(in, ret);
+	return (ret);
+}
+
+t_tree	make_tree(char *input, int *cmd)
+{
+	int		i;
+	t_tree	ret;
+	t_tree	sx;
+
+	i = 0;
+	ret = get_next_tree(input, &i, cmd);
+	while (input[i] != '\0')
+	{
+		sx = ret;
+		while (input[i] == '>' || input[i] == '<')
+			i++;
+		if (input[i] == '\0')
+			return (ret);
+		if (input[i] == '&')
+			ret = nodoalb_alloc(-1);
+		if (input[i] == '|')
+			ret = nodoalb_alloc(-2);
+		if (input[i] == 'p')
+			ret = nodoalb_alloc(-3);
+		ret->left = sx;
+		i++;
+		ret->right = get_next_tree(input, &i, cmd);
+	}
 	return (ret);
 }
 
@@ -69,57 +106,20 @@ t_tree	get_next_tree(char *input, int *ind, int *cmd)
 	return (ret);
 }
 
-t_tree	make_tree(char *input, int *cmd)
-{
-	int		i;
-	t_tree	ret;
-	t_tree	sx;
-
-	i = 0;
-	ret = get_next_tree(input, &i, cmd);
-	while (input[i] != '\0')
-	{
-		sx = ret;
-		while (input[i] == '>' || input[i] == '<')
-			i++;
-		if (input[i] == '\0')
-			return (ret);
-		if (input[i] == '&')
-			ret = nodoalb_alloc(-1);
-		if (input[i] == '|')
-			ret = nodoalb_alloc(-2);
-		if (input[i] == 'p')
-			ret = nodoalb_alloc(-3);
-		ret->left = sx;
-		i++;
-		ret->right = get_next_tree(input, &i, cmd);
-	}
-	return (ret);
-}
-
-char	*parse_tree(char *in)
+char	*ft_strdup_from_to(char *input, int start, int end)
 {
 	int		i;
 	int		j;
 	char	*ret;
 
-	i = 0;
+	i = start;
+	ret = malloc(sizeof(char *) * (end - start + 1));
 	j = 0;
-	while (in[i] != '\0')
+	while (j < end - start + 1)
 	{
-		if (is_sep(in[i], "\"\'"))
-			i = search_closing(in, i, in[i], in[i]);
-		if (is_sep(in[i], "&|") && in[i + 1] != '\0' && in[i + 1] == in[i])
-		{
-			i++;
-			j++;
-		}
-		else if ((in[i] == '|' && in[i + 1] != '\0' && in[i + 1] != '&')
-			|| (is_sep(in[i], "()<>")))
-			j++;
-		i++;
+		ret[j] = input[i + j];
+		j++;
 	}
-	ret = (char *) malloc (sizeof(char) * (j + 1));
-	parse_tree_helper(in, ret);
+	ret[j] = '\0';
 	return (ret);
 }

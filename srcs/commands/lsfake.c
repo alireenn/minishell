@@ -1,33 +1,22 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*		                                                                      */
 /*                                                        :::      ::::::::   */
 /*   lsfake.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:57:25 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/09 14:25:25 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:52:44 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <dirent.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <limits.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include "../../lib/libft/libft.h"
-# include "../../incl/minishell.h"
+#include "../../incl/minishell.h"
 
 int	wild_cats(char *entry, char *to_find, char **split)
 {
-    int 	i;
-	int		j;
-    
+	int	i;
+	int	j;
+
 	i = 0;
 	j = 0;
 	while (*entry && split[j])
@@ -43,29 +32,28 @@ int	wild_cats(char *entry, char *to_find, char **split)
 
 void	what_team(char *filename, char *to_find)
 {
-    DIR 			*dir;
-    struct dirent	*entry;
+	DIR				*dir;
+	struct dirent	*entry;
 	int				i;
 	char			*ret;
 	char			*tmp;
-	char	**split;
+	char			**split;
 
 	i = 0;
 	split = ft_split(to_find, "*", &i);
-    dir = opendir(filename);
+	dir = opendir(filename);
 	ret = NULL;
-    if (dir == NULL)
-    {
+	if (dir == NULL)
+	{
 		printf("minishell: %s: Permission denied\n", filename);
 		exit(126);
-    }
+	}
 	while (1)
 	{
 		entry = readdir(dir);
 		if (entry == NULL)
-			break;
-		// printf("%s\n", entry->d_name);
-    	if (wild_cats(entry->d_name, to_find, split) == 1)
+			break ;
+		if (wild_cats(entry->d_name, to_find, split) == 1)
 		{
 			tmp = ft_strdup(ret);
 			if (tmp == NULL)
@@ -85,7 +73,7 @@ void	what_team(char *filename, char *to_find)
 		printf("%s\n", to_find);
 	printf("%s\n", ret);
 	free(split);
-    closedir(dir);
+	closedir(dir);
 }
 
 // char	*ft_pwd_ft(void)
