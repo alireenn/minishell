@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/10 15:34:06 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:55:12 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	expand(char **s, t_mini *mini)
 			if (s[i][j] == '$'
 			&& s[i][j + 1] != '\0' && s[i][j + 1] != ' ')
 				j += expand_helper(s, i, j, mini) - 1;
-				
-			j++;
+			else
+				j++;
 		}
 		i++;
 	}
@@ -119,7 +119,6 @@ int	expand_helper(char **s, int i, int j, t_mini *mini)
 		ret = expand_helper2(&s[i], mini, j, len);
 	return (ret);
 }
-
 
 /*
 void	expanded(char **s, t_mini *mini)

@@ -32,6 +32,7 @@ COMMANDS_FILES=					\
 		quotes.c 				\
 		redirections.c 			\
 		expand.c				\
+		pipe.c 					\
 		mod_split.c				\
 
 COMMANDS		= $(addprefix commands/, $(COMMANDS_FILES))

@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/14 15:40:43 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:45:46 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,27 @@ t_command	**alloc_cmds(int cmd)
 	return (cmds);
 }
 
+void	other_command(t_command *cmd, t_mini *mini)
+{
+	pid_t	pid;
+	int		ret;
+	int		status;
+
+	pid = fork();
+	if (pid == 0)
+		other_command_helper(mini, cmd);
+	ret = wait(&status);
+	if (ret == -1)
+		exit(-1);
+	if (WEXITSTATUS(status) == 0)
+		cmd->res = 1;
+	else
+	{
+		mini->last = WEXITSTATUS(status);
+		cmd->res = 0;
+	}
+}
+
 void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 {
 	if (input[i][j] == '\"' || input[i][j] == '\'')
@@ -37,7 +58,7 @@ void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 		cmds[i]->com = NULL;
 	else
 		cmds[i]->com = get_strip_str(input[i], 0, j);
-	remove_quotes_com(cmds[i]);
+	cmds[i]->com = remove_quotes_str(cmds[i]->com);
 	while (input[i][j] == ' ')
 		j++;
 	if (j == (int)ft_strlen(input[i]))

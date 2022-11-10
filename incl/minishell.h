@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/10 15:46:53 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:30:14 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ typedef struct s_mini {
 	t_env		*secret;
 	t_tree		tree;
 	t_command	**commands;
+	pid_t		pipe_pid1;
+	char		*pwd;
 	int			cmd;
 	int			exit;
-	char		*pwd;
 	int			last;
 	int			res;
 	int			save_out;
@@ -105,15 +106,14 @@ char		*check_path(char *filename, char **path, int i);
 void		other_command_helper(t_mini *mini, t_command *cmd);
 //		commands.c
 t_command	**alloc_cmds(int cmd);
+void		other_command(t_command *cmd, t_mini *mini);
 void		get_cmds(t_command **cmds, int cmd, char **input);
 void		get_cmd_simple(t_command **cmds, char **input, int i, int j);
 //		execute.c
 char		**get_argv(char *com, char *arg);
 void		make_cmd(t_command *cmd, t_mini *mini);
 char		*get_filename(t_mini *mini, char *filename);
-void		other_command(t_command *cmd, t_mini *mini);
 int			execute(t_tree a, t_command **cmds, t_mini *mini);
-int			execute_pipe(t_tree a, t_command **cmds, t_mini *mini);
 //		expand.c
 int			check_env_var(char *var);
 void		expand(char **s, t_mini *mini);
@@ -130,6 +130,9 @@ char		**mod_split(char *str, char *charset, char *avoid);
 int			mod_helper(char *str, int i, char *avoid, int open);
 int			mod_strcount(char *str, char *charset, char *avoid);
 int			mod_putstr(char *str, char *charset, char *matrix, char *avoid);
+//		pipe.c
+int			execute_pipe(t_tree a, t_command **cmds, t_mini *mini);
+int			execute_pipe2(t_tree a, t_command **cmds, t_mini *mini, int fd[2]);
 //		quotes.c
 char		*remove_quotes_str(char *str);
 void		remove_quotes_arg(t_command *cmd);

@@ -9,4 +9,4 @@ gestione segnali
 ----- wildcards --------
 se trovo una wildcard nel comando -> non mi interessa
 se trovo wildcard nell' argomento -> usare opendir per lo stream directory
-léxport e unset devono accettare più argomenti
+l'export e unset devono accettare più argomenti

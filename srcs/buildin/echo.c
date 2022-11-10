@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:44:33 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/10 15:46:09 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:44:49 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_echo(char *str, t_command *com)
 		printf_fd(1, "\n");
 		return ;
 	}
-	remove_quotes_arg(com);
+	com->arg = remove_quotes_str(com->arg);
 	flag = check_flag_echo(com);
 	if (str == NULL)
 		printf_fd(1, "\n");

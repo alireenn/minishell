@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/10 12:53:30 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:29:04 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,79 +87,16 @@ char	*get_filename(t_mini *mini, char *filename)
 	return (NULL);
 }
 
-void	other_command(t_command *cmd, t_mini *mini)
-{
-	pid_t	pid;
-	int		ret;
-	int		status;
-
-	pid = fork();
-	if (pid == 0)
-		other_command_helper(mini, cmd);
-	ret = wait(&status);
-	if (ret == -1)
-		exit(-1);
-	if (WEXITSTATUS(status) == 0)
-		cmd->res = 1;
-	else
-	{
-		mini->last = WEXITSTATUS(status);
-		cmd->res = 0;
-	}
-}
-
-int	execute_pipe(t_tree a, t_command **cmds, t_mini *mini)
-{
-	int		fd[2];
-	pid_t	pid1;
-	pid_t	pid2;
-	int		ret;
-	int		status1;
-	int		status2;
-
-	if (pipe(fd) == -1)
-		return (-1);
-	pid1 = fork();
-	if (pid1 == 0)
-	{
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[0]);
-		ret = execute(a->left, cmds, mini);
-		close(fd[1]);
-		exit(ret);
-	}
-	else
-	{
-		pid2 = fork();
-		if (pid2 == 0)
-		{
-			dup2(fd[0], STDIN_FILENO);
-			close(fd[1]);
-			ret = execute(a->right, cmds, mini);
-			close(fd[0]);
-			exit(ret);
-		}
-		else
-		{
-			close(fd[0]);
-			close(fd[1]);
-			waitpid(pid1, &status1, 0);
-			waitpid(pid1, &status2, 0);
-			dup2(mini->save_out, STDOUT_FILENO);
-			dup2(mini->save_in, STDIN_FILENO);
-			ret = WEXITSTATUS(status1) && WEXITSTATUS(status2);
-		}
-	}
-	// dup2(fd[1], STDOUT_FILENO);
-	// ret = execute(a->left, cmds, mini);
-	// close(fd[1]);
-	// dup2(mini->save_out, STDOUT_FILENO);
-	// dup2(fd[0], STDIN_FILENO);
-	// ret = execute(a->right, cmds, mini);
-	// close(fd[0]);
-	// dup2(mini->save_in, STDIN_FILENO);
-	return (ret);
-}
+/*
+	dup2(fd[1], STDOUT_FILENO);
+	ret = execute(a->left, cmds, mini);
+	close(fd[1]);
+	dup2(mini->save_out, STDOUT_FILENO);
+	dup2(fd[0], STDIN_FILENO);
+	ret = execute(a->right, cmds, mini);
+	close(fd[0]);
+	dup2(mini->save_in, STDIN_FILENO);
+*/
 
 int	execute(t_tree a, t_command **cmds, t_mini *mini)
 {

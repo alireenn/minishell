@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:54:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/10 12:33:13 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:48:51 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	quit(int sig)
 void	received(int sig)
 {
 	(void)sig;
-	// ft_putchar_fd((char)127, 1);
-	// ft_putchar_fd((char)127, 1);
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
