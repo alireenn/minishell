@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/10 16:30:14 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:46:57 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,6 @@ int			execute_pipe(t_tree a, t_command **cmds, t_mini *mini);
 int			execute_pipe2(t_tree a, t_command **cmds, t_mini *mini, int fd[2]);
 //		quotes.c
 char		*remove_quotes_str(char *str);
-void		remove_quotes_arg(t_command *cmd);
-void		remove_quotes_com(t_command *cmd);
 //		redirection.c
 int			here_doc(char *end);
 char		*here_doc_helper(int *fd, char *tmp);
