@@ -41,6 +41,7 @@ BUILDIN_FILES	=				\
 		cd.c					\
 		env.c					\
 		env2.c					\
+		export.c 				\
 		some_buildin.c			\
 		echo.c 					\
 
@@ -54,7 +55,7 @@ UTILS_FILES		=				\
 		strings.c				\
 		list.c					\
 		list_utils.c 			\
-		utils.c					\
+		env_utils.c				\
 		init.c					\
 		free.c					\
 		debugging.c				\

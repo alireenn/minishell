@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:33:27 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/11 16:40:18 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:04:15 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void	make_cmd_helper(t_command *cmd, t_mini *mini)
 		}
 	}
 	else if (equal_strings(cmd->com, "export") == 0
-		|| equal_strings(cmd->com, "unset") == 0 )
-			export_unset(mini, cmd);
+		|| equal_strings(cmd->com, "unset") == 0)
+		export_unset(mini, cmd);
 	else if (equal_strings(cmd->com, "exit") == 0)
 		ft_exit(mini, cmd);
 	else if (equal_strings(cmd->com, "cd") == 0)

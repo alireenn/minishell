@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 17:48:21 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/10 16:44:38 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:41:39 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ char	*remove_quotes_str(char *str)
 
 	i = 0;
 	j = 0;
-	while ((str[i] == '\"' || str[i] == '\'') || str[i] != '\0')
+	if (!str)
+		return (NULL);
+	while ((str[i] == '\"' || str[i] == '\'') && str[i] != '\0')
 		i++;
 	if (i > 0)
 	{

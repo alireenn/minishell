@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/10 14:51:08 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:46:02 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,15 @@ char	*get_file_io(char **s, int r, int j, int *type)
 	return (file);
 }
 
+void	get_redirs_type(char *file, t_mini *mini, t_command *cmd, int type)
+{
+	if (file == NULL)
+		printf("error");
+	cmd->red[type % 2] = 1;
+	cmd->fd_red[type % 2] = get_red_io(cmd,
+			file, type, mini);
+}
+
 void	get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini)
 {
 	int		i;
@@ -89,11 +98,7 @@ void	get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini)
 			if (is_sep(s[i][j], "><"))
 			{
 				file = get_file_io(s, i, j, &type);
-				if (file == NULL)
-					printf("error");
-				cmds[i]->red[type % 2] = 1;
-				cmds[i]->fd_red[type % 2] = get_red_io(cmds[i],
-						file, type, mini);
+				get_redirs_type(file, mini, cmds[i], type);
 			}
 			else
 				j++;

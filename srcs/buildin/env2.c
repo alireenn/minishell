@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 16:27:05 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/11 16:38:55 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:03:07 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,59 +70,23 @@ void	ft_unset(t_mini *mini, char *name, t_command *cmd)
 	cmd->res = 1;
 }
 
-void	export_error(t_env *tmp, t_mini *mini, t_command *cmd, int flag)
+void	unset_help(t_command *cmd, t_mini *mini)
 {
-	if (flag == 0)
-	{
-		printf_fd(2, "minishell: export: `%s': not a valid identifier\n",
-			tmp->name_var);
-		mini->last = 1;
-		cmd->res = 0;
-	}
-	if (flag == 1 && tmp->arg_var != NULL)
-	{
-		change_var(mini->env, tmp->name_var, tmp->arg_var);
-		change_var(mini->secret, tmp->name_var, tmp->arg_var);
-	}
-}
-
-void	export_unset(t_mini *mini, t_command *cmd)
-{
-	char	**split;
 	int		i;
+	char	**split;
 
 	i = 0;
-	if (equal_strings(cmd->com, "export") == 0)
+	if (cmd->arg != NULL)
 	{
-		if (cmd->arg != NULL)
-		{
-			split = ft_split(cmd->arg, " ", &i);
-			i = 0;
-			while (split[i])
-			{
-				ft_export(mini, split[i], cmd);
-				i++;
-			}
-			free(split);
-		}
-		else
-			ft_export(mini, cmd->arg, cmd);
-	}
-	else if (equal_strings(cmd->com, "unset") == 0) //non da errore se provo ad unsettare cose che non ci sono
-	{
+		split = ft_split(cmd->arg, " ", &i);
 		i = 0;
-		if (cmd->arg != NULL)
+		while (split[i])
 		{
-			split = ft_split(cmd->arg, " ", &i);
-			i = 0;
-			while (split[i])
-			{
-				ft_unset(mini, split[i], cmd);
-				i++;
-			}
-			free(split);
+			ft_unset(mini, split[i], cmd);
+			i++;
 		}
-		else
-			ft_unset(mini, cmd->arg, cmd);
+		free(split);
 	}
+	else
+		ft_unset(mini, cmd->arg, cmd);
 }

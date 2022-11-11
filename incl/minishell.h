@@ -6,10 +6,9 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/11 16:34:26 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:43:16 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -80,13 +79,16 @@ void		ft_cd_supp(char *tmp, t_mini *mini, t_command *com, char *arg);
 void		free_tmp(t_env *tmp);
 char		**trasformation(t_env *env);
 void		ft_env(t_env *env, t_command *cmd);
-void		ft_print_export(t_env *env, t_command *cmd);
-void		ft_export(t_mini *mini, char *str, t_command *cmd);
 //		env2.c
 int			search(t_env *env, char *name);
 void		ft_export_supp(t_mini *mini, t_env *tmp);
-void		export_unset(t_mini *mini, t_command *cmd);
 void		ft_unset(t_mini *mini, char *name, t_command *cmd);
+void		unset_help(t_command *cmd, t_mini *mini);
+//		export.c
+void		export_unset(t_mini *mini, t_command *cmd);
+void		ft_print_export(t_env *env, t_command *cmd);
+void		ft_export(t_mini *mini, char *str, t_command *cmd);
+void		ft_export_replace(t_mini *mini, t_env *tmp, t_command *cmd);
 void		export_error(t_env *tmp, t_mini *mini, t_command *cmd, int flag);
 //		some_buildin.c
 int			check_par(char *str);
@@ -195,6 +197,7 @@ void		init_secret_env(t_mini *mini);
 void		init_env(t_mini *mini, char **env);
 //		list_utils.c
 int			add_elem_ord_help(t_env *it, char *elem_name);
+int			add_elem_ord_norme(t_env **it, char *elem_name);
 //		list.c
 void		delete_elem(t_env **list, t_env *elem);
 t_env		*create_elem(char *elem_name, char *elem_arg);
@@ -206,7 +209,7 @@ int			equal_strings(char *com, char *exec);
 char		*ft_join_char(char *s1, char *s2, char c);
 char		*get_strip_str(char *input, int from, int to);
 void		replace(char **tbr, int from, int to, char *rep);
-//		utils.c
+//		env_utils.c
 void		change_fd(t_command *cmd);
 t_env		*copy_env(t_mini *mini, int *n);
 t_env		*ft_search_var(t_env *env, char *name);

@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:29:32 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/10 14:43:48 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/11 17:58:13 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,7 @@ void	add_elem_ord(t_env **list, char *elem_name, char *elem_arg)
 		(*list) = create_elem(elem_name, elem_arg);
 	else
 	{
-		while (it->next != NULL && i == 0)
-		{
-			if (ft_strlen(it->name_var) == ft_strlen(elem_name)
-				&& ft_strncmp(it->name_var, elem_name,
-					ft_strlen(elem_name)) == 0)
-			{
-				i = 1;
-				break ;
-			}
-			else if (add_elem_ord_help(it, elem_name) == 1)
-				break ;
-			it = it->next;
-		}
+		i = add_elem_ord_norme(&it, elem_name);
 		if (i == 0)
 		{
 			save = it->next;
