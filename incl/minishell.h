@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/10 16:46:57 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/11 16:34:26 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void		ft_export(t_mini *mini, char *str, t_command *cmd);
 //		env2.c
 int			search(t_env *env, char *name);
 void		ft_export_supp(t_mini *mini, t_env *tmp);
+void		export_unset(t_mini *mini, t_command *cmd);
 void		ft_unset(t_mini *mini, char *name, t_command *cmd);
 void		export_error(t_env *tmp, t_mini *mini, t_command *cmd, int flag);
 //		some_buildin.c

@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:24:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/10 15:36:55 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:42:04 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,16 @@ void	ft_export(t_mini *mini, char *str, t_command *cmd)
 {
 	t_env	*tmp;
 	int		i;
+	int flag;
 
+	flag = 0;
 	i = 0;
 	if (str != NULL)
 	{
+		if (ft_strchr(str, ' ') != 0)
+			flag = 1;
 		tmp = malloc (sizeof(t_env));
 		split_at(str, tmp, '=');
-		printf("ecco %s\n", tmp->name_var);
 		if (check_env_var(tmp->name_var) == 0)
 		{
 			export_error(tmp, mini, cmd, 0);
