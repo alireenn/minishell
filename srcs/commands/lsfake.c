@@ -11,7 +11,16 @@
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <dirent.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <limits.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 int	wild_cats(char *entry, char *to_find, char **split)
 {
 	int	i;
@@ -35,14 +44,14 @@ void	what_team(char *filename, char *to_find)
 	DIR				*dir;
 	struct dirent	*entry;
 	int				i;
-	char			*ret;
-	char			*tmp;
+	// char			*ret;
+	// char			*tmp;
 	char			**split;
 
 	i = 0;
 	split = ft_split(to_find, "*", &i);
 	dir = opendir(filename);
-	ret = NULL;
+	// ret = NULL;
 	if (dir == NULL)
 	{
 		printf("minishell: %s: Permission denied\n", filename);
@@ -55,43 +64,43 @@ void	what_team(char *filename, char *to_find)
 			break ;
 		if (wild_cats(entry->d_name, to_find, split) == 1)
 		{
-			tmp = ft_strdup(ret);
-			if (tmp == NULL)
-			{
-				tmp = malloc(1);
-				tmp[0] = '\0';
-			}
-			if (ret != NULL)
-				free(ret);
-			ret = ft_strjoin(tmp, entry->d_name);
-			free(tmp);
-			// printf("%s\n", entry->d_name);
+			// tmp = ft_strdup(ret);
+			// if (tmp == NULL)
+			// {
+			// 	tmp = malloc(1);
+			// 	tmp[0] = '\0';
+			// }
+			// if (ret != NULL)
+			// 	free(ret);
+			// ret = ft_strjoin(tmp, entry->d_name);
+			// free(tmp);
+			printf("%s\n", entry->d_name);
 			i++;
 		}
 	}
 	if (i == 0)
 		printf("%s\n", to_find);
-	printf("%s\n", ret);
-	free(split);
+	// printf("%s\n", ret);
+	// free(split);
 	closedir(dir);
 }
 
-// char	*ft_pwd_ft(void)
-// {
-// 	char	*ret;
-// 	char	pwd[PATH_MAX];
+char	*ft_pwd_ft(void)
+{
+	char	*ret;
+	char	pwd[PATH_MAX];
 
-// 	getcwd(pwd, PATH_MAX);
-// 	ret = strdup(pwd);
-// 	return (ret);
-// }
+	getcwd(pwd, PATH_MAX);
+	ret = strdup(pwd);
+	return (ret);
+}
 
-// int main (int ac, char **av)
-// {
-// 	(void)ac;
-// 	char	*dir;
+int main (int ac, char **av)
+{
+	(void)ac;
+	char	*dir;
 
-// 	dir = ft_pwd_ft();
-// 	what_team(dir, av[1]);
-// 	free(dir);
-// }
+	dir = ft_pwd_ft();
+	what_team(dir, av[1]);
+	free(dir);
+}

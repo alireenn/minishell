@@ -40,15 +40,9 @@ void	ft_export_replace(t_mini *mini, t_env *tmp, t_command *cmd)
 void	ft_export(t_mini *mini, char *str, t_command *cmd)
 {
 	t_env	*tmp;
-	int		i;
-	int		flag;
 
-	flag = 0;
-	i = 0;
 	if (str != NULL)
 	{
-		if (ft_strchr(str, ' ') != 0)
-			flag = 1;
 		tmp = malloc (sizeof(t_env));
 		split_at(str, tmp, '=');
 		if (check_env_var(tmp->name_var) == 0)
@@ -93,6 +87,8 @@ void	export_unset(t_mini *mini, t_command *cmd)
 			i = 0;
 			while (split[i])
 			{
+				split[i] = remove_quotes_str(split[i]);
+				printf("SONO IO %s\n", split[i]);
 				ft_export(mini, split[i], cmd);
 				i++;
 			}

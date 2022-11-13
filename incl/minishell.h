@@ -113,6 +113,7 @@ void		other_command(t_command *cmd, t_mini *mini);
 void		get_cmds(t_command **cmds, int cmd, char **input);
 void		get_cmd_simple(t_command **cmds, char **input, int i, int j);
 //		execute.c
+int			here_doc(char *end);
 char		**get_argv(char *com, char *arg);
 void		make_cmd(t_command *cmd, t_mini *mini);
 char		*get_filename(t_mini *mini, char *filename);
@@ -139,11 +140,11 @@ int			execute_pipe2(t_tree a, t_command **cmds, t_mini *mini, int fd[2]);
 //		quotes.c
 char		*remove_quotes_str(char *str);
 //		redirection.c
-int			here_doc(char *end);
 char		*here_doc_helper(int *fd, char *tmp);
 char		*get_file_io(char **s, int r, int j, int *type);
 void		get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini);
 int			get_red_io(t_command *cmd, char *filename, int type, t_mini *mini);
+void		get_redirs_type(char *file, t_mini *mini, t_command *cmd, int type);
 //		signal.c
 void		quit(int sig);
 void		received(int sig);

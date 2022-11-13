@@ -114,3 +114,29 @@ int	execute(t_tree a, t_command **cmds, t_mini *mini)
 		return (cmds[a->info]->res);
 	}
 }
+
+int	here_doc(char *end)
+{
+	pid_t	reader;
+	int		fd[2];
+	char	*tmp;
+
+	if (pipe(fd) == -1)
+		return (-1);
+	reader = fork();
+	if (reader == 0)
+	{
+		close(fd[0]);
+		tmp = readline("> ");
+		while (ft_strlen(tmp) != ft_strlen(end)
+			|| ft_strncmp(tmp, end, ft_strlen(end)) != 0)
+			tmp = here_doc_helper(fd, tmp);
+		exit(0);
+	}
+	else
+	{
+		close(fd[1]);
+		wait(NULL);
+		return (fd[0]);
+	}
+}
