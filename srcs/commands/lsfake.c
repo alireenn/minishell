@@ -52,6 +52,7 @@ void	what_team(char *filename, char *to_find)
 	split = ft_split(to_find, "*", &i);
 	dir = opendir(filename);
 	// ret = NULL;
+	i = 0;
 	if (dir == NULL)
 	{
 		printf("minishell: %s: Permission denied\n", filename);
@@ -81,7 +82,7 @@ void	what_team(char *filename, char *to_find)
 	if (i == 0)
 		printf("%s\n", to_find);
 	// printf("%s\n", ret);
-	// free(split);
+	free(split);
 	closedir(dir);
 }
 
@@ -97,8 +98,8 @@ char	*ft_pwd_ft(void)
 
 int main (int ac, char **av)
 {
-	(void)ac;
 	char	*dir;
+	(void)ac;
 
 	dir = ft_pwd_ft();
 	what_team(dir, av[1]);
