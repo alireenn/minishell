@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:02:22 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/13 17:16:42 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:36:22 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_mat(char **mat)
 	i = 0;
 	while (mat[i] != NULL)
 	{
-		printf("%d -> <>%s<>\n", i, mat[i]);
+		printf("%d -> %s\n", i, mat[i]);
 		i++;
 	}
 }

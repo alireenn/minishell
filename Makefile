@@ -32,6 +32,7 @@ COMMANDS_FILES=					\
 		quotes.c 				\
 		redirections.c 			\
 		expand.c				\
+		lsfake.c 				\
 		pipe.c 					\
 		mod_split.c				\
 

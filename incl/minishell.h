@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/11 18:43:16 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:56:48 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ int			expand_helper(char **s, int i, int j, t_mini *mini);
 int			expand_helper2(char **s, t_mini *mini, int j, int len);
 //		ls_fake
 char		*ft_pwd_ft(void);
-void		what_team(char *filename, char *to_find);
-int			wild_cats(char *entry, char *to_find, char **split);
+int			wild_cats(char *entry, char **split);
+char 		**what_team(char *filename, char *to_find);
 //		mod_split
 int			mod_strlen(char *str, char *charset, char *avoid);
 char		**mod_split(char *str, char *charset, char *avoid);

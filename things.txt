@@ -10,3 +10,4 @@ gestione segnali
 se trovo una wildcard nel comando -> non mi interessa
 se trovo wildcard nell' argomento -> usare opendir per lo stream directory
 l'export e unset devono accettare più argomenti
+ritorno la matrice delle cose trovate e le passo a get_argv(che va a execve)

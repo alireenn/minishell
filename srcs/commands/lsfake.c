@@ -21,7 +21,7 @@
 # include <limits.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-int	wild_cats(char *entry, char *to_find, char **split)
+int	wild_cats(char *entry, char **split)
 {
 	int	i;
 	int	j;
@@ -39,16 +39,20 @@ int	wild_cats(char *entry, char *to_find, char **split)
 	return (0);
 }
 
-void	what_team(char *filename, char *to_find)
+char 	**what_team(char *filename, char *to_find)
 {
 	DIR				*dir;
 	struct dirent	*entry;
 	int				i;
-	// char			*ret;
-	// char			*tmp;
+	char			**ret;
 	char			**split;
 
 	i = 0;
+	if (ft_strchr(to_find, ' ') != 0)
+	{
+		while (*(to_find) != ' ')
+			to_find++;
+	}
 	split = ft_split(to_find, "*", &i);
 	dir = opendir(filename);
 	// ret = NULL;
@@ -63,9 +67,10 @@ void	what_team(char *filename, char *to_find)
 		entry = readdir(dir);
 		if (entry == NULL)
 			break ;
-		if (wild_cats(entry->d_name, to_find, split) == 1)
+		if (wild_cats(entry->d_name, split) == 1)
 		{
-			// tmp = ft_strdup(ret);
+			
+			// tmp = ft_strdup(entry->d_name);
 			// if (tmp == NULL)
 			// {
 			// 	tmp = malloc(1);
@@ -77,11 +82,11 @@ void	what_team(char *filename, char *to_find)
 			// free(tmp);
 			printf("%s\n", entry->d_name);
 			i++;
+			// printf("%s\n", ret);
 		}
 	}
 	if (i == 0)
 		printf("%s\n", to_find);
-	// printf("%s\n", ret);
 	free(split);
 	closedir(dir);
 }
@@ -96,12 +101,12 @@ char	*ft_pwd_ft(void)
 	return (ret);
 }
 
-int main (int ac, char **av)
-{
-	char	*dir;
-	(void)ac;
+// int main (int ac, char **av)
+// {
+// 	char	*dir;
+// 	(void)ac;
 
-	dir = ft_pwd_ft();
-	what_team(dir, av[1]);
-	free(dir);
-}
+// 	dir = ft_pwd_ft();
+// 	what_team(dir, av[1]);
+// 	free(dir);
+// }

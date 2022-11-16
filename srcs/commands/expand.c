@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/10 15:55:12 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:57:58 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ void	expand(char **s, t_mini *mini)
 			if (s[i][j] == '$'
 			&& s[i][j + 1] != '\0' && s[i][j + 1] != ' ')
 				j += expand_helper(s, i, j, mini) - 1;
+			else if (ft_strchr(s[i], '*'))
+			{
+				print_mat(s);
+				what_team(ft_pwd_ft(), s[i]);
+				j += ft_strlen(s[i]);
+			}
 			else
 				j++;
 		}

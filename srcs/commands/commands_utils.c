@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:33:27 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/11 18:04:15 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:35:37 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void	other_command_helper(t_mini *mini, t_command *cmd)
 	envp = trasformation(mini->env);
 	argv = get_argv(cmd->com, cmd->arg);
 	filename = get_filename(mini, cmd->com);
+	print_mat(argv);
+	printf("porcoddio %s\n", filename);
 	if (execve(filename, argv, envp) == -1)
 	{
 		free_execve(filename, argv, envp);
