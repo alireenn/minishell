@@ -6,13 +6,13 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/10 16:29:04 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/17 18:23:26 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-char	**get_argv(char *com, char *arg)
+char	**get_argv(char *com, char *arg, t_mini *mini)
 {
 	char	*tmp;
 	char	**argv;
@@ -22,6 +22,15 @@ char	**get_argv(char *com, char *arg)
 		argv = malloc(sizeof(char *) * 2);
 		argv[0] = ft_strdup(com);
 		argv[1] = NULL;
+	}
+	else if (ft_strchr(arg, '*') != 0)
+	{
+		argv = what_team(ft_pwd_ft(), arg, com, mini);
+		if (argv == NULL)
+		{
+			printf("%s: %s: No such file or directory\n", com, arg);
+			return (NULL);
+		}
 	}
 	else
 	{

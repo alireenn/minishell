@@ -11,16 +11,17 @@
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <dirent.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <limits.h>
-# include <sys/types.h>
-# include <sys/wait.h>
+// #include "../../lib/libft/libft.h"
+// # include <unistd.h>
+// # include <stdlib.h>
+// # include <stdio.h>
+// # include <string.h>
+// # include <dirent.h>
+// # include <readline/readline.h>
+// # include <readline/history.h>
+// # include <limits.h>
+// # include <sys/types.h>
+// # include <sys/wait.h>
 int	wild_cats(char *entry, char **split)
 {
 	int	i;
@@ -30,7 +31,7 @@ int	wild_cats(char *entry, char **split)
 	j = 0;
 	while (*entry && split[j])
 	{
-		if (ft_strnstr(entry, split[j], ft_strlen(entry)) == entry)
+		if (ft_strnstr(entry, split[j], ft_strlen(split[j])) == entry)
 			j++;
 		entry++;
 	}
@@ -39,7 +40,7 @@ int	wild_cats(char *entry, char **split)
 	return (0);
 }
 
-char 	**what_team(char *filename, char *to_find)
+char 	**what_team(char *filename, char *to_find, char *com, t_mini *mini)
 {
 	DIR				*dir;
 	struct dirent	*entry;
@@ -54,41 +55,35 @@ char 	**what_team(char *filename, char *to_find)
 			to_find++;
 	}
 	split = ft_split(to_find, "*", &i);
+	ret = NULL;
 	dir = opendir(filename);
-	// ret = NULL;
-	i = 0;
 	if (dir == NULL)
 	{
 		printf("minishell: %s: Permission denied\n", filename);
 		exit(126);
 	}
-	while (1)
+	i = 1;
+	ret = ft_calloc(sizeof(char *), 100);
+	ret[0] = ft_strdup(com);
+	while (i < 100)
 	{
 		entry = readdir(dir);
 		if (entry == NULL)
 			break ;
 		if (wild_cats(entry->d_name, split) == 1)
 		{
-			
-			// tmp = ft_strdup(entry->d_name);
-			// if (tmp == NULL)
-			// {
-			// 	tmp = malloc(1);
-			// 	tmp[0] = '\0';
-			// }
-			// if (ret != NULL)
-			// 	free(ret);
-			// ret = ft_strjoin(tmp, entry->d_name);
-			// free(tmp);
-			printf("%s\n", entry->d_name);
+			ret[i] = ft_strdup(entry->d_name);
 			i++;
-			// printf("%s\n", ret);
 		}
 	}
-	if (i == 0)
-		printf("%s\n", to_find);
+	if (i == 1)
+	{
+		mini->last = 1;
+		return (NULL);
+	}
 	free(split);
 	closedir(dir);
+	return(ret);
 }
 
 char	*ft_pwd_ft(void)
@@ -104,9 +99,16 @@ char	*ft_pwd_ft(void)
 // int main (int ac, char **av)
 // {
 // 	char	*dir;
+// 	char	**mat;
 // 	(void)ac;
 
 // 	dir = ft_pwd_ft();
-// 	what_team(dir, av[1]);
+// 	mat = what_team(dir, av[1]);
+// 	int	i = 0;
+// 	while (mat[i] != NULL)
+// 	{
+// 		printf("%d -> %s\n", i, mat[i]);
+// 		i++;
+// 	}
 // 	free(dir);
 // }

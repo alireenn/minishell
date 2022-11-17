@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/16 17:56:48 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/17 18:24:38 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void		get_cmds(t_command **cmds, int cmd, char **input);
 void		get_cmd_simple(t_command **cmds, char **input, int i, int j);
 //		execute.c
 int			here_doc(char *end);
-char		**get_argv(char *com, char *arg);
+char		**get_argv(char *com, char *arg, t_mini *mini);
 void		make_cmd(t_command *cmd, t_mini *mini);
 char		*get_filename(t_mini *mini, char *filename);
 int			execute(t_tree a, t_command **cmds, t_mini *mini);
@@ -127,7 +127,7 @@ int			expand_helper2(char **s, t_mini *mini, int j, int len);
 //		ls_fake
 char		*ft_pwd_ft(void);
 int			wild_cats(char *entry, char **split);
-char 		**what_team(char *filename, char *to_find);
+char 		**what_team(char *filename, char *to_find, char *com, t_mini *mini);
 //		mod_split
 int			mod_strlen(char *str, char *charset, char *avoid);
 char		**mod_split(char *str, char *charset, char *avoid);

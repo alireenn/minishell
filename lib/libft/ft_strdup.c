@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 19:32:15 by anovelli          #+#    #+#             */
-/*   Updated: 2022/10/13 15:07:53 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/17 10:25:11 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strdup(const char *s1)
 	if (!s1)
 		return (NULL);
 	len = ft_strlen(s1);
-	dest = malloc((len + 1) * sizeof(char));
+	dest = malloc(sizeof(char) * (len + 1));
 	while (s1[i] != '\0')
 	{
 		dest[i] = s1[i];

@@ -20,7 +20,7 @@ YELLOW 			= \033[00;33m
 RESET  			= \033[00m
 
 $(NAME):
-		gcc -Wall -Werror -Wextra -c $(SRC)
+		gcc -Wall -Werror -Wextra -c $(SRC) 
 		ar rc $(NAME) $(OBJS)
 		ranlib $(NAME)
 
