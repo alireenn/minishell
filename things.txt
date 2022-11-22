@@ -11,3 +11,10 @@ se trovo una wildcard nel comando -> non mi interessa
 se trovo wildcard nell' argomento -> usare opendir per lo stream directory
 l'export e unset devono accettare più argomenti
 ritorno la matrice delle cose trovate e le passo a get_argv(che va a execve)
+
+
+export a= on deve mostrarlo nell énv
+export likka
+le pipe lasciano quale fd aperto
+echo con piu di un -n non ne deve stampare nessuno
+cat << delimiter deve fare il cat solo alla fine
