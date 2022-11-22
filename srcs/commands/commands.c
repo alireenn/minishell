@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/11 18:43:30 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:35:46 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 		cmds[i]->com = NULL;
 	else
 		cmds[i]->com = get_strip_str(input[i], 0, j);
-	cmds[i]->com = remove_quotes_str(cmds[i]->com);
+	// cmds[i]->com = remove_quotes_str(cmds[i]->com);
 	while (input[i][j] == ' ')
 		j++;
 	if (j == (int)ft_strlen(input[i]))

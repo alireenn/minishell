@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 17:37:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/11 18:15:41 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:35:38 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	export_unset(t_mini *mini, t_command *cmd)
 			i = 0;
 			while (split[i])
 			{
-				split[i] = remove_quotes_str(split[i]);
+				// split[i] = remove_quotes_str(split[i]);
 				printf("SONO IO %s\n", split[i]);
 				ft_export(mini, split[i], cmd);
 				i++;

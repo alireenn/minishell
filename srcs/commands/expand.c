@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/17 16:07:08 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:59:25 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void	expand(char **s, t_mini *mini)
 		while (j < (int)ft_strlen(s[i]))
 		{
 			if (s[i][j] == '\'')
+			{
+
 				j = search_closing(s[i], j, s[i][j], s[i][j]) - 1;
+			}
 			if (s[i][j] == '$'
 			&& s[i][j + 1] != '\0' && s[i][j + 1] != ' ')
 				j += expand_helper(s, i, j, mini) - 1;

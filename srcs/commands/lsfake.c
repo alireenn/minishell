@@ -22,13 +22,20 @@
 // # include <limits.h>
 // # include <sys/types.h>
 // # include <sys/wait.h>
-int	wild_cats(char *entry, char **split)
+int	wild_cats(char *entry, char **split, char *to_find)
 {
-	int	i;
 	int	j;
+	int	len;
 
-	i = 0;
+	len = 0;
+	while (split[len])
+		len++;
 	j = 0;
+	if (to_find[0] != '*' && ft_strncmp(split[0], entry, ft_strlen(split[0])) != 0)
+		return (0);
+	if (ft_strlen(entry) - ft_strlen(split[len - 1]) > 0)
+		if (to_find[ft_strlen(to_find) - 1] != '*' && ft_strncmp(split[len - 1], &entry[ft_strlen(entry) - ft_strlen(split[len - 1])], ft_strlen(split[len - 1])) != 0)
+			return (0);
 	while (*entry && split[j])
 	{
 		if (ft_strnstr(entry, split[j], ft_strlen(split[j])) == entry)
@@ -70,7 +77,7 @@ char 	**what_team(char *filename, char *to_find, char *com, t_mini *mini)
 		entry = readdir(dir);
 		if (entry == NULL)
 			break ;
-		if (wild_cats(entry->d_name, split) == 1)
+		if (wild_cats(entry->d_name, split, to_find) == 1)
 		{
 			ret[i] = ft_strdup(entry->d_name);
 			i++;
