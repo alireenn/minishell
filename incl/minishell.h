@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/23 12:03:20 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/23 13:13:26 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,7 @@ void		add_elem_ord(t_env **list, char *elem_name, char *elem_arg);
 int			equal_strings(char *com, char *exec);
 char		*ft_join_char(char *s1, char *s2, char c);
 char		*get_strip_str(char *input, int from, int to);
+char		*get_strip_str_q(char *input, int from, int to);
 void		replace(char **tbr, int from, int to, char *rep);
 //		env_utils.c
 void		change_fd(t_command *cmd);

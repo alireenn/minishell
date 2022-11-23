@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:33:27 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/22 15:39:47 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:32:55 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	other_command_helper(t_mini *mini, t_command *cmd)
 	envp = trasformation(mini->env);
 	argv = get_argv(cmd->com, cmd->arg, mini);
 	filename = get_filename(mini, cmd->com);
-	print_mat(argv);
+	//print_mat(argv);
 	if (execve(filename, argv, envp) == -1)
 	{
 		free_execve(filename, argv, envp);

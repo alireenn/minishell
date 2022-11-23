@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 16:27:05 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/23 11:55:27 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/23 12:37:59 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_export_supp(t_mini *mini, t_env *tmp)
 	{
 		if (tmp->arg_var != NULL)
 		{
-			// tmp->arg_var = remove_quotes_str(tmp->arg_var);
+			tmp->arg_var = remove_quotes_str(tmp->arg_var);
 			add_elem(&mini->env, tmp->name_var, tmp->arg_var);
 		}
 		change_var(mini->secret, tmp->name_var, tmp->arg_var);
@@ -27,7 +27,7 @@ void	ft_export_supp(t_mini *mini, t_env *tmp)
 	{
 		if (tmp->arg_var != NULL)
 		{
-			// tmp->arg_var = remove_quotes_str(tmp->arg_var);
+			tmp->arg_var = remove_quotes_str(tmp->arg_var);
 			add_elem(&mini->env, tmp->name_var, tmp->arg_var);
 		}
 		add_elem_ord(&mini->secret, tmp->name_var, tmp->arg_var);

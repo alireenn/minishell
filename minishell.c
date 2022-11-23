@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/11 18:36:35 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:17:51 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,11 @@ void	process_input(t_mini *mini, char *input)
 	get_redirs(splitted, mini->commands, mini->cmd, mini);
 	expand(splitted, mini);
 	get_cmds(mini->commands, mini->cmd, splitted);
-	// print_cmds(mini->commands, mini->cmd);
+	print_cmds(mini->commands, mini->cmd);
 	mini->res = execute(mini->tree, mini->commands, mini);
+	printf("il problema e' qua\n");
 	free_cmds(mini->commands, mini->cmd);
+	printf("il problema e' qua\n");
 	free_tree(&(mini->tree));
 	free_matrix(splitted, mini->cmd);
 	free(parsed);

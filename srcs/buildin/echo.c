@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:44:33 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/23 12:10:53 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/23 12:55:09 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_echo(char *str, t_command *com)
 {
 	int		flag;
+	char	*tmp;
 
 	if (!com->arg)
 	{
@@ -26,10 +27,12 @@ void	ft_echo(char *str, t_command *com)
 		printf_fd(1, "\n");
 	else
 	{
+		tmp = remove_quotes_str(com->arg);
 		if (flag == 0)
-			printf("%s\n", com->arg);
+			printf("%s\n", tmp);
 		else
-			printf("%s", com->arg);
+			printf("%s", tmp);
+		free(tmp);
 	}
 	com->res = 1;
 }
@@ -61,6 +64,8 @@ int	check_flag_echo(t_command *cmd)
 		return (-1);
 	while (cmd->arg[i] != '\0')
 	{
+		if (cmd->arg[i] == '\'' || cmd->arg[i] == '\"')
+			i = search_closing(cmd->arg, i, cmd->arg[i], cmd->arg[i]);
 		if (cmd->arg[i] == '-')
 		{
 			if (flag_echo_help(cmd, i) == 1)
