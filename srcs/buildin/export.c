@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 17:37:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/22 16:35:38 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:54:59 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,8 @@ void	export_unset(t_mini *mini, t_command *cmd)
 			i = 0;
 			while (split[i])
 			{
-				// split[i] = remove_quotes_str(split[i]);
-				printf("SONO IO %s\n", split[i]);
 				ft_export(mini, split[i], cmd);
+				free(split[i]);
 				i++;
 			}
 			free(split);

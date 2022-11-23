@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 16:27:05 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/22 16:35:28 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:55:27 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	unset_help(t_command *cmd, t_mini *mini)
 		while (split[i])
 		{
 			ft_unset(mini, split[i], cmd);
+			free(split[i]);
 			i++;
 		}
 		free(split);

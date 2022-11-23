@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/22 14:38:29 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:03:20 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		ft_exit(t_mini *mini, t_command *com);
 //		echo.c
 int			check_flag_echo(t_command *cmd);
 void		ft_echo(char *str, t_command *com);
-int			flag_echo_help(t_command *cmd, int i, int j);
+int			flag_echo_help(t_command *cmd, int i);
 /*
 ** 			COMMANDS
 */
