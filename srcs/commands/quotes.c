@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 17:48:21 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/23 13:06:40 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/23 18:22:07 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ char	*remove_quotes_str(char *str)
 	if (i > 0)
 		return (remove_quotes_str_helper(str, i));
 	else
-		return (str);
+		return (ft_strdup(str));
 }

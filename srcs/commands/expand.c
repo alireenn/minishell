@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/23 12:33:01 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/23 17:56:01 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	expand_helper2(char **s, t_mini *mini, int j, int len)
 	t_env	*var_env;
 
 	ret = 1;
-	//print_mat(s);
 	tmp = ft_strdup_from_to(*s, j + 1, j + len);
 	if (check_env_var(tmp) != 0)
 	{
