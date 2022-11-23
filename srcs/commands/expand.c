@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/23 17:56:01 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:39:24 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ void	expand(char **s, t_mini *mini)
 {
 	int		i;
 	int		j;
+	int		flag;
 
 	i = 0;
+	flag = 0;
 	if (s[i] == NULL)
 		return ;
 	while (s[i] != NULL)
@@ -41,7 +43,9 @@ void	expand(char **s, t_mini *mini)
 		j = 0;
 		while (j < (int)ft_strlen(s[i]))
 		{
-			if (s[i][j] == '\'')
+			if (s[i][j] == '\"')
+				flag = !flag;
+			if (s[i][j] == '\'' && flag == 0)
 				j = search_closing(s[i], j, s[i][j], s[i][j]) - 1;
 			if (s[i][j] == '$'
 			&& s[i][j + 1] != '\0' && s[i][j + 1] != ' ')
