@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:19:42 by gcucino           #+#    #+#             */
-/*   Updated: 2022/10/12 16:08:25 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/24 18:17:49 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	init_env(t_mini *mini, char **env)
 	int		i;
 	t_env	*new;
 	t_env	*tmp;
+	int		x;
 
 	tmp = malloc(sizeof(t_env));
 	split_at(env[0], tmp, '=');
@@ -52,6 +53,12 @@ void	init_env(t_mini *mini, char **env)
 	i = 1;
 	while (env[i])
 	{
+		if (equal_strings(tmp->name_var, "SHLVL") == 0)
+		{
+			x = ft_atoi(tmp->arg_var);
+			free(tmp->arg_var);
+			tmp->arg_var = ft_itoa(x + 1);
+		}
 		new = malloc(sizeof(t_env));
 		split_at(env[i], new, '=');
 		tmp->next = new;
