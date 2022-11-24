@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 17:37:11 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/23 11:54:59 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/24 10:53:22 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	export_unset(t_mini *mini, t_command *cmd)
 	{
 		if (cmd->arg != NULL)
 		{
-			split = ft_split(cmd->arg, " ", &i);
+			split = mod_split(cmd->arg, " ", "\'\"");
 			i = 0;
 			while (split[i])
 			{

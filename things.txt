@@ -12,11 +12,6 @@ se trovo wildcard nell' argomento -> usare opendir per lo stream directory
 l'export e unset devono accettare più argomenti
 ritorno la matrice delle cose trovate e le passo a get_argv(che va a execve)
 
-export gestire virgolette
-✅ Minishell ➡ export alice="la piu bella del mondo"
-minishell: export: `mondo"': not a valid identifier
-❌ Minishell ➡ 
-pure unset
 le pipe lasciano qualche fd aperto -> ✨greve✨
 
 cambiare exit di questo: (c'entra con le fucking pipe)

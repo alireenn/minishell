@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/23 18:27:14 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:00:46 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,43 @@ void	process_input(t_mini *mini, char *input)
 	// print_cmds(mini->commands, mini->cmd);
 	mini->res = execute(mini->tree, mini->commands, mini);
 	// print_cmds(mini->commands, mini->cmd);
+	//mini->exit = 1;
 	free_cmds(mini->commands, mini->cmd);
 	free_tree(&(mini->tree));
 	free_matrix(splitted, mini->cmd);
 	free(parsed);
+}
+
+void	my_pid(t_mini *mini)
+{
+	pid_t	culo;
+	int		fd[2];
+	int		ret;
+	int		status;
+	char	buf[5];
+
+	if (pipe(fd) == -1)
+		return ;
+	culo = fork();
+	if (culo == 0)
+	{
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+		process_input(mini, "ps | grep -w ./minishell | tail -n 1 | cut -d' ' -f1");
+		close(fd[1]);
+		exit(0);
+	}
+	else
+	{
+		while(read(fd[0], buf, 1) == 1);
+		close(fd[1]);
+		waitpid(culo, &status, 0);
+		close(fd[0]);
+		dup2(mini->save_out, STDOUT_FILENO);
+		dup2(mini->save_in, STDIN_FILENO);
+		printf("%s\n", buf);
+		ret = WEXITSTATUS(status);
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -120,6 +153,7 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGINT, received);
 	signal(SIGQUIT, quit);
 	mini = init_mini(envp);
+	my_pid(mini);
 	prompt = our_prompt(mini->res, mini);
 	while (prompt != NULL)
 	{

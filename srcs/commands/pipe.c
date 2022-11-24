@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:28:28 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/10 16:29:18 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:11:58 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	execute_pipe2(t_tree a, t_command **cmds, t_mini *mini, int fd[2])
 		close(fd[0]);
 		close(fd[1]);
 		waitpid(mini->pipe_pid1, &status[0], 0);
-		waitpid(mini->pipe_pid1, &status[1], 0);
+		waitpid(pid2, &status[1], 0);
 		dup2(mini->save_out, STDOUT_FILENO);
 		dup2(mini->save_in, STDIN_FILENO);
 		ret = (WEXITSTATUS(status[0]) && WEXITSTATUS(status[1]));
