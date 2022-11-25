@@ -14,7 +14,25 @@ ritorno la matrice delle cose trovate e le passo a get_argv(che va a execve)
 
 le pipe lasciano qualche fd aperto -> ✨greve✨
 
-cambiare exit di questo: (c'entra con le fucking pipe)
-✅ Minishell ➡ cat things.txt | wc -l
-      20
-❌ Minishell
+bash-3.2$ echo "-n" ciso
+cisobash-3.2$ echo '-n' ciso
+cisobash-3.2$ echo '-n ciso'
+-n ciso
+bash-3.2$ echo "-n ciso"
+-n ciso
+
+bash-3.2$ echo "-n " ciso
+-n  ciso
+bash-3.2$ echo "culo -n" ciso
+culo -n ciso
+bash-3.2$ echo "-n" ciso
+cisobash-3.2$
+
+-> bisogna modificare in modo che se ci sono le 
+quotes controlli che ci siano solo -n(nnnn)
+altrimenti controlla solo la prima parte dell'arg
+
+vs. nostro
+
+✅ Minishell ➡ echo "-n" culo
+-n culo
