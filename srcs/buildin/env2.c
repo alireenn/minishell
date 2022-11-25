@@ -14,6 +14,8 @@
 
 void	ft_export_supp(t_mini *mini, t_env *tmp)
 {
+	char	*tmp2;
+
 	if (search(mini->secret, tmp->name_var) == 0)
 	{
 		if (tmp->arg_var != NULL)
@@ -27,7 +29,9 @@ void	ft_export_supp(t_mini *mini, t_env *tmp)
 	{
 		if (tmp->arg_var != NULL)
 		{
+			tmp2 = tmp->arg_var;
 			tmp->arg_var = remove_quotes_str(tmp->arg_var);
+			free(tmp2);
 			add_elem(&mini->env, tmp->name_var, tmp->arg_var);
 		}
 		add_elem_ord(&mini->secret, tmp->name_var, tmp->arg_var);
