@@ -85,7 +85,6 @@ void	export_unset(t_mini *mini, t_command *cmd)
 		if (cmd->arg != NULL)
 		{
 			split = mod_split(cmd->arg, " ", "\'\"");
-			print_mat(split);
 			i = 0;
 			while (split[i])
 			{

@@ -54,7 +54,6 @@ void	change_var(t_env *env, char *name, char *arg)
 		if (ft_strlen(tmp->name_var) == ft_strlen(name)
 			&& ft_strncmp(tmp->name_var, name, ft_strlen(tmp->name_var)) == 0)
 		{
-			printf("tmp: %s\n", tmp->arg_var);
 			free(tmp->arg_var);
 			tmp->arg_var = ft_strdup(arg);
 			break ;
