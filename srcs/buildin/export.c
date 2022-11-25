@@ -65,6 +65,7 @@ void	export_error(t_env *tmp, t_mini *mini, t_command *cmd, int flag)
 			tmp->name_var);
 		mini->last = 1;
 		cmd->res = 0;
+		free_tmp(tmp);
 	}
 	if (flag == 1 && tmp->arg_var != NULL)
 	{
