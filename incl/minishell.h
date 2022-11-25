@@ -53,6 +53,7 @@ typedef struct s_mini {
 	t_tree		tree;
 	t_command	**commands;
 	pid_t		pipe_pid1;
+    char        *pid;
 	char		*pwd;
 	int			cmd;
 	int			exit;

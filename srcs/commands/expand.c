@@ -104,8 +104,8 @@ int	expand_helper(char **s, int i, int j, t_mini *mini)
 	len = get_len_var(s, i, j);
 	if (len == 0 && s[i][j + 1] == '$')
 	{
-		replace(&s[i], j, j + 2, "pid");
-		ret = 3;
+		replace(&s[i], j, j + 2, mini->pid);
+		ret = (int)ft_strlen(mini->pid);
 	}
 	else if (len == 1 && s[i][j + 1] == '?')
 	{

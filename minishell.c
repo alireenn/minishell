@@ -100,7 +100,7 @@ void	process_input(t_mini *mini, char *input)
 	get_cmds(mini->commands, mini->cmd, splitted);
 	// print_cmds(mini->commands, mini->cmd);
 	mini->res = execute(mini->tree, mini->commands, mini);
-	// print_cmds(mini->commands, mini->cmd);
+	//print_cmds(mini->commands, mini->cmd);
 	//mini->exit = 1;
 	free_cmds(mini->commands, mini->cmd);
 	free_tree(&(mini->tree));
@@ -148,20 +148,28 @@ void	my_pid(t_mini *mini)
 	pid = fork();
 	if (pid == 0)
 	{
+        char *prova = ft_strjoin_3("ps | grep -w ./minishell | head -n ", get_shlvl(mini), " | tail -n 1 | cut -d' ' -f2");
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
-		process_input(mini, ft_strjoin_3("ps | grep -w ./minishell | head -n ", get_shlvl(mini), " | tail -n 1 | cut -d' ' -f1"));
+		process_input(mini, prova);
 		close(fd[1]);
 		exit(0);
 	}
 	else
 	{
-		close(fd[1]);
 		waitpid(pid, &status, 0);
+		close(fd[1]);
 		dup2(mini->save_out, STDOUT_FILENO);
-		printf("%zd\n", read(fd[0], buf, 5));
-		buf[5] = '\0';
-		printf("%s\n", buf);
+		read(fd[0], buf, 5);
+        ret = 0;
+		while (ret < 6)
+        {
+            if (buf[ret] < '0' || buf[ret] > '9')
+                buf[ret] = '\0';
+            ret++;
+        }
+        mini->pid = ft_strdup(buf);
+		//printf("%s\n", buf);
 		close(fd[0]);
 		ret = WEXITSTATUS(status);
 	}
@@ -181,6 +189,7 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, quit);
 	mini = init_mini(envp);
 	my_pid(mini);
+    //printf("debug: %s\n", mini->pid);
 	prompt = our_prompt(mini->res, mini);
 	while (prompt != NULL)
 	{
