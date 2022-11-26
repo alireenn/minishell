@@ -28,6 +28,7 @@ void	ft_echo(char *str, t_command *com)
 	else
 	{
 		tmp = remove_quotes_str(com->arg);
+        //tmp = ft_strdup(com->arg);
 		if (flag == 0)
 			printf("%s\n", tmp);
 		else
@@ -37,46 +38,51 @@ void	ft_echo(char *str, t_command *com)
 	com->res = 1;
 }
 
-int	flag_echo_help(t_command *cmd, int i)
-{
-	int	j;
-	
-	j = 1;
-	while (cmd->arg[i + j] == 'n')
-		j++;
-	if (cmd->arg[i + j] == ' ' && j > 1)
-	{
-		replace(&cmd->arg, i, i + j + 1, "");
-		cmd->arg = get_strip_str(cmd->arg, 0, (int)ft_strlen(cmd->arg));
-		return (1);
-	}
-	return (0);
-}
-
 int	check_flag_echo(t_command *cmd)
 {
-	int	i;
-	int	ret;
+    int i;
+    int n;
+    int j;
 
-	ret = 0;
-	i = 0;
+    i = 0;
 	if (cmd->arg == NULL)
 		return (-1);
-	while (cmd->arg[i] != '\0')
-	{
-		if (cmd->arg[i] == '\'' || cmd->arg[i] == '\"')
-			i = search_closing(cmd->arg, i, cmd->arg[i], cmd->arg[i]);
-		if (cmd->arg[i] == '-')
-		{
-			if (flag_echo_help(cmd, i) == 1)
-			{
-				ret = 1;
-				i = -1;
-			}
-			else
-				return (ret);
-		}
-		i++;
-	}
-	return (ret);
+    //printf("%s\n", cmd->arg);
+	if (cmd->arg[i] == '-')
+    {
+        while (cmd->arg[i + 1] == 'n')
+            i++;
+        if (i > 0)
+        {
+            replace(&cmd->arg, 0, i + 1, "");
+            cmd->arg = get_strip_str(cmd->arg, 0, (int)ft_strlen(cmd->arg));
+            return (1);
+        }
+        else
+            return (0);
+    }
+    else if (cmd->arg[0] == '\'' || cmd->arg[0] == '\"')
+    {
+        while (cmd->arg[i] == cmd->arg[0])
+            i++;
+        if (cmd->arg[i] != '-')
+            return (0);
+        n = 1;
+        while (cmd->arg[i + n] == 'n')
+            n++;
+        if (n == 1 || cmd->arg[i + n] != cmd->arg[0])
+            return (0);
+        j = 0;
+        while (cmd->arg[i + n + j] == cmd->arg[0])
+            j++;
+        if (i == j && (cmd->arg[i + n + j] == ' ' || cmd->arg[i + n + j] == '\0'))
+        {
+            replace(&cmd->arg, 0, i + n + j, "");
+            cmd->arg = get_strip_str(cmd->arg, 0, (int)ft_strlen(cmd->arg));
+            return (1);
+        }
+        return (0);
+    }
+    else
+        return (0);
 }

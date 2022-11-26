@@ -1,6 +1,4 @@
--> non eliminare il file prova.c che è importante!!!!!
 -> pulizia file
--> gestire quotes con $
 ------ bug e mini bug ------
 
 quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> questo non ho idea di come sistemarlo
@@ -12,27 +10,9 @@ se trovo wildcard nell' argomento -> usare opendir per lo stream directory
 l'export e unset devono accettare più argomenti
 ritorno la matrice delle cose trovate e le passo a get_argv(che va a execve)
 
-le pipe lasciano qualche fd aperto -> ✨greve✨
+con -> echo ""-n" culo" va in loop per colpa del remove quotes
 
-bash-3.2$ echo "-n" ciso
-cisobash-3.2$ echo '-n' ciso
-cisobash-3.2$ echo '-n ciso'
--n ciso
-bash-3.2$ echo "-n ciso"
--n ciso
-
-bash-3.2$ echo "-n " ciso
--n  ciso
-bash-3.2$ echo "culo -n" ciso
-culo -n ciso
-bash-3.2$ echo "-n" ciso
-cisobash-3.2$
-
--> bisogna modificare in modo che se ci sono le 
-quotes controlli che ci siano solo -n(nnnn)
-altrimenti controlla solo la prima parte dell'arg
-
-vs. nostro
-
-✅ Minishell ➡ echo "-n" culo
--n culo
+va modificata tutta la gestione delle quotes, non solo per le variabili globali ma anche le stringhe semplici
+es:
+    bash-3.2$ echo "'-n'" ciao
+    '-n' ciao

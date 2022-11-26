@@ -96,7 +96,7 @@ int			check_par(char *str);
 void		ft_pwd(t_command *cmd);
 void		ft_exit(t_mini *mini, t_command *com);
 //		echo.c
-int			check_flag_echo(t_command *cmd);
+int			check_flag_echo(t_command *com);
 void		ft_echo(char *str, t_command *com);
 int			flag_echo_help(t_command *cmd, int i);
 /*
