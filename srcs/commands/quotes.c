@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 17:48:21 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/23 18:22:07 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/28 12:56:55 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,27 @@ char	*remove_quotes_str_helper(char *str, int i)
 {
 	char	*temp;
 	int		j;
+	char	open;
 
 	j = 0;
-	temp = (char *)malloc(sizeof(char) * (int)ft_strlen(str) - i + 1);
+	temp = (char *)malloc(sizeof(char) * ((int)ft_strlen(str) - i + 1));
+	// printf("len tmp: %d\n", (int)ft_strlen(str) - i);
 	if (!temp)
 		return (str);
 	i = 0;
+	open = '\0';
 	while (str[i])
 	{
-		if (str[i] == '\'' || str[i] == '\"')
+		if (str[i] == open)
+		{
+			open = '\0';
 			i++;
+		}
+		else if ((str[i] == '\'' || str[i] == '\"') && open == '\0')
+		{
+			open = str[i];
+			i++;
+		}
 		else
 		{
 			temp[j] = str[i];
@@ -49,11 +60,15 @@ char	*remove_quotes_str(char *str)
 	while (str[j] != '\0')
 	{
 		if (str[j] == '\'' || str[j] == '\"')
-			i++;
+		{
+			i += 2; 
+			j = search_closing(str, j, str[j], str[j]) - 1;
+		}
 		j++;
 	}
+	//printf("%d\n", i);
 	if (i > 0)
 		return (remove_quotes_str_helper(str, i));
-	else
-		return (ft_strdup(str));
+		//return (ft_strdup(str));
+	return (ft_strdup(str));
 }
