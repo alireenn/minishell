@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/24 19:16:40 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/28 17:29:38 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	my_pid(t_mini *mini)
 	pid = fork();
 	if (pid == 0)
 	{
-        char *prova = ft_strjoin_3("ps | grep -w ./minishell | head -n ", get_shlvl(mini), " | tail -n 1 | cut -d' ' -f2");
+        char *prova = ft_strjoin_3("ps | grep -w ./minishell | head -n ", get_shlvl(mini), " | tail -n 1 | cut -c 1-6");
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
 		process_input(mini, prova);
@@ -160,7 +160,8 @@ void	my_pid(t_mini *mini)
 		waitpid(pid, &status, 0);
 		close(fd[1]);
 		dup2(mini->save_out, STDOUT_FILENO);
-		read(fd[0], buf, 5);
+		int r = read(fd[0], buf, 5);
+		printf("%d\n", r);
         ret = 0;
 		while (ret < 6)
         {
@@ -169,7 +170,7 @@ void	my_pid(t_mini *mini)
             ret++;
         }
         mini->pid = ft_strdup(buf);
-		//printf("%s\n", buf);
+		printf("%s\n", buf);
 		close(fd[0]);
 		ret = WEXITSTATUS(status);
 	}
