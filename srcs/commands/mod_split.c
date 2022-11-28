@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:52:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/10 17:04:57 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:05:04 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	mod_strcount(char *str, char *charset, char *avoid)
 	return (count);
 }
 
-int	mod_putstr(char *str, char *charset, char *matrix, char *avoid) // 32
+int	mod_putstr(char *str, char *charset, char *matrix, char *avoid)
 {
 	int	i;
 	int	j;
@@ -115,10 +115,8 @@ int	mod_putstr(char *str, char *charset, char *matrix, char *avoid) // 32
 	{
 		if (is_sep(str[i], charset) == 0)
 		{
-			while (str[i] != '\0')
+			while (str[i] != '\0' && !(is_sep(str[i], charset) == 1 && !open))
 			{
-				if (is_sep(str[i], charset) == 1 && open == 0)
-					break ;
 				if (is_sep(str[i], avoid) == 1 && open == 0)
 					open++;
 				else if (is_sep(str[i], avoid) == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/23 13:13:26 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/28 18:10:52 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_mini {
 	t_tree		tree;
 	t_command	**commands;
 	pid_t		pipe_pid1;
-    char        *pid;
+	char		*pid;
 	char		*pwd;
 	int			cmd;
 	int			exit;
@@ -63,12 +63,7 @@ typedef struct s_mini {
 	int			save_in;
 }	t_mini;
 
-void		free_mini(t_mini *mini);
-int			incomplete_cmd(char *input);
-char		*get_other_input(char *input);
-char		*our_prompt(int res, t_mini *mini);
-void		process_input(t_mini *mini, char *input);
-void		process_input_aux(t_mini *mini, char *input);
+int			free_mini(t_mini *mini);
 /*
 **		BUILDIN
 */
@@ -128,7 +123,7 @@ int			expand_helper2(char **s, t_mini *mini, int j, int len);
 //		ls_fake
 char		*ft_pwd_ft(void);
 int			wild_cats(char *entry, char **split, char *to_find);
-char 		**what_team(char *filename, char *to_find, char *com, t_mini *mini);
+char		**what_team(char *filename, char *to_find, char *com, t_mini *mini);
 //		mod_split
 int			mod_strlen(char *str, char *charset, char *avoid);
 char		**mod_split(char *str, char *charset, char *avoid);
@@ -206,6 +201,12 @@ t_env		*create_elem(char *elem_name, char *elem_arg);
 void		change_var(t_env *env, char *name, char *arg);
 void		add_elem(t_env **list, char *elem_name, char *elem_arg);
 void		add_elem_ord(t_env **list, char *elem_name, char *elem_arg);
+//		process_input.c
+int			incomplete_cmd(char *input);
+char		*get_other_input(char *input);
+char		*our_prompt(int res, t_mini *mini);
+void		process_input(t_mini *mini, char *input);
+void		process_input_aux(t_mini *mini, char *input);
 //		strings.c
 int			equal_strings(char *com, char *exec);
 char		*ft_join_char(char *s1, char *s2, char c);

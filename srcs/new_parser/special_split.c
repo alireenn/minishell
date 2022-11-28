@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:01:06 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/10 14:56:42 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:42:13 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,7 @@ int	special_putstr(char *str, char *charset, char *matrix)
 				if (is_sep(str[i], charset) == 1
 					&& str[i + 1] != '\0' && str[i + 1] == str[i])
 				{
-					i++;
-					matrix[j] = str[i];
-					j++;
+					matrix[j++] = str[++i];
 					if (str[i + 1] != '\0'
 						&& is_sep(str[i + 1], charset) == 0)
 					{
@@ -113,9 +111,7 @@ int	special_putstr(char *str, char *charset, char *matrix)
 						break ;
 					}
 				}
-				matrix[j] = str[i];
-				j++;
-				i++;
+				matrix[j++] = str[i++];
 			}
 			matrix[j] = '\0';
 			return (i);

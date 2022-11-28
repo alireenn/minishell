@@ -14,3 +14,6 @@ va modificata tutta la gestione delle quotes, non solo per le variabili globali 
 es:
     bash-3.2$ echo "'-n'" ciao
     '-n' ciao
+
+export a -> ok
+export a=ciao -> leaks

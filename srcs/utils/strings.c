@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:34:35 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/23 18:14:18 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:39:13 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,27 @@ char	*get_strip_str(char *input, int from, int to)
 	return (ft_strdup_from_to(input, from + i, to - j - 1));
 }
 
-char	*get_strip_str_q(char *input, int from, int to)
-{
-	int	i;
-	int	j;
+// char	*get_strip_str_q(char *input, int from, int to)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (input[from + i] == ' ' && input[from + i] != '\0' && input[from + i] != '\'' && input[from + i] != '\"')
-		i++;
-	if (input[from + i] == '\'' || input[from + i] == '\"')
-		i++;
-	if (from + i == (int)ft_strlen(input))
-		return (NULL);
-	j = 0;
-	while (input[to - 1 - j] == ' ' && input[to - 1 - j] != '\'' && input[to - 1 - j] != '\"')
-		j++;
-	if (input[to - 1 - j] == '\'' || input[to - 1 - j] == '\"')
-		j++;
-	return (ft_strdup_from_to(input, from + i, to - j - 1));
-}
+// 	i = 0;
+// 	while (input[from + i] == ' ' && input[from + i] != '\0'
+// 		&& input[from + i] != '\'' && input[from + i] != '\"')
+// 		i++;
+// 	if (input[from + i] == '\'' || input[from + i] == '\"')
+// 		i++;
+// 	if (from + i == (int)ft_strlen(input))
+// 		return (NULL);
+// 	j = 0;
+// 	while (input[to - 1 - j] == ' ' && input[to - 1 - j] != '\''
+// 		&& input[to - 1 - j] != '\"')
+// 		j++;
+// 	if (input[to - 1 - j] == '\'' || input[to - 1 - j] == '\"')
+// 		j++;
+// 	return (ft_strdup_from_to(input, from + i, to - j - 1));
+// }
 
 void	replace(char **tbr, int from, int to, char *rep)
 {
