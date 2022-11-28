@@ -31,10 +31,13 @@ int	wild_cats(char *entry, char **split, char *to_find)
 	while (split[len])
 		len++;
 	j = 0;
-	if (to_find[0] != '*' && ft_strncmp(split[0], entry, ft_strlen(split[0])) != 0)
+	if (to_find[0] != '*' && ft_strncmp(split[0], entry,
+			ft_strlen(split[0])) != 0)
 		return (0);
 	if (ft_strlen(entry) - ft_strlen(split[len - 1]) > 0)
-		if (to_find[ft_strlen(to_find) - 1] != '*' && ft_strncmp(split[len - 1], &entry[ft_strlen(entry) - ft_strlen(split[len - 1])], ft_strlen(split[len - 1])) != 0)
+		if (to_find[ft_strlen(to_find) - 1] != '*' && ft_strncmp(split[len - 1],
+				&entry[ft_strlen(entry) - ft_strlen(split[len - 1])],
+				ft_strlen(split[len - 1])) != 0)
 			return (0);
 	while (*entry && split[j])
 	{
@@ -47,7 +50,7 @@ int	wild_cats(char *entry, char **split, char *to_find)
 	return (0);
 }
 
-char 	**what_team(char *filename, char *to_find, char *com, t_mini *mini)
+char	**what_team(char *filename, char *to_find, char *com, t_mini *mini)
 {
 	DIR				*dir;
 	struct dirent	*entry;
@@ -90,7 +93,7 @@ char 	**what_team(char *filename, char *to_find, char *com, t_mini *mini)
 	}
 	free(split);
 	closedir(dir);
-	return(ret);
+	return (ret);
 }
 
 char	*ft_pwd_ft(void)
@@ -102,20 +105,3 @@ char	*ft_pwd_ft(void)
 	ret = strdup(pwd);
 	return (ret);
 }
-
-// int main (int ac, char **av)
-// {
-// 	char	*dir;
-// 	char	**mat;
-// 	(void)ac;
-
-// 	dir = ft_pwd_ft();
-// 	mat = what_team(dir, av[1]);
-// 	int	i = 0;
-// 	while (mat[i] != NULL)
-// 	{
-// 		printf("%d -> %s\n", i, mat[i]);
-// 		i++;
-// 	}
-// 	free(dir);
-// }

@@ -59,6 +59,7 @@ UTILS_FILES		=				\
 		env_utils.c				\
 		init.c					\
 		free.c					\
+		process_input.c 		\
 		debugging.c				\
 
 UTILS			= $(addprefix utils/, $(UTILS_FILES))

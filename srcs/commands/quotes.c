@@ -20,7 +20,6 @@ char	*remove_quotes_str_helper(char *str, int i)
 
 	j = 0;
 	temp = (char *)malloc(sizeof(char) * ((int)ft_strlen(str) - i + 1));
-	// printf("len tmp: %d\n", (int)ft_strlen(str) - i);
 	if (!temp)
 		return (str);
 	i = 0;
@@ -33,16 +32,9 @@ char	*remove_quotes_str_helper(char *str, int i)
 			i++;
 		}
 		else if ((str[i] == '\'' || str[i] == '\"') && open == '\0')
-		{
-			open = str[i];
-			i++;
-		}
+			open = str[i++];
 		else
-		{
-			temp[j] = str[i];
-			j++;
-			i++;
-		}
+			temp[j++] = str[i++];
 	}
 	temp[j] = '\0';
 	return (temp);
@@ -61,14 +53,12 @@ char	*remove_quotes_str(char *str)
 	{
 		if (str[j] == '\'' || str[j] == '\"')
 		{
-			i += 2; 
+			i += 2;
 			j = search_closing(str, j, str[j], str[j]) - 1;
 		}
 		j++;
 	}
-	//printf("%d\n", i);
 	if (i > 0)
 		return (remove_quotes_str_helper(str, i));
-		//return (ft_strdup(str));
 	return (ft_strdup(str));
 }

@@ -50,7 +50,7 @@ void	other_command(t_command *cmd, t_mini *mini)
 
 void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 {
-    char    *tmp;
+	char	*tmp;
 
 	if (input[i][j] == '\"' || input[i][j] == '\'')
 		j = search_closing(input[i], j, input[i][j], input[i][j]);
@@ -59,11 +59,11 @@ void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 	if (j == 0)
 		cmds[i]->com = NULL;
 	else
-    {
+	{
 		tmp = get_strip_str(input[i], 0, j);
-        cmds[i]->com = remove_quotes_str(tmp);
-        free(tmp);
-    }
+		cmds[i]->com = remove_quotes_str(tmp);
+		free(tmp);
+	}
 	while (input[i][j] == ' ')
 		j++;
 	if (j == (int)ft_strlen(input[i]))
