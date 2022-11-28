@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 16:27:05 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/23 12:37:59 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/28 18:45:54 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void	ft_export_supp(t_mini *mini, t_env *tmp)
 {
 	char	*tmp2;
 
+	tmp2 = tmp->arg_var;
 	if (search(mini->secret, tmp->name_var) == 0)
 	{
 		if (tmp->arg_var != NULL)
 		{
-			tmp->arg_var = remove_quotes_str(tmp->arg_var);
+			tmp->arg_var = remove_quotes_str(tmp2);
+			free(tmp2);
 			add_elem(&mini->env, tmp->name_var, tmp->arg_var);
 		}
 		change_var(mini->secret, tmp->name_var, tmp->arg_var);
@@ -30,7 +32,7 @@ void	ft_export_supp(t_mini *mini, t_env *tmp)
 		if (tmp->arg_var != NULL)
 		{
 			tmp2 = tmp->arg_var;
-			tmp->arg_var = remove_quotes_str(tmp->arg_var);
+			tmp->arg_var = remove_quotes_str(tmp2);
 			free(tmp2);
 			add_elem(&mini->env, tmp->name_var, tmp->arg_var);
 		}

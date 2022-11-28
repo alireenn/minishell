@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:44:33 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/28 17:36:05 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/28 19:09:43 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,40 @@ int	check_flag_helper(t_command *cmd, int i)
 	return (0);
 }
 
+int	get_n(t_command *cmd, int i)
+{
+	if (cmd->arg[i] != '-')
+		return (0);
+	while (cmd->arg[i + 1] == 'n')
+		i++;
+	if (cmd->arg[i + 1] != ' ')
+		return (0);
+	if (i == 0)
+		return (0);
+	replace(&cmd->arg, 0, i + 1, "");
+	cmd->arg = get_strip_str(cmd->arg, 0, (int)ft_strlen(cmd->arg));
+	return (1);
+}
+
 int	check_flag_echo(t_command *cmd)
 {
 	int	i;
+	int	n;
 
 	i = 0;
 	if (cmd->arg == NULL)
 		return (-1);
-	if (cmd->arg[i] == '-')
+	if (cmd->arg[0] == '-')
 	{
-		while (cmd->arg[i + 1] == 'n')
-			i++;
-		if (cmd->arg[i + 1] != ' ')
-			return (0);
-		if (i > 0)
+		n = get_n(cmd, 0);
+		while (n != 0)
 		{
-			replace(&cmd->arg, 0, i + 1, "");
-			cmd->arg = get_strip_str(cmd->arg, 0, (int)ft_strlen(cmd->arg));
-			return (1);
+			i++;
+			n = get_n(cmd, 0);
 		}
-		else
-			return (0);
+		if (i > 0)
+			return (1);
+		return (0);
 	}
 	else if (cmd->arg[0] == '\'' || cmd->arg[0] == '\"')
 		return (check_flag_helper(cmd, i));
