@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:52:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/28 18:15:28 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:16:22 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	mod_strcount(char *str, char *charset, char *avoid)
 	return (count);
 }
 
-int	mod_putstr(char *str, char *charset, char *matrix, char *avoid)
+int	mod_putstr(char *str, char *charset, char *matrix, char *avoid) //fai array e b_zero
 {
 	int	i;
 	int	j;
