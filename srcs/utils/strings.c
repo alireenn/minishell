@@ -12,6 +12,35 @@
 
 #include "../../incl/minishell.h"
 
+int	mod_strlen(char *str, char *charset, char *avoid)
+{
+	int	i;
+	int	len;
+	int	open;
+
+	i = 0;
+	len = 0;
+	open = 0;
+	while (str[i] != '\0')
+	{
+		if (is_sep(str[i], charset) == 0)
+		{
+			while (str[i] != '\0')
+			{
+				open = mod_helper(str, i, avoid, open);
+				if (is_sep(str[i], charset) == 1 && open == 0)
+					break ;
+				i++;
+				len++;
+			}
+			return (len);
+		}
+		else
+			i++;
+	}
+	return (0);
+}
+
 int	equal_strings(char *com, char *exec)
 {
 	int	len_com;

@@ -70,17 +70,17 @@ void	process_input(t_mini *mini, char *input)
 
 char	*our_prompt(int res, t_mini *mini)
 {
-    struct termios  prev;
-    struct termios  new;
-	char	*tmp;
-	char	*ret;
+	struct termios	prev;
+	struct termios	new;
+	char			*tmp;
+	char			*ret;
 
-    if (tcgetattr(STDIN_FILENO, &prev))
-        perror("tcgetattr");
-    new = prev;
-    new.c_lflag &= ~(ECHOCTL);
-    if (tcsetattr(STDIN_FILENO, TCSANOW | TCSAFLUSH, &new))
-        perror("tcsetattr");
+	if (tcgetattr(STDIN_FILENO, &prev))
+		perror("tcgetattr");
+	new = prev;
+	new.c_lflag &= ~(ECHOCTL);
+	if (tcsetattr(STDIN_FILENO, TCSANOW | TCSAFLUSH, &new))
+		perror("tcsetattr");
 	if (res == 1)
 	{
 		tmp = ft_strjoin("✅ ", "Minishell ➡ ");
@@ -90,7 +90,7 @@ char	*our_prompt(int res, t_mini *mini)
 		tmp = ft_strjoin("❌ ", "Minishell ➡ ");
 	ret = readline(tmp);
 	free(tmp);
-    if (tcsetattr(STDIN_FILENO, TCSANOW | TCSAFLUSH, &prev))
-        perror("tcsetattr");
+	if (tcsetattr(STDIN_FILENO, TCSANOW | TCSAFLUSH, &prev))
+		perror("tcsetattr");
 	return (ret);
 }

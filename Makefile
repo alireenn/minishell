@@ -33,6 +33,7 @@ COMMANDS_FILES=					\
 		redirections.c 			\
 		expand.c				\
 		lsfake.c 				\
+		pid.c 					\
 		pipe.c 					\
 		mod_split.c				\
 

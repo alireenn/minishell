@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alice <alice@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/29 11:47:25 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/29 21:42:57 by alice            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,16 @@ char		*ft_pwd_ft(void);
 int			wild_cats(char *entry, char **split, char *to_find);
 char		**what_team(char *filename, char *to_find, char *com, t_mini *mini);
 //		mod_split
-int			mod_strlen(char *str, char *charset, char *avoid);
 char		**mod_split(char *str, char *charset, char *avoid);
 int			mod_helper(char *str, int i, char *avoid, int open);
 int			mod_strcount(char *str, char *charset, char *avoid);
 int			mod_putstr(char *str, char *charset, char *matrix, char *avoid);
+int			mod_putstr_aux(char *str, char *charset, char *avoid, char *matrix);
+//		pid.c
+void		my_pid(t_mini *mini);
+char		*get_shlvl(t_mini *mini);
+void		my_child_get_pid(t_mini *mini, int *fd);
+char		*ft_strjoin_3(const char *s1, char *s2, const char *s3);
 //		pipe.c
 int			execute_pipe(t_tree a, t_command **cmds, t_mini *mini);
 int			execute_pipe2(t_tree a, t_command **cmds, t_mini *mini, int fd[2]);
@@ -211,6 +216,7 @@ void		process_input_aux(t_mini *mini, char *input);
 int			equal_strings(char *com, char *exec);
 char		*ft_join_char(char *s1, char *s2, char c);
 void		replace(char **tbr, int from, int to, char *rep);
+int			mod_strlen(char *str, char *charset, char *avoid);
 char		*get_strip_str(char *input, int from, int to, int flag);
 //		env_utils.c
 void		change_fd(t_command *cmd);
