@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/23 18:11:43 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/29 12:19:13 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 		cmds[i]->com = NULL;
 	else
 	{
-		tmp = get_strip_str(input[i], 0, j);
+		tmp = get_strip_str(input[i], 0, j, 0);
 		cmds[i]->com = remove_quotes_str(tmp);
 		free(tmp);
 	}
@@ -69,23 +69,25 @@ void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 	if (j == (int)ft_strlen(input[i]))
 		cmds[i]->arg = NULL;
 	else
-		cmds[i]->arg = get_strip_str(input[i], j, (int)ft_strlen(input[i]));
+		cmds[i]->arg = get_strip_str(input[i], j, (int)ft_strlen(input[i]), 0);
 }
 
 void	get_cmds(t_command **cmds, int cmd, char **input)
 {
 	int	i;
 	int	j;
+	int	len;
 
 	i = -1;
 	while (++i < cmd)
 	{
 		j = 0;
-		while (input[i][j] == ' ' && j < (int)ft_strlen(input[i]))
+		len = ((int)ft_strlen(input[i]));
+		while (input[i][j] == ' ' && j < len)
 			j++;
 		if (input[i][j] == '(')
 		{
-			cmds[i]->com = get_strip_str(input[i], 0, (int)ft_strlen(input[i]));
+			cmds[i]->com = get_strip_str(input[i], 0, len, 0);
 			cmds[i]->arg = NULL;
 		}
 		else

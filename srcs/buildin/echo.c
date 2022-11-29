@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:44:33 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/28 19:09:43 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/29 11:49:19 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ void	ft_echo(char *str, t_command *com)
 	else
 	{
 		tmp = remove_quotes_str(com->arg);
-		if (flag == 0)
+		if (flag == 0 && tmp != NULL)
 			printf("%s\n", tmp);
-		else
+		else if (flag == 0)
+			printf("\n");
+		else if (tmp != NULL)
 			printf("%s", tmp);
 		free(tmp);
 	}
@@ -39,8 +41,8 @@ void	ft_echo(char *str, t_command *com)
 
 int	check_flag_helper(t_command *cmd, int i)
 {
-	int	j;
-	int	n;
+	int		j;
+	int		n;
 
 	while (cmd->arg[i] == cmd->arg[0])
 		i++;
@@ -58,7 +60,7 @@ int	check_flag_helper(t_command *cmd, int i)
 			|| cmd->arg[i + n + j] == '\0'))
 	{
 		replace(&cmd->arg, 0, i + n + j, "");
-		cmd->arg = get_strip_str(cmd->arg, 0, (int)ft_strlen(cmd->arg));
+		cmd->arg = get_strip_str(cmd->arg, 0, (int)ft_strlen(cmd->arg), 1);
 		return (1);
 	}
 	return (0);
@@ -66,16 +68,18 @@ int	check_flag_helper(t_command *cmd, int i)
 
 int	get_n(t_command *cmd, int i)
 {
+	if (cmd->arg == NULL)
+		return (0);
 	if (cmd->arg[i] != '-')
 		return (0);
 	while (cmd->arg[i + 1] == 'n')
 		i++;
-	if (cmd->arg[i + 1] != ' ')
+	if (cmd->arg[i + 1] != ' ' && cmd->arg[i + 1] != '\0')
 		return (0);
 	if (i == 0)
 		return (0);
 	replace(&cmd->arg, 0, i + 1, "");
-	cmd->arg = get_strip_str(cmd->arg, 0, (int)ft_strlen(cmd->arg));
+	cmd->arg = get_strip_str(cmd->arg, 0, (int)ft_strlen(cmd->arg), 1);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/28 18:39:41 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/29 12:45:42 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	free_mini(t_mini *mini)
 {
 	int	ret;
 
-	ret = mini->last;	
+	ret = mini->last;
 	if (mini->env != NULL)
 		free_env(mini->env);
 	if (mini->secret != NULL)
@@ -55,6 +55,21 @@ char	*get_shlvl(t_mini *mini)
 	return (ret);
 }
 
+void	my_child_get_pid(t_mini *mini, int *fd)
+{
+	char		*cmd;
+	char		*shlvl;
+	const char	*s1;
+
+	shlvl = get_shlvl(mini);
+	s1 = "ps | grep -w ./minishell | head -n ";
+	cmd = ft_strjoin_3(s1, shlvl, " | tail -n 1 | cut -c 1-6");
+	dup2(fd[1], STDOUT_FILENO);
+	close(fd[0]);
+	process_input(mini, cmd);
+	close(fd[1]);
+}
+
 void	my_pid(t_mini *mini)
 {
 	pid_t	pid;
@@ -68,12 +83,7 @@ void	my_pid(t_mini *mini)
 	pid = fork();
 	if (pid == 0)
 	{
-		char	*prova = ft_strjoin_3("ps | grep -w ./minishell | head -n ",
-				get_shlvl(mini), " | tail -n 1 | cut -c 1-6");
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[0]);
-		process_input(mini, prova);
-		close(fd[1]);
+		my_child_get_pid(mini, fd);
 		exit(0);
 	}
 	else
@@ -82,14 +92,7 @@ void	my_pid(t_mini *mini)
 		close(fd[1]);
 		dup2(mini->save_out, STDOUT_FILENO);
 		read(fd[0], buf, 5);
-		ret = 0;
-		while (ret < 6)
-		{
-			if (buf[ret] < '0' || buf[ret] > '9')
-				buf[ret] = '\0';
-			ret++;
-		}
-		mini->pid = ft_strdup(buf);
+		mini->pid = get_strip_str(buf, 0, 5, 0);
 		close(fd[0]);
 		ret = WEXITSTATUS(status);
 	}

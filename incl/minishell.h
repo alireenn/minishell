@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/28 18:10:52 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/29 11:47:25 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,9 +210,8 @@ void		process_input_aux(t_mini *mini, char *input);
 //		strings.c
 int			equal_strings(char *com, char *exec);
 char		*ft_join_char(char *s1, char *s2, char c);
-char		*get_strip_str(char *input, int from, int to);
-char		*get_strip_str_q(char *input, int from, int to);
 void		replace(char **tbr, int from, int to, char *rep);
+char		*get_strip_str(char *input, int from, int to, int flag);
 //		env_utils.c
 void		change_fd(t_command *cmd);
 t_env		*copy_env(t_mini *mini, int *n);

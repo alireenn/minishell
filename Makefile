@@ -135,6 +135,6 @@ rem:
 		./minishell
 
 norme:				
-		norminette ./include ./srcs ./lib/libft | awk '! /OK!/'
+		norminette ./incl ./srcs ./lib/libft | awk '! /OK!/'
 
 PHONY: 				all clean fclean re libraries norme rem

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:34:35 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/28 17:39:13 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/29 12:07:48 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,43 +39,31 @@ char	*ft_join_char(char *s1, char *s2, char c)
 	return (ret);
 }
 
-char	*get_strip_str(char *input, int from, int to)
+char	*get_strip_str(char *input, int from, int to, int flag)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*ret;
 
 	i = 0;
+	if (input == NULL)
+		return (NULL);
 	while (input[from + i] == ' ' && input[from + i] != '\0')
 		i++;
 	if (from + i == (int)ft_strlen(input))
+	{
+		if (flag == 1)
+			free(input);
 		return (NULL);
+	}
 	j = 0;
 	while (input[to - 1 - j] == ' ')
 		j++;
-	return (ft_strdup_from_to(input, from + i, to - j - 1));
+	ret = ft_strdup_from_to(input, from + i, to - j - 1);
+	if (flag == 1)
+		free(input);
+	return (ret);
 }
-
-// char	*get_strip_str_q(char *input, int from, int to)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	while (input[from + i] == ' ' && input[from + i] != '\0'
-// 		&& input[from + i] != '\'' && input[from + i] != '\"')
-// 		i++;
-// 	if (input[from + i] == '\'' || input[from + i] == '\"')
-// 		i++;
-// 	if (from + i == (int)ft_strlen(input))
-// 		return (NULL);
-// 	j = 0;
-// 	while (input[to - 1 - j] == ' ' && input[to - 1 - j] != '\''
-// 		&& input[to - 1 - j] != '\"')
-// 		j++;
-// 	if (input[to - 1 - j] == '\'' || input[to - 1 - j] == '\"')
-// 		j++;
-// 	return (ft_strdup_from_to(input, from + i, to - j - 1));
-// }
 
 void	replace(char **tbr, int from, int to, char *rep)
 {
