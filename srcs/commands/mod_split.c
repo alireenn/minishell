@@ -12,20 +12,6 @@
 
 #include "../../incl/minishell.h"
 
-int	is_sep(char c, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 int	mod_strlen(char *str, char *charset, char *avoid)
 {
 	int	i;
