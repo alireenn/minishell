@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/29 15:33:52 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:58:35 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ int	here_doc(char *end)
 		while (ft_strlen(tmp) != ft_strlen(end)
 			|| ft_strncmp(tmp, end, ft_strlen(end)) != 0)
 			tmp = here_doc_helper(fd, tmp);
+		free(tmp);
 		exit(0);
 	}
 	else

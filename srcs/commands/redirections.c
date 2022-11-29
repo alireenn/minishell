@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/29 15:22:40 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:01:15 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini)
 			{
 				file = get_file_io(s, i, j, &type);
 				get_redirs_type(file, mini, cmds[i], type);
+				free(file);
 			}
 			else
 				j++;

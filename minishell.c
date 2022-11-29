@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/29 15:51:01 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:08:29 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	my_pid(t_mini *mini)
 	}
 }
 
-void sig_handle(int sig)
+void	sig_handle(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -109,7 +109,7 @@ void sig_handle(int sig)
 	}
 }
 
-void ft_sig(void)
+void	ft_sig(void)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
@@ -125,8 +125,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc > 1)
 		return (printf("Minishell: %s: No such file or directory\n", argv[1]));
 	ft_sig();
-	// signal(SIGINT, received);
-	// signal(SIGQUIT, quit);
 	mini = init_mini(envp);
 	my_pid(mini);
 	prompt = our_prompt(mini->res, mini);
