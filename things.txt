@@ -7,3 +7,58 @@ quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> q
 gestione segnali
 
 le redirection likkano
+
+----------------------- mod_split varianti --------------------
+{ ...
+int a[3]; // 0=i, 1=j, 2=open
+
+    ft_bzero(a, 3);
+    while (str[a[0]] != '\0')
+    {
+        if (is_sep(str[a[0]], charset) == 0)
+        {
+            while (str[a[0]] != '\0' && !(is_sep(str[a[0]], charset) == 1 && !a[2]))
+            {
+                if (is_sep(str[a[0]], avoid) == 1)
+                    a[2] = !a[2];
+                else
+                    matrix[a[1]++] = str[a[0]];
+                a[0]++;
+            }
+            matrix[a[1]] = '\0';
+            return (a[0]);
+        }
+        else
+            a[0]++;
+    }
+    return (0);
+}
+
+{ ...
+
+    int i;
+    int j;
+    int open;
+
+    i = 0;
+    j = 0;
+    open = 0;
+    while (str[i] != '\0')
+    {
+        if (is_sep(str[i], charset) == 0)
+        {
+            while (str[i] != '\0' && !(is_sep(str[i], charset) == 1 && !open))
+            {
+                if (is_sep(str[i], avoid) == 1)
+                    open = !open;
+                else
+                    matrix[j++] = str[i];
+                i++;
+            }
+            matrix[j] = '\0';
+            return (i);
+        }
+        else
+            i++;
+    }
+    return (0);
