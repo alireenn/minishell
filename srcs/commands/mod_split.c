@@ -12,6 +12,20 @@
 
 #include "../../incl/minishell.h"
 
+int	is_sep(char c, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	mod_strlen(char *str, char *charset, char *avoid)
 {
 	int	i;
@@ -102,30 +116,36 @@ int	mod_strcount(char *str, char *charset, char *avoid)
 	return (count);
 }
 
+int    mod_putstr_aux(char *str, char *charset, char *avoid, char *matrix)
+{
+    int     i;
+    int     j;
+    int     open;
+
+    j = 0;
+    open = 0;
+    i = 0;
+    while (str[i] != '\0' && !(is_sep(str[i], charset) == 1 && !open))
+	{
+		if (is_sep(str[i], avoid) == 1)
+			open = !open;
+		else
+			matrix[j++] = str[i];
+		i++;
+	}
+	matrix[j] = '\0';
+    return (i);
+}
+
 int	mod_putstr(char *str, char *charset, char *matrix, char *avoid) //fai array e b_zero
 {
 	int	i;
-	int	j;
-	int	open;
 
 	i = 0;
-	j = 0;
-	open = 0;
 	while (str[i] != '\0')
 	{
 		if (is_sep(str[i], charset) == 0)
-		{
-			while (str[i] != '\0' && !(is_sep(str[i], charset) == 1 && !open))
-			{
-				if (is_sep(str[i], avoid) == 1)
-					open = !open;
-				else
-					matrix[j++] = str[i];
-				i++;
-			}
-			matrix[j] = '\0';
-			return (i);
-		}
+            return(i + mod_putstr_aux(&str[i], charset, avoid, matrix));
 		else
 			i++;
 	}
