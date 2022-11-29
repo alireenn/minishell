@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/29 12:45:42 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/29 15:51:01 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,24 @@ void	my_pid(t_mini *mini)
 	}
 }
 
+void sig_handle(int sig)
+{
+	if (sig == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
+
+void ft_sig(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_handle);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	int		ret;
@@ -106,8 +124,9 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc > 1)
 		return (printf("Minishell: %s: No such file or directory\n", argv[1]));
-	signal(SIGINT, received);
-	signal(SIGQUIT, quit);
+	ft_sig();
+	// signal(SIGINT, received);
+	// signal(SIGQUIT, quit);
 	mini = init_mini(envp);
 	my_pid(mini);
 	prompt = our_prompt(mini->res, mini);
