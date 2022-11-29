@@ -20,9 +20,9 @@ YELLOW 			= \033[00;33m
 RESET  			= \033[00m
 
 $(NAME):
-		gcc -Wall -Werror -Wextra -c $(SRC) 
-		ar rc $(NAME) $(OBJS)
-		ranlib $(NAME)
+		@gcc -Wall -Werror -Wextra -c $(SRC) 
+		@ar rc $(NAME) $(OBJS)
+		@ranlib $(NAME)
 
 bonus: 
 		gcc -Wall -Werror -Wextra -c $(BONUS_SRC)
@@ -31,10 +31,10 @@ bonus:
 all: $(NAME)
 
 clean:
-		rm -f $(OBJS) $(BONUS_OBJS)
+		@rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-		rm -f $(NAME)
+		@rm -f $(NAME)
 		@echo "$(GREEN)Successfully forced cleaned - $(NAME)$(RESET)"
 	
 re: fclean all
