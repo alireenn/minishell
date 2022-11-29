@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mod_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:52:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/29 11:01:24 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/29 17:20:57 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,30 +104,26 @@ int	mod_strcount(char *str, char *charset, char *avoid)
 
 int	mod_putstr(char *str, char *charset, char *matrix, char *avoid) //fai array e b_zero
 {
-	int	i;
-	int	j;
-	int	open;
+	int	a[3]; // 0=i, 1=j, 2=open
 
-	i = 0;
-	j = 0;
-	open = 0;
-	while (str[i] != '\0')
+	ft_bzero(a, 0);
+	while (str[a[0]] != '\0')
 	{
-		if (is_sep(str[i], charset) == 0)
+		if (is_sep(str[a[0]], charset) == 0)
 		{
-			while (str[i] != '\0' && !(is_sep(str[i], charset) == 1 && !open))
+			while (str[a[0]] != '\0' && !(is_sep(str[a[0]], charset) == 1 && !a[2]))
 			{
-				if (is_sep(str[i], avoid) == 1)
-					open = !open;
+				if (is_sep(str[a[0]], avoid) == 1)
+					a[2] = !a[2];
 				else
-					matrix[j++] = str[i];
-				i++;
+					matrix[a[1]++] = str[a[0]];
+				a[0]++;
 			}
-			matrix[j] = '\0';
-			return (i);
+			matrix[a[1]] = '\0';
+			return (a[0]);
 		}
 		else
-			i++;
+			a[0]++;
 	}
 	return (0);
 }
