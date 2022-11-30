@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/30 15:46:47 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:19:49 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,11 @@ int	main(int argc, char **argv, char **envp)
 	{
 		while (incomplete_cmd(prompt) == 0)
 			prompt = get_other_input(prompt);
-		process_input_aux(mini, prompt);
-		free(prompt);
+		if (prompt)
+		{
+			process_input_aux(mini, prompt);
+			free(prompt);
+		}
 		if (mini->exit == 1)
 			break ;
 		prompt = our_prompt(mini->res, mini);

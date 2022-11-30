@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:50:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/30 18:53:02 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/30 19:12:56 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,15 @@ int	search_closing(char *input, int c, char c1, char c2)
 			open++;
 		i++;
 	}
-	if (open == 0 && input[i] == 0)
-		return (i);
+	if (open == 0)
+	{
+		while (input[i + open] != c1 && input[i + open] != c2 && input[i + open] != '\0')
+			open++;
+		if (input[i + open] == '\0')
+			return (i);
+		else
+			return (-2);
+	}
 	return (-1);
 }
 

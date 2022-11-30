@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/30 18:01:26 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/30 19:14:28 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char	*get_file_io(char **s, int r, int j, int *type)
 	k = 0;
 	(*type) = (s[r][j] == '>') + 2 * (s[r][j] == '<')
 		+ 2 * (s[r][j + 1] == '<') + 2 * (s[r][j + 1] == '>');
-	printf("type: %d\n", *type);
 	if (s[r][j] == s[r][i + j + 1])
 		i++;
 	i++;

@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:53:58 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/30 18:59:05 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/30 19:21:03 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	incomplete_cmd(char *input)
 {
 	int	i;
 
+	if (input == NULL)
+		return (1);
 	i = (int)ft_strlen(input) - 1;
 	while (input[i] == ' ')
 		i--;
@@ -49,6 +51,12 @@ char	*get_other_input(char *input)
 	char	*ret;
 
 	tmp = readline("> ");
+	if (!tmp)
+	{
+		printf_fd(2, "minishell: syntax error: unexpected end of file\n");
+		free(input);
+		return (NULL);
+	}
 	ret = ft_strjoin(input, tmp);
 	free(tmp);
 	free(input);
