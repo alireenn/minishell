@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/29 12:19:13 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/30 16:02:41 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,13 @@ void	other_command(t_command *cmd, t_mini *mini)
 	ret = wait(&status);
 	if (ret == -1)
 		exit(-1);
-	if (WEXITSTATUS(status) == 0)
+	if (WEXITSTATUS(status) == 0 && WIFSIGNALED(status) == 0)
 		cmd->res = 1;
+	else if (WIFSIGNALED(status))
+	{
+		mini->last = WTERMSIG(status) + 128;
+		cmd->res = 0;
+	}
 	else
 	{
 		mini->last = WEXITSTATUS(status);
