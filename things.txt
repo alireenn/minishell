@@ -1,7 +1,3 @@
--> pulizia file
 ------ bug e mini bug ------
 
-gestione segnali con la roba di dan (ali chiedi a me se vuoii farla, ti giro una foto carina)
-
 quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> questo non ho idea di come sistemarlo
-gestione segnali

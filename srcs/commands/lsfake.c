@@ -50,31 +50,14 @@ int	wild_cats(char *entry, char **split, char *to_find)
 	return (0);
 }
 
-char	**what_team(char *filename, char *to_find, char *com, t_mini *mini)
+char	**playmaker(char *to_find, char **split, DIR *dir, t_mini *mini)
 {
-	DIR				*dir;
-	struct dirent	*entry;
-	int				i;
 	char			**ret;
-	char			**split;
+	int				i;
+	struct dirent	*entry;
 
-	i = 0;
-	if (ft_strchr(to_find, ' ') != 0)
-	{
-		while (*(to_find) != ' ')
-			to_find++;
-	}
-	split = ft_split(to_find, "*", &i);
-	ret = NULL;
-	dir = opendir(filename);
-	if (dir == NULL)
-	{
-		printf("minishell: %s: Permission denied\n", filename);
-		exit(126);
-	}
 	i = 1;
 	ret = ft_calloc(sizeof(char *), 100);
-	ret[0] = ft_strdup(com);
 	while (i < 100)
 	{
 		entry = readdir(dir);
@@ -88,9 +71,34 @@ char	**what_team(char *filename, char *to_find, char *com, t_mini *mini)
 	}
 	if (i == 1)
 	{
+		ret[1] = ft_strdup(to_find);
 		mini->last = 1;
-		return (NULL);
 	}
+	return (ret);
+}
+
+char	**what_team(char *filename, char *to_find, char *com, t_mini *mini)
+{
+	DIR				*dir;
+	char			**ret;
+	int				i;
+	char			**split;
+
+	if (ft_strchr(to_find, ' ') != 0)
+	{
+		while (*(to_find) != ' ')
+			to_find++;
+	}
+	i = 0;
+	split = ft_split(to_find, "*", &i);
+	dir = opendir(filename);
+	if (dir == NULL)
+	{
+		printf("minishell: %s: Permission denied\n", filename);
+		exit(126);
+	}
+	ret = playmaker(to_find, split, dir, mini);
+	ret[0] = ft_strdup(com);
 	free(split);
 	closedir(dir);
 	return (ret);

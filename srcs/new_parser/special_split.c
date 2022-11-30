@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   special_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:01:06 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/28 17:42:13 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/30 11:00:17 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-int	is_sep(char c, char *str)
+/*int	is_sep(char c, char *str)
 {
 	int	i;
 
@@ -145,4 +145,4 @@ char	**special_split(char *str, char *charset, int *c)
 		row++;
 	}
 	return (matrix);
-}
+}*/

@@ -19,7 +19,6 @@ NEW_PARSER_FILES=				\
 		ft_tree.c				\
 		ft_tree2.c				\
 		parse_tree.c			\
-		special_split.c			\
 		parse_tree_supp.c 		\
 		split.c 				\
 
@@ -121,8 +120,8 @@ clean:
 		@echo "$(GREEN)Successfully cleaned objects - $(NAME)$(RESET)"
 
 fclean: 			clean
-		make fclean -C $(LIBFT_DIR)
-		make fclean -C $(PRINTFFD_DIR)
+		@make fclean -C $(LIBFT_DIR)
+		@make fclean -C $(PRINTFFD_DIR)
 		@rm -f $(OBJS)
 		@rm -f $(NAME)
 		@rm -rf $(OBJS_DIR)
@@ -136,6 +135,6 @@ rem:
 		./minishell
 
 norme:				
-		norminette ./incl ./srcs ./lib/libft | awk '! /OK!/'
+		@norminette ./incl $(SRCS_DIR) $(LIB_DIR) | awk '! /OK!/'
 
 PHONY: 				all clean fclean re libraries norme rem
