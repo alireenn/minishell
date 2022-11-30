@@ -1,3 +1,0 @@
------- bug e mini bug ------
-
-quando esce da cat con ctrl-C l'exit status deve essere 130, il nostro è 0 -> questo non ho idea di come sistemarlo
