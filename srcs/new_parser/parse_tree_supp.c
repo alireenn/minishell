@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:43:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/09/24 17:48:23 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/30 18:47:26 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ int	check_parse(char *parsed)
 	i = 0;
 	while (parsed[i] != '\0')
 	{
+		if (parsed[i] == '(')
+		{
+			i = search_closing(parsed, i, '(', ')');
+			if (i < 0)
+				return (0);
+		}
 		if (parsed[i] == '>' && parsed[i + 1] == '(')
 		{
 			printf("minishell: parse error near `)'\n");
@@ -27,6 +33,11 @@ int	check_parse(char *parsed)
 		else if (parsed[i] == '>' && parsed[i + 1] == '<')
 		{
 			printf("minishell: syntax error near unexpected token `<'\n");
+			return (0);
+		}
+		else if (parsed[i] == '<' && parsed[i + 1] == '>')
+		{
+			printf("minishell: syntax error near unexpected token `newline'\n");
 			return (0);
 		}
 		i++;

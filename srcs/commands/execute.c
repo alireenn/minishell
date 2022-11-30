@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/29 15:58:35 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/30 17:37:02 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void	make_cmd(t_command *cmd, t_mini *mini)
 		mini2 = init_mini(envp2);
 		process_input(mini2, new_cmd);
 		cmd->res = mini2->res;
+		free_mini(mini2);
+		free_matrix_no_rows(envp2);
+		free(new_cmd);
 	}
 	else
 		make_cmd_helper(cmd, mini);

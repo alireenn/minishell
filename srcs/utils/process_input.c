@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:53:58 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/30 10:54:22 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/30 18:59:05 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,16 @@ int	incomplete_cmd(char *input)
 	if (input[i] == '|' || input[i] == '&')
 		return (0);
 	else
+	{
+		i = 0;
+		while (input[i] != 0)
+		{
+			if (input[i] == '(' && search_closing(input, i, '(', ')') == -1)
+				return (0);
+			i++;
+		}
 		return (1);
+	}
 }
 
 char	*get_other_input(char *input)
@@ -53,7 +62,10 @@ void	process_input(t_mini *mini, char *input)
 
 	parsed = parse_tree(input);
 	if (!check_parse(parsed))
+	{
+		free(parsed);
 		return ;
+	}
 	mini->cmd = 0;
 	mini->tree = make_tree(parsed, &(mini->cmd));
 	splitted = split_parser(input, mini->cmd);
@@ -61,6 +73,8 @@ void	process_input(t_mini *mini, char *input)
 	get_redirs(splitted, mini->commands, mini->cmd, mini);
 	expand(splitted, mini);
 	get_cmds(mini->commands, mini->cmd, splitted);
+	//print_cmds(mini->commands, mini->cmd);
+	// print_tree(&mini->tree);
 	mini->res = execute(mini->tree, mini->commands, mini);
 	free_cmds(mini->commands, mini->cmd);
 	free_tree(&(mini->tree));

@@ -6,7 +6,7 @@
 /*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/29 16:01:15 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/11/30 18:01:26 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*get_file_io(char **s, int r, int j, int *type)
 	k = 0;
 	(*type) = (s[r][j] == '>') + 2 * (s[r][j] == '<')
 		+ 2 * (s[r][j + 1] == '<') + 2 * (s[r][j + 1] == '>');
+	printf("type: %d\n", *type);
 	if (s[r][j] == s[r][i + j + 1])
 		i++;
 	i++;
@@ -48,7 +49,10 @@ char	*get_file_io(char **s, int r, int j, int *type)
 void	get_redirs_type(char *file, t_mini *mini, t_command *cmd, int type)
 {
 	if (file == NULL)
+	{
 		printf("error");
+		return ;
+	}
 	cmd->red[type % 2] = 1;
 	cmd->fd_red[type % 2] = get_red_io(cmd,
 			file, type, mini);

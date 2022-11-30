@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:50:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/10 14:46:12 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:53:02 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ int	search_closing(char *input, int c, char c1, char c2)
 			open++;
 		i++;
 	}
-	return (i);
+	if (open == 0 && input[i] == 0)
+		return (i);
+	return (-1);
 }
 
 t_tree	get_next_tree(char *input, int *ind, int *cmd)
