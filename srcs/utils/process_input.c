@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:53:58 by anovelli          #+#    #+#             */
-/*   Updated: 2022/12/01 12:44:50 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:11:56 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,13 @@ void	process_input(t_mini *mini, char *input)
 		free(parsed);
 		return ;
 	}
-	printf("%s\n", parsed);
 	mini->cmd = 0;
-	// printf("ok\n");
 	mini->tree = make_tree(parsed, &(mini->cmd));
 	splitted = split_parser(input, mini->cmd);
 	mini->commands = alloc_cmds(mini->cmd);
 	get_redirs(splitted, mini->commands, mini->cmd, mini);
 	expand(splitted, mini);
 	get_cmds(mini->commands, mini->cmd, splitted);
-	// print_cmds(mini->commands, mini->cmd);
-	// print_tree(&mini->tree);
 	mini->res = execute(mini->tree, mini->commands, mini);
 	free_cmds(mini->commands, mini->cmd);
 	free_tree(&(mini->tree));

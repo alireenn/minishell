@@ -1,2 +1,1 @@
-✅ Minishell ➡ echo ciao & echo culo ||| ls
-✅ Minishell ➡  -->> dovrebbe dare errore
+i tab
