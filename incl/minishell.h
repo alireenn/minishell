@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alice <alice@student.42.fr>                +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/29 21:42:57 by alice            ###   ########.fr       */
+/*   Updated: 2022/12/01 12:40:12 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ int			get_tree_depth(t_tree a);
 void		print_tree_rec(t_tree a);
 //		parse_tree_supp.c
 int			check_parse(char *parsed);
+int			check_parenthesis(char *input);
 char		*parse_tree_helper(char *input, char *ret);
 void		put_symbols(char *in, char *ret, int *i, int *j);
 //		parse_tree.c
@@ -193,6 +194,9 @@ void		free_matrix_no_rows(char **matrix);
 void		free_matrix(char **matrix, int rows);
 void		free_cmds(t_command	**cmds, int cmd);
 void		free_execve(char *filename, char **argv, char **envp);
+// 		free_2.c
+int			free_mini(t_mini *mini);
+void		free_subshell(t_mini *mini2, char **envp2, char *new_cmd);
 // 		init.c
 t_mini		*init_mini(char **envp);
 void		init_secret_env(t_mini *mini);

@@ -59,6 +59,7 @@ UTILS_FILES		=				\
 		env_utils.c				\
 		init.c					\
 		free.c					\
+		free_2.c 				\
 		process_input.c 		\
 		debugging.c				\
 
@@ -111,7 +112,7 @@ $(OBJS_DIR):
 		@mkdir $(OBJS_DIR)
 
 libraries:			
-		@printf "Making libft..." && make -C $(LIBFT_DIR) && echo "$(YELLOW)libft successfully compiled $(RESET)"
+		@printf "Making libft... " && make -C $(LIBFT_DIR) && echo "$(YELLOW)libft successfully compiled $(RESET)"
 		@printf "Making printf_fd..." && make -C $(PRINTFFD_DIR) && echo "$(YELLOW)printf_fd successfully compiled $(RESET)"
 
 
@@ -128,11 +129,6 @@ fclean: 			clean
 		@echo "$(GREEN)Successfully forced cleaned - $(NAME)$(RESET)"
 
 re: 				fclean all
-
-rem:
-		exit
-		make re
-		./minishell
 
 norme:				
 		@norminette ./incl $(SRCS_DIR) $(LIB_DIR) | awk '! /OK!/'

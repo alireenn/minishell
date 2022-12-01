@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/30 19:19:49 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/12/01 11:58:11 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "incl/minishell.h"
-
-int	free_mini(t_mini *mini)
-{
-	int	ret;
-
-	ret = mini->last;
-	if (mini->env != NULL)
-		free_env(mini->env);
-	if (mini->secret != NULL)
-		free_env(mini->secret);
-	if (mini->pwd != NULL)
-		free(mini->pwd);
-	close(mini->save_in);
-	close(mini->save_out);
-	free(mini);
-	return (ret);
-}
 
 void	sig_handle(int sig)
 {

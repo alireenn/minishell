@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:53:58 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/30 19:21:03 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/12/01 12:44:50 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ int	incomplete_cmd(char *input)
 		i--;
 	if (input[i] == '|' || input[i] == '&')
 		return (0);
+	if (check_parenthesis(input) > 0)
+		return (0);
 	else
 	{
 		i = 0;
 		while (input[i] != 0)
 		{
-			if (input[i] == '(' && search_closing(input, i, '(', ')') == -1)
-				return (0);
+			if (input[i] == '\'' || input[i] == '\"')
+				i = search_closing(input, i, input[i], input[i]);
 			i++;
 		}
 		return (1);
@@ -74,14 +76,16 @@ void	process_input(t_mini *mini, char *input)
 		free(parsed);
 		return ;
 	}
+	printf("%s\n", parsed);
 	mini->cmd = 0;
+	// printf("ok\n");
 	mini->tree = make_tree(parsed, &(mini->cmd));
 	splitted = split_parser(input, mini->cmd);
 	mini->commands = alloc_cmds(mini->cmd);
 	get_redirs(splitted, mini->commands, mini->cmd, mini);
 	expand(splitted, mini);
 	get_cmds(mini->commands, mini->cmd, splitted);
-	//print_cmds(mini->commands, mini->cmd);
+	// print_cmds(mini->commands, mini->cmd);
 	// print_tree(&mini->tree);
 	mini->res = execute(mini->tree, mini->commands, mini);
 	free_cmds(mini->commands, mini->cmd);

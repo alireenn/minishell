@@ -3,43 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tree_supp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:43:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/30 18:47:26 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/12/01 12:37:17 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
+
+int	check_redirs(int i, char *parsed)
+{
+	if (parsed[i] == '>' && parsed[i + 1] == '<')
+	{
+		printf("minishell: syntax error near unexpected token `<'\n");
+		return (0);
+	}
+	else if (parsed[i] == '<' && parsed[i + 1] == '>')
+	{
+		printf("minishell: syntax error near unexpected token `newline'\n");
+		return (0);
+	}
+	return (1);
+}
+
+int	check_parenthesis(char *input)
+{
+	int	i;
+	int	open;
+
+	i = 0;
+	open = 0;
+	while (input[i] != 0)
+	{
+		if (input[i] == '\'' || input[i] == '\"')
+			i = search_closing(input, i, input[i], input[i]);
+		if (input[i] == ')')
+			open--;
+		else if (input[i] == '(')
+			open++;
+		i++;
+	}
+	return (open);
+}
 
 int	check_parse(char *parsed)
 {
 	int	i;
 
 	i = 0;
+	if (check_parenthesis(parsed) != 0)
+		return (0);
 	while (parsed[i] != '\0')
 	{
-		if (parsed[i] == '(')
-		{
-			i = search_closing(parsed, i, '(', ')');
-			if (i < 0)
-				return (0);
-		}
 		if (parsed[i] == '>' && parsed[i + 1] == '(')
 		{
 			printf("minishell: parse error near `)'\n");
 			return (0);
 		}
-		else if (parsed[i] == '>' && parsed[i + 1] == '<')
-		{
-			printf("minishell: syntax error near unexpected token `<'\n");
+		if (check_redirs(i, parsed) == 0)
 			return (0);
-		}
-		else if (parsed[i] == '<' && parsed[i + 1] == '>')
-		{
-			printf("minishell: syntax error near unexpected token `newline'\n");
-			return (0);
-		}
 		i++;
 	}
 	return (1);

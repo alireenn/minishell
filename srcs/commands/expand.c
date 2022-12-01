@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/23 18:39:24 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/01 10:29:28 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,50 +123,3 @@ int	expand_helper(char **s, int i, int j, t_mini *mini)
 		ret = expand_helper2(&s[i], mini, j, len);
 	return (ret);
 }
-
-/*
-void	expanded(char **s, t_mini *mini)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (s[i] != NULL)
-	{
-		j = 0;
-		while (j < (int)ft_strlen(s[i]))
-		{
-			if (s[i][j] == '\'')
-				j = search_closing(s[i], j, s[i][j], s[i][j]) - 1;
-			if (s[i][j] == '$' && s[i][j + 1] != '\0')
-				j += expand_helper(s, i, j, mini) - 1;
-			// if (s[i][j] == '*' && s[i][j + 1] != '\0')
-				
-			j++;
-		}
-		i++;
-	}
-}
-
-void	expand(char **s, t_mini *mini)
-{
-	int		i;
-	int		j;
-	int		count;
-	char	**tmp;
-	
-	i = 0;
-	while (s[i] != NULL)
-	{
-		count = 0;
-		j = 0;
-		tmp = ft_split(s[i], " ", &count);
-		while (j < count)
-		{
-			expanded(tmp, mini);
-			j++;
-		}
-		i++;
-	}
-}
-*/
