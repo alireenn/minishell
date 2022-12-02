@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:44:33 by anovelli          #+#    #+#             */
-/*   Updated: 2022/12/02 11:53:04 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:55:19 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_echo(char *str, t_command *com)
 	if (!com->arg)
 	{
 		printf_fd(1, "\n");
+		com->res = 1;
 		return ;
 	}
 	flag = check_flag_echo(com);
