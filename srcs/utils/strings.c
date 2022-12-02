@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:34:35 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/29 12:07:48 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/12/02 12:36:56 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ char	*get_strip_str(char *input, int from, int to, int flag)
 	i = 0;
 	if (input == NULL)
 		return (NULL);
-	while (input[from + i] == ' ' && input[from + i] != '\0')
+	while ((input[from + i] == '\t' || input[from + i] == ' ')
+		&& input[from + i] != '\0')
 		i++;
 	if (from + i == (int)ft_strlen(input))
 	{
@@ -86,7 +87,7 @@ char	*get_strip_str(char *input, int from, int to, int flag)
 		return (NULL);
 	}
 	j = 0;
-	while (input[to - 1 - j] == ' ')
+	while (input[to - 1 - j] == ' ' || input[to - 1 - j] == '\t')
 		j++;
 	ret = ft_strdup_from_to(input, from + i, to - j - 1);
 	if (flag == 1)

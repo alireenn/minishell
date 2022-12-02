@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/30 16:02:41 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:36:36 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 
 	if (input[i][j] == '\"' || input[i][j] == '\'')
 		j = search_closing(input[i], j, input[i][j], input[i][j]);
-	while (input[i][j] != ' ' && j < (int)ft_strlen(input[i]))
+	while ((input[i][j] != ' ' && input[i][j] != '\t')
+			&& j < (int)ft_strlen(input[i]))
 		j++;
 	if (j == 0)
 		cmds[i]->com = NULL;
@@ -69,7 +70,8 @@ void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 		cmds[i]->com = remove_quotes_str(tmp);
 		free(tmp);
 	}
-	while (input[i][j] == ' ')
+	while (input[i][j] != ' ' && input[i][j] != '\t'
+			&& j < (int)ft_strlen(input[i]))
 		j++;
 	if (j == (int)ft_strlen(input[i]))
 		cmds[i]->arg = NULL;
@@ -88,7 +90,7 @@ void	get_cmds(t_command **cmds, int cmd, char **input)
 	{
 		j = 0;
 		len = ((int)ft_strlen(input[i]));
-		while (input[i][j] == ' ' && j < len)
+		while ((input[i][j] == ' ' || input[i][j] == '\t') && j < len)
 			j++;
 		if (input[i][j] == '(')
 		{

@@ -95,9 +95,9 @@ RESET 			= \033[00m
 # Rules
 all:			$(NAME)
 
-$(NAME):	libraries $(LIB_A) $(OBJS)
+$(NAME):	 libraries $(OBJS)
 		@gcc -g $(FLAGS) $(OBJS) $(MAIN) $(LIB_A) -o $(NAME) $(RLFLAGS2)
-		@echo "$(GREEN_B)$(NAME) successfully compiled $(RESET)"
+		@printf "$(GREEN)Done\n$(RESET)"
 
 sanitize:	 libraries $(OBJS) $(LIB_A)
 		@gcc -g -fsanitize=address $(FLAGS) $(OBJS) $(MAIN) $(LIB_A) -o $(NAME)
@@ -111,10 +111,9 @@ $(OBJS): 			| $(OBJS_DIR)
 $(OBJS_DIR):
 		@mkdir $(OBJS_DIR)
 
-libraries:			
-		@printf "Making libft... " && make -C $(LIBFT_DIR) && echo "$(YELLOW)libft successfully compiled $(RESET)"
-		@printf "Making printf_fd..." && make -C $(PRINTFFD_DIR) && echo "$(YELLOW)printf_fd successfully compiled $(RESET)"
-
+libraries:		
+		@printf "Making libft... " && make -C $(LIBFT_DIR) #&& echo "$(YELLOW)libft successfully compiled $(RESET)"
+		@printf "Making printf_fd... " && make -C $(PRINTFFD_DIR) #&& echo "$(YELLOW)printf_fd successfully compiled $(RESET)"
 
 clean:				
 		@rm -f $(OBJS)
