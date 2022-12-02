@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tree_supp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:43:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/12/01 12:37:17 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/02 20:16:06 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,16 @@ int	check_parse(char *parsed)
 	int	i;
 
 	i = 0;
-	if (check_parenthesis(parsed) != 0)
+	if (check_parenthesis(parsed) < 0)
+	{
+		printf_fd(2, "minishell: syntax error near unexpected token `)'");
 		return (0);
+	}
 	while (parsed[i] != '\0')
 	{
 		if (parsed[i] == '>' && parsed[i + 1] == '(')
 		{
-			printf("minishell: parse error near `)'\n");
+			printf("minishell: parse error near `('\n");
 			return (0);
 		}
 		if (check_redirs(i, parsed) == 0)

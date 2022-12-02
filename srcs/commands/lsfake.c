@@ -11,17 +11,29 @@
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-// #include "../../lib/libft/libft.h"
-// # include <unistd.h>
-// # include <stdlib.h>
-// # include <stdio.h>
-// # include <string.h>
-// # include <dirent.h>
-// # include <readline/readline.h>
-// # include <readline/history.h>
-// # include <limits.h>
-// # include <sys/types.h>
-// # include <sys/wait.h>
+
+char	*join_mat(char **matrix, int flag)
+{
+	char	*ret;
+	char	*tmp;
+	int		i;
+
+	i = 1;
+	ret = NULL;
+	tmp = NULL;
+	while (matrix[i])
+	{
+		tmp = ret;
+		ret = ft_strjoin(tmp, matrix[i]);
+		if (flag == 1)
+			free(matrix[i]);
+		i++;
+		if (tmp != NULL)
+			free(tmp);
+	}
+	return (ret);
+}
+
 int	wild_cats(char *entry, char **split, char *to_find)
 {
 	int	j;

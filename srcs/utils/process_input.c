@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:53:58 by anovelli          #+#    #+#             */
-/*   Updated: 2022/12/02 12:35:56 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/02 20:08:47 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,8 @@ void	process_input(t_mini *mini, char *input)
 	char	**splitted;
 
 	parsed = parse_tree(input);
-	if (!check_parse(parsed))
-	{
-		free(parsed);
+	if (parsed == NULL || !check_parse(parsed))
 		return ;
-	}
 	mini->cmd = 0;
 	mini->tree = make_tree(parsed, &(mini->cmd));
 	splitted = split_parser(input, mini->cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/12/01 12:40:12 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/02 21:58:33 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void		ft_export(t_mini *mini, char *str, t_command *cmd);
 void		ft_export_replace(t_mini *mini, t_env *tmp, t_command *cmd);
 void		export_error(t_env *tmp, t_mini *mini, t_command *cmd, int flag);
 //		some_buildin.c
-int			check_par(char *str);
 void		ft_pwd(t_command *cmd);
 void		ft_exit(t_mini *mini, t_command *com);
 //		echo.c
@@ -147,8 +146,8 @@ void		get_redirs(char **s, t_command **cmds, int cmd, t_mini *mini);
 int			get_red_io(t_command *cmd, char *filename, int type, t_mini *mini);
 void		get_redirs_type(char *file, t_mini *mini, t_command *cmd, int type);
 //		signal.c
-void		quit(int sig);
-void		received(int sig);
+void		ft_sig(void);
+void		sig_handle(int sig);
 /*
 ** 			NEW_PARSER 
 */
@@ -176,13 +175,14 @@ int			search_closing(char *input, int c, char c1, char c2);
 t_tree		get_next_tree(char *input, int *ind, int *cmd);
 char		*ft_strdup_from_to(char *input, int start, int end);
 // 		special_split.c
-int			is_sep(char c, char *str);
 int			special_strlen(char *str, char *charset);
 int			special_strcount(char *str, char *charset);
 char		**special_split(char *str, char *charset, int *c);
 int			special_putstr(char *str, char *charset, char *matrix);
 //		split.c
+int			is_sep(char c, char *str);
 int			strlen_parser(char *input);
+int			check_syntax(char *in, int i);
 char		**split_parser(char *input, int cmd);
 int			putstr_parser(char *input, int len, int offset, char *matrix);
 /*

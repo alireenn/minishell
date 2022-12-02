@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/12/02 12:36:36 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/02 22:15:35 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 	if (j == (int)ft_strlen(input[i]))
 		cmds[i]->arg = NULL;
 	else
+	{
 		cmds[i]->arg = get_strip_str(input[i], j, (int)ft_strlen(input[i]), 0);
+	}
 }
 
 void	get_cmds(t_command **cmds, int cmd, char **input)

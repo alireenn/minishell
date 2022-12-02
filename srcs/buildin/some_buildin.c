@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   some_buildin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:50:52 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/10 15:45:21 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/02 20:43:19 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-
-int	check_par(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '(' || str[i] == ')'
-			|| (str[i] == '(' && str[i + 1] == ')'))
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 void	ft_pwd(t_command *cmd)
 {

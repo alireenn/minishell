@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:50:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/12/02 11:40:10 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/02 20:44:44 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*parse_tree(char *in)
 		else if ((in[i] == '|' && in[i + 1] != '\0' && in[i + 1] != '&')
 			|| (is_sep(in[i], "()<>")))
 			j++;
+		if (in[i] == '(' && check_syntax(in, i) == 0)
+			return (NULL);
 		i++;
 	}
 	ret = (char *) malloc (sizeof(char) * (j + 1));

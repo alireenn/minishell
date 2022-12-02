@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:54:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/30 15:11:56 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/02 21:55:13 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,26 @@
 
 extern	void	rl_replace_line(const char *text, int clear_undo);
 
-void	quit(int sig)
+void	sig_handle(int sig)
 {
-	(void)sig;
-	rl_on_new_line();
-	rl_redisplay();
+	int	flag;
+
+	flag = 0;
+	if (sig == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		if (ft_strlen(rl_line_buffer) == 0)
+			flag = 1;
+		rl_replace_line("", 0);
+		if (flag == 1)
+			rl_redisplay();
+	}
 }
 
-/* è un problema per la Giorgia del futuro 42*/
-void	received(int sig)
+void	ft_sig(void)
 {
-	(void)sig;
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, sig_handle);
 }

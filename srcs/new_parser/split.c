@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 17:15:28 by gcucino           #+#    #+#             */
-/*   Updated: 2022/12/02 11:28:41 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/02 21:49:02 by gcucino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
+
+int	check_syntax(char *in, int i)
+{
+	int	x;
+
+	x = 1;
+	if (in[i + x] == ')')
+	{
+		printf_fd(2, "minishell: syntax error near unexpected token `)'\n");
+		return (0);
+	}
+	while (i - x >= 0 && (in[i - x] == ' ' || in[i - x] == '\t'))
+		x++;
+	if (i - x >= 0 && is_sep(in[i - x], "&|p") == 0)
+	{
+		printf_fd(2, "minishell: syntax error near unexpected token `('\n");
+		return (0);
+	}
+	return (1);
+}
 
 int	is_sep(char c, char *str)
 {
