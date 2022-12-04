@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alice <alice@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 18:25:42 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/10 14:35:52 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/04 15:54:45 by alice            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	split_at(char *input, t_env *env, char c)
 		j++;
 	}
 	env->name_var[j] = '\0';
-	if (input[i] == '\0')
+	if (input[i] == '\0' || input[i] == ' ')
 		env->arg_var = NULL;
 	else
 		env->arg_var = ft_strdup(&input[i + 1]);
