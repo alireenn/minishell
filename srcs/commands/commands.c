@@ -44,6 +44,7 @@ void	other_command(t_command *cmd, t_mini *mini)
 	else if (WIFSIGNALED(status))
 	{
 		mini->last = WTERMSIG(status) + 128;
+		rl_already_prompted = 0;
 		cmd->res = 0;
 	}
 	else
@@ -82,7 +83,7 @@ void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 		cmds[i]->com = remove_quotes_str(tmp);
 		free(tmp);
 	}
-	while (input[i][j] != ' ' && input[i][j] != '\t'
+	while ((input[i][j] == ' ' || input[i][j] == '\t')
 			&& j < (int)ft_strlen(input[i]))
 		j++;
 	if (j == (int)ft_strlen(input[i]))

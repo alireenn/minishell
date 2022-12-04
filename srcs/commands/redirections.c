@@ -17,7 +17,9 @@ char	*here_doc_helper(int *fd, char *tmp)
 	write(fd[1], tmp, ft_strlen(tmp));
 	write(fd[1], "\n", 1);
 	free(tmp);
+	rl_already_prompted = 0;
 	tmp = readline("> ");
+	rl_already_prompted = 1;
 	return (tmp);
 }
 

@@ -137,7 +137,9 @@ int	here_doc(char *end)
 	if (reader == 0)
 	{
 		close(fd[0]);
+		rl_already_prompted = 0;
 		tmp = readline("> ");
+		rl_already_prompted = 1;
 		while (ft_strlen(tmp) != ft_strlen(end)
 			|| ft_strncmp(tmp, end, ft_strlen(end)) != 0)
 			tmp = here_doc_helper(fd, tmp);

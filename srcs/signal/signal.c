@@ -16,17 +16,12 @@ extern	void	rl_replace_line(const char *text, int clear_undo);
 
 void	sig_handle(int sig)
 {
-	int	flag;
-
-	flag = 0;
 	if (sig == SIGINT)
 	{
 		printf("\n");
 		rl_on_new_line();
-		if (ft_strlen(rl_line_buffer) == 0)
-			flag = 1;
 		rl_replace_line("", 0);
-		if (flag == 1)
+		if (rl_already_prompted == 0)
 			rl_redisplay();
 	}
 }

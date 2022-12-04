@@ -52,7 +52,9 @@ char	*get_other_input(char *input)
 	char	*tmp;
 	char	*ret;
 
+	rl_already_prompted = 0;
 	tmp = readline("> ");
+	rl_already_prompted = 1;
 	if (!tmp)
 	{
 		printf_fd(2, "minishell: syntax error: unexpected end of file\n");
@@ -74,7 +76,9 @@ void	process_input(t_mini *mini, char *input)
 	if (parsed == NULL || !check_parse(parsed))
 		return ;
 	mini->cmd = 0;
-	mini->tree = make_tree(parsed, &(mini->cmd));
+	//printf("len: %d\n", (int)ft_strlen(parsed));
+	mini->tree = make_tree(parsed, &(mini->cmd), 0);
+	//print_tree(&(mini->tree));
 	splitted = split_parser(input, mini->cmd);
 	mini->commands = alloc_cmds(mini->cmd);
 	get_redirs(splitted, mini->commands, mini->cmd, mini);
@@ -83,8 +87,14 @@ void	process_input(t_mini *mini, char *input)
 	mini->res = execute(mini->tree, mini->commands, mini);
 	//print_cmds(mini->commands, mini->cmd);
 	free_cmds(mini->commands, mini->cmd);
-	free_tree(&(mini->tree));
+	//int	i = 0;
+	//while (splitted[i])
+	//{
+	//	printf("%s\n", splitted[i]);
+	//	i++;
+	//}
 	free_matrix(splitted, mini->cmd);
+	free_tree(&(mini->tree));
 	free(parsed);
 }
 
@@ -109,6 +119,7 @@ char	*our_prompt(int res, t_mini *mini)
 	else
 		tmp = ft_strjoin("❌ ", "Minishell ➡ ");
 	ret = readline(tmp);
+	rl_already_prompted = 1;
 	free(tmp);
 	if (tcsetattr(STDIN_FILENO, TCSANOW | TCSAFLUSH, &prev))
 		perror("tcsetattr");

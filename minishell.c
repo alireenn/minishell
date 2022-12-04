@@ -35,6 +35,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (mini->exit == 1)
 			break ;
+		rl_already_prompted = 0;
 		prompt = our_prompt(mini->res, mini);
 	}
 	ret = free_mini(mini);

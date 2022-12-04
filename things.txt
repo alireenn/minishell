@@ -1,7 +1,8 @@
-gestire export x= e export x
+gestire wildcard e "" combinate
 
-Minishell ➡echo ciao && echo $USER | echo -n $PWD stampa male, confronta con bash
+cambiare tutti i printf che danno errore (nel senso che dicono error 
+qualcosa nel messaggio che stampano) in printf_fd con fd = 2
 
-* rotte sulle builtin
+maronn ho quasi risolto il control c mi manca pochissimo voglio morire
 
-cambiare tutti i printf che danno errore in printf_fd
+norminettare

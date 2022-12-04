@@ -171,9 +171,9 @@ char		*parse_tree_helper(char *input, char *ret);
 void		put_symbols(char *in, char *ret, int *i, int *j);
 //		parse_tree.c
 char		*parse_tree(char *input);
-t_tree		make_tree(char *input, int *cmd);
+t_tree		make_tree(char *input, int *cmd, int pipe);
 int			search_closing(char *input, int c, char c1, char c2);
-t_tree		get_next_tree(char *input, int *ind, int *cmd);
+t_tree		get_next_tree(char *input, int *ind, int *cmd, int pipe);
 char		*ft_strdup_from_to(char *input, int start, int end);
 // 		special_split.c
 int			special_strlen(char *str, char *charset);
