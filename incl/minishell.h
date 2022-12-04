@@ -109,7 +109,7 @@ void		get_cmds(t_command **cmds, int cmd, char **input);
 void		get_cmd_simple(t_command **cmds, char **input, int i, int j);
 //		execute.c
 int			here_doc(char *end);
-char		**get_argv(char *com, char *arg, t_mini *mini);
+char		**get_argv(char *com, char *arg);
 void		make_cmd(t_command *cmd, t_mini *mini);
 char		*get_filename(t_mini *mini, char *filename);
 int			execute(t_tree a, t_command **cmds, t_mini *mini);
@@ -121,8 +121,9 @@ int			expand_helper(char **s, int i, int j, t_mini *mini);
 int			expand_helper2(char **s, t_mini *mini, int j, int len);
 //		ls_fake
 char		*ft_pwd_ft(void);
+char		*join_mat(char **matrix, int flag);
 int			wild_cats(char *entry, char **split, char *to_find);
-char		**what_team(char *filename, char *to_find, char *com, t_mini *mini);
+char		*what_team(char *filename, char *to_find);
 //		mod_split
 char		**mod_split(char *str, char *charset, char *avoid);
 int			mod_helper(char *str, int i, char *avoid, int open);

@@ -111,7 +111,7 @@ void	other_command_helper(t_mini *mini, t_command *cmd)
 	char	*filename;
 
 	envp = trasformation(mini->env);
-	argv = get_argv(cmd->com, cmd->arg, mini);
+	argv = get_argv(cmd->com, cmd->arg);
 	filename = get_filename(mini, cmd->com);
 	if (execve(filename, argv, envp) == -1)
 	{

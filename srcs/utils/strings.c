@@ -45,13 +45,21 @@ int	equal_strings(char *com, char *exec)
 {
 	int	len_com;
 	int	len_exec;
+	int	max_len;
 
 	len_com = (int)ft_strlen(com);
 	len_exec = (int)ft_strlen(exec);
 	if (len_com == len_exec && ft_strncmp(com, exec, len_com) == 0)
 		return (0);
 	else
-		return (1);
+	{
+		if (len_com < len_exec)
+			max_len = len_exec;
+		else
+			max_len = len_com;
+		return (ft_strncmp(com, exec, max_len));
+		
+	}
 }
 
 char	*ft_join_char(char *s1, char *s2, char c)

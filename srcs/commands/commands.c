@@ -53,6 +53,18 @@ void	other_command(t_command *cmd, t_mini *mini)
 	}
 }
 
+void	expand_wildcats(t_command *com)
+{
+	char	*tmp;
+
+	if (ft_strchr(com->arg, '*') != 0)
+	{
+		tmp = what_team(ft_pwd_ft(), com->arg);
+		free(com->arg);
+		com->arg = tmp;
+	}
+}
+
 void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 {
 	char	*tmp;
@@ -78,6 +90,7 @@ void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 	else
 	{
 		cmds[i]->arg = get_strip_str(input[i], j, (int)ft_strlen(input[i]), 0);
+		expand_wildcats(cmds[i]);
 	}
 }
 

@@ -12,7 +12,7 @@
 
 #include "../../incl/minishell.h"
 
-char	**get_argv(char *com, char *arg, t_mini *mini)
+char	**get_argv(char *com, char *arg)
 {
 	char	*tmp;
 	char	**argv;
@@ -23,15 +23,15 @@ char	**get_argv(char *com, char *arg, t_mini *mini)
 		argv[0] = ft_strdup(com);
 		argv[1] = NULL;
 	}
-	else if (ft_strchr(arg, '*') != 0)
+	/*else if (ft_strchr(arg, '*') != 0)
 	{
-		argv = what_team(ft_pwd_ft(), arg, com, mini);
-		if (argv == NULL)
+		argv = what_team(ft_pwd_ft(), arg, com);
+		if (argv[1] == NULL)
 		{
-			printf("%s: %s: No such file or directory\n", com, arg);
-			return (NULL);
+			argv[1] = ft_strdup(arg);
+			argv[2] = NULL;
 		}
-	}
+	}*/
 	else
 	{
 		tmp = ft_join_char(com, arg, ' ');

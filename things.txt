@@ -3,3 +3,5 @@ gestire export x= e export x
 Minishell ➡echo ciao && echo $USER | echo -n $PWD stampa male, confronta con bash
 
 * rotte sulle builtin
+
+cambiare tutti i printf che danno errore in printf_fd

@@ -81,6 +81,7 @@ void	process_input(t_mini *mini, char *input)
 	expand(splitted, mini);
 	get_cmds(mini->commands, mini->cmd, splitted);
 	mini->res = execute(mini->tree, mini->commands, mini);
+	//print_cmds(mini->commands, mini->cmd);
 	free_cmds(mini->commands, mini->cmd);
 	free_tree(&(mini->tree));
 	free_matrix(splitted, mini->cmd);
