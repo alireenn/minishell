@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/12/02 22:15:35 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/12/05 11:55:41 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,25 @@ void	other_command(t_command *cmd, t_mini *mini)
 void	expand_wildcats(t_command *com)
 {
 	char	*tmp;
+	char	**splitted;
+	int		i;
+	int		flag;
 
-	if (ft_strchr(com->arg, '*') != 0)
+	flag = 0;
+	splitted = mod_split(com->arg, " ", "\'\"");
+	i = 0;
+	while (splitted[i])
 	{
-		tmp = what_team(ft_pwd_ft(), com->arg);
-		free(com->arg);
-		com->arg = tmp;
+		if (ft_strchr(splitted[i], '*') != 0)
+		{
+			tmp = what_team(ft_pwd_ft(), splitted[i]);
+			free(splitted[i]);
+			splitted[i] = tmp;
+		}
+		i++;
 	}
+	free(com->arg);
+	com->arg = join_mat(splitted, 1);
 }
 
 void	get_cmd_simple(t_command **cmds, char **input, int i, int j)

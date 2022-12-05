@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/12/05 10:45:16 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:50:55 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	main(int argc, char **argv, char **envp)
 		return (printf_fd(2, "Minishell: %s: No such file or directory\n", argv[1]));
 	ft_sig();
 	mini = init_mini(envp);
-	my_pid(mini);
+	mini->pid = "emily";
+	//my_pid(mini);
 	prompt = our_prompt(mini->res, mini);
 	while (prompt != NULL)
 	{

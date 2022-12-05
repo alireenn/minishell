@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:52:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/11/29 17:34:57 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:31:11 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ int	mod_putstr_aux(char *str, char *charset, char *avoid, char *matrix)
 	{
 		if (is_sep(str[i], avoid) == 1)
 			open = !open;
-		else
-			matrix[j++] = str[i];
+		matrix[j++] = str[i];
 		i++;
 	}
 	matrix[j] = '\0';

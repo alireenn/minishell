@@ -18,7 +18,7 @@ void	remove_quotes_mat(char **matrix)
 	int		i;
 
 	i = 0;
-	if (!matrix && !matrix[i])
+	if (!matrix || !matrix[i])
 		return ;
 	while (matrix[i])
 	{
@@ -37,6 +37,7 @@ char	*join_mat(char **matrix, int flag)
 
 	i = 1;
 	ret = ft_strdup(matrix[0]);
+	free(matrix[0]);
 	while (matrix[i])
 	{
 		tmp = ret;
@@ -47,6 +48,8 @@ char	*join_mat(char **matrix, int flag)
 		if (tmp != NULL)
 			free(tmp);
 	}
+	if (flag == 1)
+		free(matrix);
 	return (ret);
 }
 
@@ -146,15 +149,8 @@ char	*what_team(char *filename, char *to_find)
 {
 	DIR				*dir;
 	char			*ret;
-	int				i;
 	char			**split;
 
-	if (ft_strchr(to_find, ' ') != 0)
-	{
-		while (*(to_find) != ' ')
-			to_find++;
-	}
-	i = 0;
 	split = mod_split(to_find, "*", "\'\"");
 	dir = opendir(filename);
 	if (dir == NULL)
@@ -163,7 +159,8 @@ char	*what_team(char *filename, char *to_find)
 		exit(126);
 	}
 	ret = playmaker(to_find, split, dir);
-	free(split);
+	free_matrix_no_rows(split);
+	free(filename);
 	closedir(dir);
 	return (ret);
 }
