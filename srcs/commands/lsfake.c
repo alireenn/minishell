@@ -147,7 +147,7 @@ char	*what_team(char *filename, char *to_find)
 	dir = opendir(filename);
 	if (dir == NULL)
 	{
-		printf("minishell: %s: Permission denied\n", filename);
+		printf_fd(2, "minishell: %s: Permission denied\n", filename);
 		exit(126);
 	}
 	ret = playmaker(to_find, split, dir);

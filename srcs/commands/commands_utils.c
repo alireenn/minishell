@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:33:27 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/30 11:27:47 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/12/05 10:46:23 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	make_cmd_helper(t_command *cmd, t_mini *mini)
 			ft_env(mini->env, cmd);
 		else
 		{
-			printf("env: %s: No such file or directory\n", cmd->arg);
+			printf_fd(2, "env: %s: No such file or directory\n", cmd->arg);
 			mini->last = 127;
 		}
 	}

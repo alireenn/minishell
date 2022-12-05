@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tree_supp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:43:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/12/02 20:16:06 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/12/05 10:47:49 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int	check_redirs(int i, char *parsed)
 {
 	if (parsed[i] == '>' && parsed[i + 1] == '<')
 	{
-		printf("minishell: syntax error near unexpected token `<'\n");
+		printf_fd(2, "minishell: syntax error near unexpected token `<'\n");
 		return (0);
 	}
 	else if (parsed[i] == '<' && parsed[i + 1] == '>')
 	{
-		printf("minishell: syntax error near unexpected token `newline'\n");
+		printf_fd(2, "minishell: syntax error near unexpected token `newline'\n");
 		return (0);
 	}
 	return (1);
@@ -61,7 +61,7 @@ int	check_parse(char *parsed)
 	{
 		if (parsed[i] == '>' && parsed[i + 1] == '(')
 		{
-			printf("minishell: parse error near `('\n");
+			printf_fd(2, "minishell: parse error near `('\n");
 			return (0);
 		}
 		if (check_redirs(i, parsed) == 0)

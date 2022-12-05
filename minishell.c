@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:39:24 by gcucino           #+#    #+#             */
-/*   Updated: 2022/12/02 21:55:20 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/12/05 10:45:16 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	char	*prompt;
 
 	if (argc > 1)
-		return (printf("Minishell: %s: No such file or directory\n", argv[1]));
+		return (printf_fd(2, "Minishell: %s: No such file or directory\n", argv[1]));
 	ft_sig();
 	mini = init_mini(envp);
 	my_pid(mini);

@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:34:35 by gcucino           #+#    #+#             */
-/*   Updated: 2022/12/02 12:36:56 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/05 10:50:46 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	equal_strings(char *com, char *exec)
 		else
 			max_len = len_com;
 		return (ft_strncmp(com, exec, max_len));
-		
 	}
 }
 

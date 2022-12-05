@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:17 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/30 19:14:28 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/12/05 10:47:12 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	get_redirs_type(char *file, t_mini *mini, t_command *cmd, int type)
 {
 	if (file == NULL)
 	{
-		printf("error");
+		printf_fd(2, "error");
 		return ;
 	}
 	cmd->red[type % 2] = 1;
@@ -98,7 +98,7 @@ int	get_red_io(t_command *cmd, char *filename, int type, t_mini *mini)
 	{
 		if (access(filename, F_OK) != 0)
 		{
-			printf("minishell: %s: No such file or directory\n", filename);
+			printf_fd(2, "minishell: %s: No such file or directory\n", filename);
 			mini->last = 1;
 			cmd->res = 0;
 			return (-1);

@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 16:27:05 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/29 14:01:51 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/05 10:46:08 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_unset(t_mini *mini, char *name, t_command *cmd)
 
 	if (ft_strchr(name, '=') != NULL)
 	{
-		printf("minishell: unset: '%s': not a valid identifier\n", name);
+		printf_fd(1, "minishell: unset: '%s': not a valid identifier\n", name);
 		cmd->res = 0;
 		return ;
 	}
