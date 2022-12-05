@@ -1,5 +1,3 @@
-gestire wildcard e "" combinate
-
 cambiare tutti i printf che danno errore (nel senso che dicono error 
 qualcosa nel messaggio che stampano) in printf_fd con fd = 2
 

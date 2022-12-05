@@ -12,6 +12,23 @@
 
 #include "../../incl/minishell.h"
 
+void	remove_quotes_mat(char **matrix)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	if (!matrix && !matrix[i])
+		return ;
+	while (matrix[i])
+	{
+		tmp = remove_quotes_str(matrix[i]);
+		free(matrix[i]);
+		matrix[i] = tmp;
+		i++;
+	}
+}
+
 char	*join_mat(char **matrix, int flag)
 {
 	char	*ret;
@@ -122,11 +139,6 @@ char	*playmaker(char *to_find, char **split, DIR *dir)
 		free(ret);
 		ret = join_mat(tmp, 1);
 	}
-	//if (i == 1)
-	//{
-	//	ret[1] = ft_strdup(to_find);
-	//	mini->last = 1;
-	//}
 	return (ret);
 }
 
@@ -143,7 +155,7 @@ char	*what_team(char *filename, char *to_find)
 			to_find++;
 	}
 	i = 0;
-	split = ft_split(to_find, "*", &i);
+	split = mod_split(to_find, "*", "\'\"");
 	dir = opendir(filename);
 	if (dir == NULL)
 	{
