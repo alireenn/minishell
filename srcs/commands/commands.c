@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:16:49 by gcucino           #+#    #+#             */
-/*   Updated: 2022/12/05 11:55:41 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:26:04 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ void	get_cmd_simple(t_command **cmds, char **input, int i, int j)
 	else
 	{
 		cmds[i]->arg = get_strip_str(input[i], j, (int)ft_strlen(input[i]), 0);
-		expand_wildcats(cmds[i]);
+		if (ft_strchr(cmds[i]->arg, '*') != 0)
+			expand_wildcats(cmds[i]);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:25:53 by gcucino           #+#    #+#             */
-/*   Updated: 2022/12/05 11:13:57 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:00:08 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,14 @@ int	expand_helper2(char **s, t_mini *mini, int j, int len)
 
 	ret = 1;
 	tmp = ft_strdup_from_to(*s, j + 1, j + len);
+	printf("tmp: %s\n", tmp);
 	if (check_env_var(tmp) != 0)
 	{
 		var_env = ft_search_var(mini->env, tmp);
 		if (var_env != NULL)
 		{
 			replace(s, j, j + len + 1, var_env->arg_var);
+			printf("%s\n", var_env->arg_var);
 			ret = (int)ft_strlen(var_env->arg_var);
 		}	
 		else
@@ -102,6 +104,7 @@ int	expand_helper(char **s, int i, int j, t_mini *mini)
 	char	*tmp;
 
 	len = get_len_var(s, i, j);
+	printf("%s, %d\n", *s, len);
 	if (len == 0 && s[i][j + 1] == '$')
 	{
 		replace(&s[i], j, j + 2, mini->pid);
