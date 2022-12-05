@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:28:28 by anovelli          #+#    #+#             */
-/*   Updated: 2022/11/24 11:11:58 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/12/05 13:39:00 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,28 @@ int	execute_pipe(t_tree a, t_command **cmds, t_mini *mini)
 		mini->pipe_pid1 = pid1;
 		ret = execute_pipe2(a, cmds, mini, fd);
 	}
+	return (ret);
+}
+
+t_tree	essential_pipe(char *input, int *ind, int *cmd)
+{
+	int		j;
+	int		i;
+	t_tree	ret;
+	char	*tmp;
+
+	i = *ind;
+	j = 0;
+	while ((input[i + j] != '&' || input[i + j] == '|')
+		&& input[i + j] != '\0')
+	{
+		if (input[i + j] == '(')
+			j = search_closing(input, i, '(', ')') - i - 1;
+		j++;
+	}
+	tmp = ft_strdup_from_to(input, i, i + j - 1);
+	ret = make_tree(tmp, cmd, 1);
+	free(tmp);
+	*ind += j;
 	return (ret);
 }

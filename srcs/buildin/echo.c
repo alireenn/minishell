@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:44:33 by anovelli          #+#    #+#             */
-/*   Updated: 2022/12/05 11:09:16 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/05 12:55:35 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	ft_echo(char *str, t_command *com)
 	{
 		tmp = remove_quotes_str(com->arg);
 		if (flag == 0 && tmp != NULL)
-			printf("%s\n", tmp);
+			printf_fd(1, "%s\n", tmp);
 		else if (flag == 0)
-			printf("\n");
+			printf_fd(1, "\n");
 		else if (tmp != NULL)
-			printf("%s", tmp);
+			printf_fd(1, "%s", tmp);
 		free(tmp);
 	}
 	com->res = 1;

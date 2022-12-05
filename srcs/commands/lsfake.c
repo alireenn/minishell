@@ -77,19 +77,13 @@ void	order_mat(char **matrix, int size)
 	}
 }
 
-int	wild_cats(char *entry, char **split, char *to_find)
+int	troyella(char **split, char *to_find, char *entry)
 {
-	int	j;
 	int	len;
 
 	len = 0;
-	if (split[len] == NULL && entry[0] != '.')
-		return (1);
-	else if (split[len] == NULL)
-		return (0);
 	while (split[len])
 		len++;
-	j = 0;
 	if (to_find[0] != '*' && ft_strncmp(split[0], entry,
 			ft_strlen(split[0])) != 0)
 		return (0);
@@ -98,71 +92,7 @@ int	wild_cats(char *entry, char **split, char *to_find)
 				&entry[ft_strlen(entry) - ft_strlen(split[len - 1])],
 				ft_strlen(split[len - 1])) != 0)
 			return (0);
-	while (*entry && split[j])
-	{
-		if (ft_strnstr(entry, split[j], ft_strlen(split[j])) == entry)
-			j++;
-		entry++;
-	}
-	if (split[j] == NULL)
-		return (1);
-	return (0);
-}
-
-char	*playmaker(char *to_find, char **split, DIR *dir)
-{
-	char			*ret;
-	char			*temp;
-	struct dirent	*entry;
-	char			**tmp;
-	int				i;
-
-	i = 0;
-	ret = ft_strdup("");
-	entry = readdir(dir);
-	while (entry != NULL)
-	{
-		if (wild_cats(entry->d_name, split, to_find) == 1)
-		{
-			temp = ret;
-			ret = ft_join_char(temp, entry->d_name, ' ');
-			free(temp);
-		}
-		entry = readdir(dir);
-	}
-	if (ft_strlen(ret) == 0)
-	{
-		free(ret);
-		ret = ft_strdup(to_find);
-	}
-	else
-	{
-		tmp = ft_split(ret, " ", &i);
-		order_mat(tmp, i);
-		free(ret);
-		ret = join_mat(tmp, 1);
-	}
-	return (ret);
-}
-
-char	*what_team(char *filename, char *to_find)
-{
-	DIR				*dir;
-	char			*ret;
-	char			**split;
-
-	split = mod_split(to_find, "*", "\'\"");
-	dir = opendir(filename);
-	if (dir == NULL)
-	{
-		printf_fd(2, "minishell: %s: Permission denied\n", filename);
-		exit(126);
-	}
-	ret = playmaker(to_find, split, dir);
-	free_matrix_no_rows(split);
-	free(filename);
-	closedir(dir);
-	return (ret);
+	return (1);
 }
 
 char	*ft_pwd_ft(void)

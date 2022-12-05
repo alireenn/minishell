@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:36:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/12/02 21:58:33 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/12/05 13:38:45 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,15 @@ int			expand_helper(char **s, int i, int j, t_mini *mini);
 int			expand_helper2(char **s, t_mini *mini, int j, int len);
 //		ls_fake
 char		*ft_pwd_ft(void);
+void		remove_quotes_mat(char **matrix);
+void		order_mat(char **matrix, int size);
 char		*join_mat(char **matrix, int flag);
-int			wild_cats(char *entry, char **split, char *to_find);
+int			troyella(char **split, char *to_find, char *entry);
+//		wildcats.c
 char		*what_team(char *filename, char *to_find);
+void		what_time_is_it(char **ret, char *to_find);
+char		*playmaker(char *to_find, char **split, DIR *dir);
+int			wild_cats(char *entry, char **split, char *to_find);
 //		mod_split
 char		**mod_split(char *str, char *charset, char *avoid);
 int			mod_helper(char *str, int i, char *avoid, int open);
@@ -136,6 +142,7 @@ char		*get_shlvl(t_mini *mini);
 void		my_child_get_pid(t_mini *mini, int *fd);
 char		*ft_strjoin_3(const char *s1, char *s2, const char *s3);
 //		pipe.c
+t_tree		essential_pipe(char *input, int *ind, int *cmd);
 int			execute_pipe(t_tree a, t_command **cmds, t_mini *mini);
 int			execute_pipe2(t_tree a, t_command **cmds, t_mini *mini, int fd[2]);
 //		quotes.c
@@ -167,6 +174,7 @@ void		print_tree_rec(t_tree a);
 //		parse_tree_supp.c
 int			check_parse(char *parsed);
 int			check_parenthesis(char *input);
+int			check_redirs(int i, char *parsed);
 char		*parse_tree_helper(char *input, char *ret);
 void		put_symbols(char *in, char *ret, int *i, int *j);
 //		parse_tree.c

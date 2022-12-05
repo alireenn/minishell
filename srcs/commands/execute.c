@@ -6,12 +6,21 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:21:27 by gcucino           #+#    #+#             */
-/*   Updated: 2022/12/01 12:00:54 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/05 12:30:29 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
+	/*else if (ft_strchr(arg, '*') != 0)
+	{
+		argv = what_team(ft_pwd_ft(), arg, com);
+		if (argv[1] == NULL)
+		{
+			argv[1] = ft_strdup(arg);
+			argv[2] = NULL;
+		}
+	}*/
 char	**get_argv(char *com, char *arg)
 {
 	char	*tmp;
@@ -23,15 +32,6 @@ char	**get_argv(char *com, char *arg)
 		argv[0] = ft_strdup(com);
 		argv[1] = NULL;
 	}
-	/*else if (ft_strchr(arg, '*') != 0)
-	{
-		argv = what_team(ft_pwd_ft(), arg, com);
-		if (argv[1] == NULL)
-		{
-			argv[1] = ft_strdup(arg);
-			argv[2] = NULL;
-		}
-	}*/
 	else
 	{
 		tmp = ft_join_char(com, arg, ' ');

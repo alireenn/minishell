@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:43:29 by anovelli          #+#    #+#             */
-/*   Updated: 2022/12/05 10:47:49 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/05 13:38:51 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	check_redirs(int i, char *parsed)
 	}
 	else if (parsed[i] == '<' && parsed[i + 1] == '>')
 	{
-		printf_fd(2, "minishell: syntax error near unexpected token `newline'\n");
+		printf_fd(2, "minishell: syntax error near ");
+		printf_fd(2, "unexpected token `newline'\n");
 		return (0);
 	}
 	return (1);

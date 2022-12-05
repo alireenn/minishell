@@ -6,7 +6,7 @@
 /*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:53:58 by anovelli          #+#    #+#             */
-/*   Updated: 2022/12/05 11:59:02 by anovelli         ###   ########.fr       */
+/*   Updated: 2022/12/05 12:56:49 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,6 @@ void	process_input(t_mini *mini, char *input)
 	get_cmds(mini->commands, mini->cmd, splitted);
 	mini->res = execute(mini->tree, mini->commands, mini);
 	free_cmds(mini->commands, mini->cmd);
-	//int	i = 0;
-	//while (splitted[i])
-	//{
-	//	printf("%s\n", splitted[i]);
-	//	i++;
-	//}
 	free_matrix(splitted, mini->cmd);
 	free_tree(&(mini->tree));
 	free(parsed);

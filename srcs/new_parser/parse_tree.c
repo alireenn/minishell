@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcucino <gcucino@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anovelli <anovelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 09:50:14 by anovelli          #+#    #+#             */
-/*   Updated: 2022/12/02 20:44:44 by gcucino          ###   ########.fr       */
+/*   Updated: 2022/12/05 13:36:32 by anovelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ t_tree	make_tree(char *input, int *cmd, int pipe)
 		ret->left = sx;
 		i++;
 		ret->right = get_next_tree(input, &i, cmd, pipe);
-		//printf("i: %d, in mod pipe: %d\n", i, pipe);
 	}
 	return (ret);
 }
@@ -93,7 +92,6 @@ int	search_closing(char *input, int c, char c1, char c2)
 t_tree	get_next_tree(char *input, int *ind, int *cmd, int pipe)
 {
 	t_tree	ret;
-	char	*tmp;
 	int		i;
 	int		j;
 
@@ -107,21 +105,7 @@ t_tree	get_next_tree(char *input, int *ind, int *cmd, int pipe)
 	}
 	if (input[i] == 'p' && pipe == 0)
 	{
-		j = 0;
-		while ((input[i + j] != '&' || input[i + j] == '|') && input[i + j] != '\0')
-		{
-			if (input[i + j] == '(')
-			{
-				j = search_closing(input, i, '(', ')') - i - 1;
-			}
-			j++;
-		}
-		tmp = ft_strdup_from_to(input, i, i + j - 1);
-		//printf("%s %s\n", tmp, input);
-		ret = make_tree(tmp, cmd, 1);
-		//print_tree(&ret);
-		free(tmp);
-		*ind += j;
+		ret = essential_pipe(input, ind, cmd);
 		return (ret);
 	}
 	ret = nodoalb_alloc(*cmd);
@@ -136,7 +120,6 @@ char	*ft_strdup_from_to(char *input, int start, int end)
 	char	*ret;
 
 	i = start;
-	//printf("%d, %d\n", end, start);
 	ret = malloc(sizeof(char) * (end - start + 1));
 	j = 0;
 	while (j < end - start + 1)
